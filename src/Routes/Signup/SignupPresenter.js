@@ -4,7 +4,15 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 import Logo from "Components/Logo";
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: ${window.innerHeight}px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 const InputContainer = styled.div`
   margin-top: 30px;
@@ -22,8 +30,6 @@ const Form = styled.form`
 const TextContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 80px;
   margin-bottom: 20px;
 `;
 const Text = styled.div`
@@ -48,7 +54,10 @@ const MainPresenter = () => (
       <InputContainer>
         <Input>
           <div className="form-group row">
-            <label for="colFormLabelLg" className="col-sm-2 col-form-label col-form-label-lg">
+            <label
+              for="colFormLabelLg"
+              className="col-sm-2 col-form-label col-form-label-lg"
+            >
               Name
             </label>
             <div className="col-sm-10">
@@ -64,7 +73,10 @@ const MainPresenter = () => (
         </Input>
         <Input>
           <div className="form-group row">
-            <label for="colFormLabelLg" className="col-sm-2 col-form-label col-form-label-lg">
+            <label
+              for="colFormLabelLg"
+              className="col-sm-2 col-form-label col-form-label-lg"
+            >
               Cell_Phone
             </label>
             <div className="col-sm-10">
@@ -80,7 +92,10 @@ const MainPresenter = () => (
         </Input>
         <Input>
           <div className="form-group row">
-            <label for="colFormLabelLg" className="col-sm-2 col-form-label col-form-label-lg">
+            <label
+              for="colFormLabelLg"
+              className="col-sm-2 col-form-label col-form-label-lg"
+            >
               Email
             </label>
             <div className="col-sm-10">
@@ -96,7 +111,10 @@ const MainPresenter = () => (
         </Input>
         <Input>
           <div className="form-group row">
-            <label for="colFormLabelLg" className="col-sm-2 col-form-label col-form-label-lg">
+            <label
+              for="colFormLabelLg"
+              className="col-sm-2 col-form-label col-form-label-lg"
+            >
               Password
             </label>
             <div className="col-sm-10">
