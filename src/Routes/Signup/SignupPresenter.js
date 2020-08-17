@@ -8,7 +8,7 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
-  height: ${window.innerHeight}px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,52 +52,110 @@ const MainPresenter = () => (
     </TextContainer>
     <Form>
       <InputContainer>
-        <form class="was-validated">
-          <div class="mb-3">
+        <form className="was-validated">
+          <div className="mb-3">
             <label for="validationServer01">Name</label>
             <input
               type="text"
               name="username"
-              class="form-control is-invalid"
+              className="mt-2 form-control is-invalid"
               aria-describedby="validatedInputGroupPrepend"
               required
             />
           </div>
+          <form class="form-inline">
+            <div class="form-row">
+              <div class="d-flex form-group col-md-6">
+                <label for="validationServer01">Cell_Phone</label>
+                <input
+                  type="text"
+                  name="cellphone"
+                  className="mt-2 form-control is-invalid"
+                  aria-describedby="validatedInputGroupPrepend"
+                  required
+                />
+                <button type="button" class="btn btn-light">
+                  본인인증
+                </button>
+              </div>
+            </div>
+          </form>
 
-          <div class="mb-3">
-            <label for="validationServer01">Cell_Phone</label>
-            <input
-              type="text"
-              name="cellphone"
-              class="form-control is-invalid"
-              aria-describedby="validatedInputGroupPrepend"
-              required
-            />
-          </div>
-
-          <div class="mb-3">
+          <div className="mb-3">
             <label for="validationServer01">E-mail</label>
             <input
               type="text"
               name="email"
-              name="cellphone"
-              class="form-control is-invalid"
+              className="mt-2 form-control is-invalid"
               aria-describedby="validatedInputGroupPrepend"
               required
             />
           </div>
 
-          <div class="custom-control custom-checkbox mb-3">
+          <div className="mb-3">
+            <label for="validationServer01">Password</label>
+            <input
+              type="password"
+              name="pwd"
+              className="mt-2 form-control is-invalid"
+              aria-describedby="validatedInputGroupPrepend"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label for="validationServer01">Confirmed Password</label>
+            <input
+              type="password"
+              name="cofirmed_pwd"
+              className="mt-2 form-control is-invalid"
+              aria-describedby="validatedInputGroupPrepend"
+              required
+            />
+          </div>
+
+          <div className="d-flex custom-control custom-checkbox mb-3">
             <input
               type="checkbox"
-              class="custom-control-input"
+              className="custom-control-input"
               id="customControlValidation1"
               required
             />
-            <label class="custom-control-label" for="customControlValidation1">
-              Check this custom checkbox
+            <label
+              className="mt-2 custom-control-label align-self-center"
+              for="customControlValidation1"
+            >
+              Never Mind 이용을 위한 필수 이용약관
             </label>
-            <div class="invalid-feedback">Example invalid feedback text</div>
+          </div>
+
+          <div className="d-flex custom-control custom-checkbox mb-3">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="customControlValidation2"
+              required
+            />
+            <label
+              className="mt-2 custom-control-label align-self-center"
+              for="customControlValidation2"
+            >
+              오픈뱅킹서비스 이용약관
+            </label>
+          </div>
+
+          <div className="d-flex custom-control custom-checkbox mb-3">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="customControlValidation3"
+              required
+            />
+            <label
+              className="mt-2 custom-control-label align-self-center"
+              for="customControlValidation3"
+            >
+              개인정보 처리 방침
+            </label>
           </div>
         </form>
       </InputContainer>
