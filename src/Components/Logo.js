@@ -7,9 +7,6 @@ const RestIcon = styled.img.attrs({
 })`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  display: grid;
-  margin: 0px auto;
-  margin-top: 170px;
 `;
 
 const Logo = (width, height) => (

@@ -16,12 +16,15 @@ const Form = styled.form`
   display: block;
   margin: 0px auto;
 `;
-
 const TextContainer = styled.div`
-  display: grid;
+  display: flex;
+  justify-content: center;
+  background-color: red;
 `;
-
-const Text = styled.div``;
+const Text = styled.div`
+  text-align: center;
+  background-color: red;
+`;
 const FormContainer = styled.div``;
 
 const MainPresenter = () => (
@@ -31,16 +34,13 @@ const MainPresenter = () => (
     </Helmet>
     <TextContainer>
       <Logo width="90px" height="80px"></Logo>
-      <Text>회원가입</Text>
+      ghl
     </TextContainer>
     <FormContainer>
       <Form>
         <Input>
           <div className="form-group row">
-            <label
-              for="colFormLabelLg"
-              className="col-sm-2 col-form-label col-form-label-lg"
-            >
+            <label for="colFormLabelLg" className="col-sm-2 col-form-label col-form-label-lg">
               Email
             </label>
             <div className="col-sm-10">
