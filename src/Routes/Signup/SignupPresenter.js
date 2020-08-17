@@ -167,15 +167,16 @@ const MainPresenter = () => (
               개인정보 처리 방침
             </label>
           </div>
-          <button type="button" className="btn btn-outline-success">
-            Success
-          </button>
+          <div className="d-flex justify-content-center">
+            <button type="button" className="mt-3 btn btn-outline-success">
+              Success
+            </button>
+          </div>
         </form>
       </InputContainer>
     </Form>
     <AskSignup>
-      이미 가입하셨나요?{" "}
-      <GotoLogin href="https://naver.com">로그인하기</GotoLogin>
+      이미 가입하셨나요? <GotoLogin href="https://naver.com">로그인하기</GotoLogin>
     </AskSignup>
   </Container>
 );
