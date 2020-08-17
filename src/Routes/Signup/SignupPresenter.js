@@ -39,6 +39,15 @@ const Text = styled.div`
   margin-left: 17px;
 `;
 
+const AskSignup = styled.p`
+  color: grey;
+  text-align: center;
+  margin-top: 30px;
+`;
+
+const GotoLogin = styled.a`
+  color: #ca444a;
+`;
 const FormContainter = styled.div``;
 
 const MainPresenter = () => (
@@ -164,6 +173,10 @@ const MainPresenter = () => (
         </form>
       </InputContainer>
     </Form>
+    <AskSignup>
+      이미 가입하셨나요?{" "}
+      <GotoLogin href="https://naver.com">로그인하기</GotoLogin>
+    </AskSignup>
   </Container>
 );
 
