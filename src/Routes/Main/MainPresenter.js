@@ -9,7 +9,7 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
-  height: ${window.innerHeight}px;
+  height: 100%;
   display: flex;
 `;
 
@@ -47,6 +47,7 @@ const MainPresenter = () => (
         </div>
         <Desc>
           매달 신경쓰였던 '구독정보' <br />
+          <br />
           이제 Never Mind가 대신 알려드릴게요
         </Desc>
         <Button>
