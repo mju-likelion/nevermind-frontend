@@ -17,4 +17,10 @@ const Logo = (width, height) => (
     <RestIcon width={width} height={height}></RestIcon>
   </>
 );
+
+Logo.propTypes = {
+  width: PropTypes.string,
+  height: PropTypes.string,
+};
+
 export default Logo;
