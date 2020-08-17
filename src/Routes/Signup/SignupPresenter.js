@@ -64,8 +64,8 @@ const MainPresenter = () => (
             />
           </div>
 
-          <div class="form-row">
-            <div class="form-group col-md-8">
+          <div class="d-flex">
+            <div class="form-group">
               <label for="validationServer01">Cell_Phone</label>
               <input
                 type="text"
@@ -75,8 +75,8 @@ const MainPresenter = () => (
                 required
               />
             </div>
-            <div class="form-group col-md-4">
-              <button type="button" class="btn btn-light mt-4">
+            <div className="d-flex flex-column justify-content-center mt-2 ml-3">
+              <button type="button" class="btn btn-light">
                 본인인증
               </button>
             </div>
