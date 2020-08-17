@@ -76,7 +76,7 @@ const MainPresenter = () => (
               />
             </div>
             <div class="form-group col-md-4">
-              <button type="button" class="btn btn-light">
+              <button type="button" class="btn btn-light mt-4">
                 본인인증
               </button>
             </div>
