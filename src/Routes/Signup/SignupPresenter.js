@@ -6,26 +6,34 @@ import Logo from "Components/Logo";
 
 const Container = styled.div``;
 
-const Input = styled.div`
+const InputContainer = styled.div`
   margin-top: 30px;
-  position: absolute;
-  left: 37%;
+`;
+
+const Input = styled.div`
+  margin-bottom: 25px;
 `;
 
 const Form = styled.form`
-  display: block;
+  display: flex;
+  justify-content: center;
   margin: 0px auto;
 `;
 const TextContainer = styled.div`
   display: flex;
   justify-content: center;
-  background-color: red;
+  align-items: center;
+  margin-top: 80px;
+  margin-bottom: 20px;
 `;
 const Text = styled.div`
-  text-align: center;
-  background-color: red;
+  font-size: 35px;
+  display: flex;
+  margin-top: 27px;
+  margin-left: 17px;
 `;
-const FormContainer = styled.div``;
+
+const FormContainter = styled.div``;
 
 const MainPresenter = () => (
   <Container>
@@ -34,18 +42,19 @@ const MainPresenter = () => (
     </Helmet>
     <TextContainer>
       <Logo width="90px" height="80px"></Logo>
-      ghl
+      <Text>회원가입</Text>
     </TextContainer>
-    <FormContainer>
-      <Form>
+    <Form>
+      <InputContainer>
         <Input>
           <div className="form-group row">
             <label for="colFormLabelLg" className="col-sm-2 col-form-label col-form-label-lg">
-              Email
+              Name
             </label>
             <div className="col-sm-10">
               <input
-                type="email"
+                type="text"
+                name="username"
                 className="form-control form-control-lg"
                 id="colFormLabelLg"
                 placeholder="col-form-label-lg"
@@ -53,8 +62,56 @@ const MainPresenter = () => (
             </div>
           </div>
         </Input>
-      </Form>
-    </FormContainer>
+        <Input>
+          <div className="form-group row">
+            <label for="colFormLabelLg" className="col-sm-2 col-form-label col-form-label-lg">
+              Cell_Phone
+            </label>
+            <div className="col-sm-10">
+              <input
+                type="text"
+                name="cellphone"
+                className="form-control form-control-lg"
+                id="colFormLabelLg"
+                placeholder="col-form-label-lg"
+              />
+            </div>
+          </div>
+        </Input>
+        <Input>
+          <div className="form-group row">
+            <label for="colFormLabelLg" className="col-sm-2 col-form-label col-form-label-lg">
+              Email
+            </label>
+            <div className="col-sm-10">
+              <input
+                type="text"
+                name="email"
+                className="form-control form-control-lg"
+                id="colFormLabelLg"
+                placeholder="col-form-label-lg"
+              />
+            </div>
+          </div>
+        </Input>
+        <Input>
+          <div className="form-group row">
+            <label for="colFormLabelLg" className="col-sm-2 col-form-label col-form-label-lg">
+              Password
+            </label>
+            <div className="col-sm-10">
+              <input
+                type="text"
+                name="password"
+                className="form-control form-control-lg"
+                id="colFormLabelLg"
+                placeholder="col-form-label-lg"
+              />
+            </div>
+          </div>
+        </Input>
+      </InputContainer>
+    </Form>
   </Container>
 );
 
