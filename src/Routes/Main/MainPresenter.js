@@ -9,14 +9,17 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
+  height: ${window.innerHeight}px;
   display: flex;
-  flex-direction: row;
 `;
 
 const ItemContainer = styled.div`
-  position: absolute;
-  left: 35%;
+  margin-left: 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 `;
 
 const Desc = styled.p`
@@ -43,16 +46,20 @@ const MainPresenter = () => (
 
     <Sidebar></Sidebar>
     <ItemContainer>
-      <Logo width="220px" height="195px"></Logo>
-      <Desc>
-        매달 신경쓰였던 '구독정보' <br />
-        이제 Never Mind가 대신 알려드릴게요
-      </Desc>
-      <Button>
-        <button type="button" className="btn btn-outline-dark btn-lg">
-          START
-        </button>
-      </Button>
+      <div className="w-100">
+        <div className="d-flex justify-content-center">
+          <Logo width="220px" height="195px"></Logo>
+        </div>
+        <Desc>
+          매달 신경쓰였던 '구독정보' <br />
+          이제 Never Mind가 대신 알려드릴게요
+        </Desc>
+        <Button>
+          <button type="button" className="btn btn-outline-dark btn-lg">
+            START
+          </button>
+        </Button>
+      </div>
     </ItemContainer>
   </Container>
 );
