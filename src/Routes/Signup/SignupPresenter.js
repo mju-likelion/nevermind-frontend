@@ -63,23 +63,24 @@ const MainPresenter = () => (
               required
             />
           </div>
-          <form class="form-inline">
-            <div class="form-row">
-              <div class="d-flex form-group col-md-6">
-                <label for="validationServer01">Cell_Phone</label>
-                <input
-                  type="text"
-                  name="cellphone"
-                  className="mt-2 form-control is-invalid"
-                  aria-describedby="validatedInputGroupPrepend"
-                  required
-                />
-                <button type="button" class="btn btn-light">
-                  본인인증
-                </button>
-              </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label for="validationServer01">Cell_Phone</label>
+              <input
+                type="text"
+                name="cellphone"
+                className="mt-2 form-control is-invalid"
+                aria-describedby="validatedInputGroupPrepend"
+                required
+              />
             </div>
-          </form>
+            <div class="form-group col-md-4">
+              <button type="button" class="btn btn-light">
+                본인인증
+              </button>
+            </div>
+          </div>
 
           <div className="mb-3">
             <label for="validationServer01">E-mail</label>
