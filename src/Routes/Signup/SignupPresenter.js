@@ -6,16 +6,6 @@ import Logo from "Components/Logo";
 
 const Container = styled.div``;
 
-const RestIcon = styled.img.attrs({
-  src: "./logo.png",
-})`
-  width: 90px;
-  height: 80px;
-  display: block;
-  margin: 0px auto;
-  margin-top: 40px;
-`;
-
 const Input = styled.div`
   margin-top: 30px;
   position: absolute;
@@ -27,6 +17,11 @@ const Form = styled.form`
   margin: 0px auto;
 `;
 
+const TextContainer = styled.div`
+  display: grid;
+`;
+
+const Text = styled.div``;
 const FormContainer = styled.div``;
 
 const MainPresenter = () => (
@@ -34,21 +29,24 @@ const MainPresenter = () => (
     <Helmet>
       <title>Sign Up | Nevermind</title>
     </Helmet>
-    <Logo width="90px" height="80px"></Logo>
+    <TextContainer>
+      <Logo width="90px" height="80px"></Logo>
+      <Text>회원가입</Text>
+    </TextContainer>
     <FormContainer>
       <Form>
         <Input>
-          <div class="form-group row">
+          <div className="form-group row">
             <label
               for="colFormLabelLg"
-              class="col-sm-2 col-form-label col-form-label-lg"
+              className="col-sm-2 col-form-label col-form-label-lg"
             >
               Email
             </label>
-            <div class="col-sm-10">
+            <div className="col-sm-10">
               <input
                 type="email"
-                class="form-control form-control-lg"
+                className="form-control form-control-lg"
                 id="colFormLabelLg"
                 placeholder="col-form-label-lg"
               />
