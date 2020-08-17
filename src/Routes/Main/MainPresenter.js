@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 import Logo from "Components/Logo";
 import Sidebar from "Components/Sidebar";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   margin: 0;
@@ -50,11 +51,13 @@ const MainPresenter = () => (
           <br />
           이제 Never Mind가 대신 알려드릴게요
         </Desc>
-        <Button>
-          <button type="button" className="btn btn-outline-dark btn-lg">
-            START
-          </button>
-        </Button>
+        <Link to={"Signup"}>
+          <Button>
+            <button type="button" className="btn btn-outline-dark btn-lg">
+              START
+            </button>
+          </Button>
+        </Link>
       </div>
     </ItemContainer>
   </Container>
