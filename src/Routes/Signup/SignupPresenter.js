@@ -169,7 +169,7 @@ const MainPresenter = () => (
           </div>
           <div className="d-flex justify-content-center">
             <button type="button" className="mt-3 btn btn-outline-success">
-              Success
+              Submit
             </button>
           </div>
         </form>
