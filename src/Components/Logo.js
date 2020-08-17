@@ -5,16 +5,16 @@ import styled from "styled-components";
 const RestIcon = styled.img.attrs({
   src: "./logo.png",
 })`
-  width: 220px;
-  height: 195px;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   display: block;
   margin: 0px auto;
   margin-top: 170px;
 `;
 
-const Logo = () => (
+const Logo = (width, height) => (
   <>
-    <RestIcon></RestIcon>
+    <RestIcon width={width} height={height}></RestIcon>
   </>
 );
 export default Logo;

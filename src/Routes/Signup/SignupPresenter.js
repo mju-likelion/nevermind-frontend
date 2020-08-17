@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
+import Logo from "Components/Logo";
 
 const Container = styled.div``;
 
@@ -15,7 +16,11 @@ const RestIcon = styled.img.attrs({
   margin-top: 40px;
 `;
 
-const Input = styled.input``;
+const Input = styled.div`
+  margin-top: 30px;
+  position: absolute;
+  left: 37%;
+`;
 
 const Form = styled.form`
   display: block;
@@ -29,10 +34,27 @@ const MainPresenter = () => (
     <Helmet>
       <title>Sign Up | Nevermind</title>
     </Helmet>
-    <RestIcon></RestIcon>
+    <Logo width="90px" height="80px"></Logo>
     <FormContainer>
       <Form>
-        <Input></Input>
+        <Input>
+          <div class="form-group row">
+            <label
+              for="colFormLabelLg"
+              class="col-sm-2 col-form-label col-form-label-lg"
+            >
+              Email
+            </label>
+            <div class="col-sm-10">
+              <input
+                type="email"
+                class="form-control form-control-lg"
+                id="colFormLabelLg"
+                placeholder="col-form-label-lg"
+              />
+            </div>
+          </div>
+        </Input>
       </Form>
     </FormContainer>
   </Container>

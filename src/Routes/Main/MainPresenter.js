@@ -43,7 +43,7 @@ const MainPresenter = () => (
 
     <Sidebar></Sidebar>
     <ItemContainer>
-      <Logo></Logo>
+      <Logo width="220px" height="195px"></Logo>
       <Desc>
         매달 신경쓰였던 '구독정보' <br />
         이제 Never Mind가 대신 알려드릴게요
