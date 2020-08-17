@@ -51,7 +51,7 @@ const GotoLogin = styled.a`
 const FormContainter = styled.div``;
 
 const MainPresenter = () => (
-  <Container>
+  <Container className="my-4">
     <Helmet>
       <title>Sign Up | Nevermind</title>
     </Helmet>
@@ -73,8 +73,8 @@ const MainPresenter = () => (
             />
           </div>
 
-          <div class="d-flex">
-            <div class="form-group">
+          <div className="d-flex">
+            <div className="form-group">
               <label for="validationServer01">Cell_Phone</label>
               <input
                 type="text"
@@ -85,7 +85,7 @@ const MainPresenter = () => (
               />
             </div>
             <div className="d-flex flex-column justify-content-center mt-2 ml-3">
-              <button type="button" class="btn btn-light">
+              <button type="button" className="btn btn-light">
                 본인인증
               </button>
             </div>
@@ -123,7 +123,7 @@ const MainPresenter = () => (
             />
           </div>
 
-          <div className="d-flex custom-control custom-checkbox mb-3">
+          <div className="custom-control custom-checkbox mb-3">
             <input
               type="checkbox"
               className="custom-control-input"
@@ -131,14 +131,14 @@ const MainPresenter = () => (
               required
             />
             <label
-              className="mt-2 custom-control-label align-self-center"
+              className="mt-2 pt-1 custom-control-label"
               for="customControlValidation1"
             >
               Never Mind 이용을 위한 필수 이용약관
             </label>
           </div>
 
-          <div className="d-flex custom-control custom-checkbox mb-3">
+          <div className="custom-control custom-checkbox mb-3">
             <input
               type="checkbox"
               className="custom-control-input"
@@ -146,14 +146,14 @@ const MainPresenter = () => (
               required
             />
             <label
-              className="mt-2 custom-control-label align-self-center"
+              className="mt-2 pt-1 custom-control-label"
               for="customControlValidation2"
             >
               오픈뱅킹서비스 이용약관
             </label>
           </div>
 
-          <div className="d-flex custom-control custom-checkbox mb-3">
+          <div className="custom-control custom-checkbox mb-3">
             <input
               type="checkbox"
               className="custom-control-input"
@@ -161,7 +161,7 @@ const MainPresenter = () => (
               required
             />
             <label
-              className="mt-2 custom-control-label align-self-center"
+              className="mt-2 pt-1 custom-control-label"
               for="customControlValidation3"
             >
               개인정보 처리 방침
@@ -176,7 +176,8 @@ const MainPresenter = () => (
       </InputContainer>
     </Form>
     <AskSignup>
-      이미 가입하셨나요? <GotoLogin href="https://naver.com">로그인하기</GotoLogin>
+      이미 가입하셨나요?{" "}
+      <GotoLogin href="https://naver.com">로그인하기</GotoLogin>
     </AskSignup>
   </Container>
 );
