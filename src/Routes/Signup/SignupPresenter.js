@@ -158,6 +158,9 @@ const MainPresenter = () => (
               개인정보 처리 방침
             </label>
           </div>
+          <button type="button" className="btn btn-outline-success">
+            Success
+          </button>
         </form>
       </InputContainer>
     </Form>
