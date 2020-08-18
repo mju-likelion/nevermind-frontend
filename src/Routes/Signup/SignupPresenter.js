@@ -83,6 +83,7 @@ function setValidation() {
     $(e).click(inputHandler);
     $(e).keyup(inputHandler);
   });
+  $('input[name=""]')
 }
 
 const MainPresenter = () => {
@@ -118,7 +119,7 @@ const MainPresenter = () => {
           <div className="form-group">
             <label htmlFor="validationServer01">Cell_Phone</label>
             <input
-              type="text"
+              type="tel"
               name="cellphone"
               className="mt-2 form-control"
               aria-describedby="validatedInputGroupPrepend"
