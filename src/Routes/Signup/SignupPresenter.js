@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Sidebar from "Components/Sidebar";
 import Helmet from "react-helmet";
 import Logo from "Components/Logo";
 import { Link } from "react-router-dom";
@@ -47,10 +48,11 @@ const GotoLogin = styled.a`
 `;
 
 const MainPresenter = () => (
-  <Container className="my-4">
+  <Container>
     <Helmet>
       <title>Sign Up | Nevermind</title>
     </Helmet>
+    <Sidebar></Sidebar>
     <TextContainer>
       <Logo width="90px" height="80px"></Logo>
       <Text>회원가입</Text>

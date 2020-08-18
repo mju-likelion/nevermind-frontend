@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Sidebar from "Components/Sidebar";
 import Helmet from "react-helmet";
 import Logo from "Components/Logo";
 import { Link } from "react-router-dom";
@@ -16,10 +17,11 @@ const Container = styled.div`
 `;
 
 const LoginPresenter = () => (
-  <Container className="my-4">
+  <Container className>
     <Helmet>
       <title>Login | Nevermind</title>
     </Helmet>
+    <Sidebar></Sidebar>
   </Container>
 );
 
