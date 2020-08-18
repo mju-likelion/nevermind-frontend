@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import Logo from "Components/Logo";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   margin: 0;
@@ -16,10 +17,6 @@ const Container = styled.div`
 
 const InputContainer = styled.div`
   margin-top: 30px;
-`;
-
-const Input = styled.div`
-  margin-bottom: 25px;
 `;
 
 const Form = styled.form`
@@ -48,7 +45,6 @@ const AskSignup = styled.p`
 const GotoLogin = styled.a`
   color: #ca444a;
 `;
-const FormContainter = styled.div``;
 
 const MainPresenter = () => (
   <Container className="my-4">
@@ -130,10 +126,7 @@ const MainPresenter = () => (
               id="customControlValidation1"
               required
             />
-            <label
-              className="mt-2 pt-1 custom-control-label"
-              for="customControlValidation1"
-            >
+            <label className="mt-2 pt-1 custom-control-label" for="customControlValidation1">
               Never Mind 이용을 위한 필수 이용약관
             </label>
           </div>
@@ -145,10 +138,7 @@ const MainPresenter = () => (
               id="customControlValidation2"
               required
             />
-            <label
-              className="mt-2 pt-1 custom-control-label"
-              for="customControlValidation2"
-            >
+            <label className="mt-2 pt-1 custom-control-label" for="customControlValidation2">
               오픈뱅킹서비스 이용약관
             </label>
           </div>
@@ -160,24 +150,22 @@ const MainPresenter = () => (
               id="customControlValidation3"
               required
             />
-            <label
-              className="mt-2 pt-1 custom-control-label"
-              for="customControlValidation3"
-            >
+            <label className="mt-2 pt-1 custom-control-label" for="customControlValidation3">
               개인정보 처리 방침
             </label>
           </div>
           <div className="d-flex justify-content-center">
-            <button type="button" className="mt-3 btn btn-outline-dark">
-              Submit
-            </button>
+            <Link to={"Login"}>
+              <button type="button" className="mt-3 btn btn-outline-dark">
+                Submit
+              </button>
+            </Link>
           </div>
         </form>
       </InputContainer>
     </Form>
     <AskSignup>
-      이미 가입하셨나요?{" "}
-      <GotoLogin href="https://naver.com">로그인하기</GotoLogin>
+      이미 가입하셨나요? <GotoLogin href="https://naver.com">로그인하기</GotoLogin>
     </AskSignup>
   </Container>
 );
