@@ -17,10 +17,6 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const InputContainer = styled.div`
-  margin-top: 30px;
-`;
-
 const Form = styled.form`
   margin: 0px auto;
 `;
@@ -45,32 +41,54 @@ const GotoLogin = styled.a`
   color: #ca444a;
 `;
 
+function initTooltip() {
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+}
 function setSignupTooltipTitleByName(name, title_txt) {
   $(`[name="${name}"]`).attr("title", title_txt);
 }
-
 function setSignupTooltipTitleForTermLabels(title_txt) {
   $(".term-label").attr("title", title_txt);
+}
+function setSignupTooltip() {
+  initTooltip();
+  setSignupTooltipTitleByName("username", "이름을 입력하세요");
+  setSignupTooltipTitleByName(
+    "cellphone",
+    "전화번호 입력 후<br>본인인증을 클릭하세요"
+  );
+  setSignupTooltipTitleByName("verify_cellphone", "인증 페이지로 이동합니다");
+  setSignupTooltipTitleByName("email", "이메일을 입력하세요");
+  setSignupTooltipTitleByName("pwd", "비밀번호를 입력하세요");
+  setSignupTooltipTitleByName(
+    "pwd_confirm",
+    "비밀번호를<br>한번 더 입력하세요"
+  );
+  setSignupTooltipTitleForTermLabels("필수 약관입니다");
+}
+
+function setValidation() {
+  $('input:not("[type=submit]")').each((i, e) => {
+    const inputHandler = function() {
+      if($(this).val().length > 0) {
+        $(this).addClass('is-valid');
+        $(this).removeClass('is-invalid');
+      } else {
+        $(this).addClass('is-invalid');
+        $(this).removeClass('is-valid');
+      }
+    };
+    $(e).click(inputHandler);
+    $(e).keyup(inputHandler);
+  });
 }
 
 const MainPresenter = () => {
   useEffect(() => {
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
-    setSignupTooltipTitleByName("username", "이름을 입력하세요");
-    setSignupTooltipTitleByName(
-      "cellphone",
-      "전화번호 입력 후<br>본인인증을 클릭하세요"
-    );
-    setSignupTooltipTitleByName("verify_cellphone", "인증 페이지로 이동합니다");
-    setSignupTooltipTitleByName("email", "이메일을 입력하세요");
-    setSignupTooltipTitleByName("pwd", "비밀번호를 입력하세요");
-    setSignupTooltipTitleByName(
-      "pwd_confirm",
-      "비밀번호를<br>한번 더 입력하세요"
-    );
-    setSignupTooltipTitleForTermLabels("필수 약관입니다");
+    setSignupTooltip();
+    setValidation();
   });
   return (
     <Container>
@@ -82,13 +100,13 @@ const MainPresenter = () => {
         <Logo width="90px" height="80px"></Logo>
         <Text>회원가입</Text>
       </TextContainer>
-      <Form className="was-validated mt-3">
+      <Form className="mt-3">
         <div className="mb-3">
           <label htmlFor="validationServer01">Name</label>
           <input
             type="text"
             name="username"
-            className="mt-2 form-control is-invalid"
+            className="mt-2 form-control"
             aria-describedby="validatedInputGroupPrepend"
             data-toggle="tooltip"
             data-placement="top"
@@ -96,14 +114,13 @@ const MainPresenter = () => {
             required
           />
         </div>
-
         <div className="d-flex">
           <div className="form-group">
             <label htmlFor="validationServer01">Cell_Phone</label>
             <input
               type="text"
               name="cellphone"
-              className="mt-2 form-control is-invalid"
+              className="mt-2 form-control"
               aria-describedby="validatedInputGroupPrepend"
               data-toggle="tooltip"
               data-placement="top"
@@ -130,7 +147,7 @@ const MainPresenter = () => {
           <input
             type="text"
             name="email"
-            className="mt-2 form-control is-invalid"
+            className="mt-2 form-control"
             aria-describedby="validatedInputGroupPrepend"
             data-toggle="tooltip"
             data-placement="top"
@@ -144,7 +161,7 @@ const MainPresenter = () => {
           <input
             type="password"
             name="pwd"
-            className="mt-2 form-control is-invalid"
+            className="mt-2 form-control"
             aria-describedby="validatedInputGroupPrepend"
             data-toggle="tooltip"
             data-placement="top"
@@ -157,7 +174,7 @@ const MainPresenter = () => {
           <input
             type="password"
             name="pwd_confirm"
-            className="mt-2 form-control is-invalid"
+            className="mt-2 form-control"
             aria-describedby="validatedInputGroupPrepend"
             data-toggle="tooltip"
             data-placement="top"
@@ -166,7 +183,7 @@ const MainPresenter = () => {
           />
         </div>
 
-        <div className="custom-control custom-checkbox mb-2">
+        <div className="custom-control custom-checkbox mb-2 was-validated">
           <input
             type="checkbox"
             className="custom-control-input"
@@ -184,7 +201,7 @@ const MainPresenter = () => {
           </label>
         </div>
 
-        <div className="custom-control custom-checkbox mb-2">
+        <div className="custom-control custom-checkbox mb-2 was-validated">
           <input
             type="checkbox"
             className="custom-control-input"
@@ -202,7 +219,7 @@ const MainPresenter = () => {
           </label>
         </div>
 
-        <div className="custom-control custom-checkbox mb-3">
+        <div className="custom-control custom-checkbox mb-3 was-validated">
           <input
             type="checkbox"
             className="custom-control-input"
