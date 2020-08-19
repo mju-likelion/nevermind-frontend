@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.js": "/nevermind-frontend/static/js/main.ca52a3ce.chunk.js",
+    "main.js.map": "/nevermind-frontend/static/js/main.ca52a3ce.chunk.js.map",
+    "runtime-main.js": "/nevermind-frontend/static/js/runtime-main.2ae3d0f4.js",
+    "runtime-main.js.map": "/nevermind-frontend/static/js/runtime-main.2ae3d0f4.js.map",
+    "static/css/2.f3cffc9e.chunk.css": "/nevermind-frontend/static/css/2.f3cffc9e.chunk.css",
+    "static/js/2.3c7a6b72.chunk.js": "/nevermind-frontend/static/js/2.3c7a6b72.chunk.js",
+    "static/js/2.3c7a6b72.chunk.js.map": "/nevermind-frontend/static/js/2.3c7a6b72.chunk.js.map",
+    "index.html": "/nevermind-frontend/index.html",
+    "precache-manifest.c2d5c1af74f25c00095ce2977a2f9597.js": "/nevermind-frontend/precache-manifest.c2d5c1af74f25c00095ce2977a2f9597.js",
+    "service-worker.js": "/nevermind-frontend/service-worker.js",
+    "static/css/2.f3cffc9e.chunk.css.map": "/nevermind-frontend/static/css/2.f3cffc9e.chunk.css.map",
+    "static/js/2.3c7a6b72.chunk.js.LICENSE.txt": "/nevermind-frontend/static/js/2.3c7a6b72.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2ae3d0f4.js",
+    "static/css/2.f3cffc9e.chunk.css",
+    "static/js/2.3c7a6b72.chunk.js",
+    "static/js/main.ca52a3ce.chunk.js"
+  ]
+}
