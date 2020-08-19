@@ -1,27 +1,33 @@
-// https://velog.io/@pop8682/%EB%B2%88%EC%97%AD-React-webpack-%EC%84%A4%EC%A0%95-%EC%B2%98%EC%9D%8C%EB%B6%80%ED%84%B0-%ED%95%B4%EB%B3%B4%EA%B8%B0
+// Source 1: https://velog.io/@pop8682/%EB%B2%88%EC%97%AD-React-webpack-%EC%84%A4%EC%A0%95-%EC%B2%98%EC%9D%8C%EB%B6%80%ED%84%B0-%ED%95%B4%EB%B3%B4%EA%B8%B0
+// Source 2: https://velog.io/@jeff0720/React-%EA%B0%9C%EB%B0%9C-%ED%99%98%EA%B2%BD%EC%9D%84-%EA%B5%AC%EC%B6%95%ED%95%98%EB%A9%B4%EC%84%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-Webpack-%EA%B8%B0%EC%B4%88
+// Source 3: https://stackoverflow.com/a/49018912/7384478
+// Source 4: https://stackoverflow.com/questions/60309183/react-jsconfig-json-ignores-paths
 
-const path = require("path"); // core nodejs 모듈 중 하나, 파일 경로 설정할 때 사용
-const HtmlWebpackPlugin = require("html-webpack-plugin"); // index.html 파일을 dist 폴더에 index_bundle.js 파일과 함께 자동으로 생성, 우리는 그냥 시작만 하고싶지 귀찮게 index.html 파일까지 만들고 싶지 않다.!!
+const path = require("path");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  // moduel export (옛날 방식..)
-  /*
-  entry: "./src/index.js", // 리액트 파일이 시작하는 곳
+  entry: "./src/index.js",
   output: {
-    // bundled compiled 파일
-    path: path.join(__dirname, "/dist"), //__dirname : 현재 디렉토리, dist 폴더에 모든 컴파일된 하나의 번들파일을 넣을 예정
-    filename: "index_bundle.js",
+    path: path.resolve(__dirname, "/build"),
+    filename: "bundle.js",
   },
-  */
+  mode: "none",
   module: {
-    // javascript 모듈을 생성할 규칙을 지정 (node_module을 제외한.js 파일을 babel-loader로 불러와 모듈을 생성
     rules: [
       {
-        test: /\.js$/, // .js, .jsx로 끝나는 babel이 컴파일하게 할 모든 파일
-        exclude: /node_module/, // node module 폴더는 babel 컴파일에서 제외
-        use: {
-          loader: "babel-loader", // babel loader가 파이프를 통해 js 코드를 불러옴
-        },
+        test: /\.(js|jsx)$/,
+        exclude: /node_module/,
+        use: ["babel-loader"],
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+            options: { minimize: true },
+          },
+        ],
       },
       {
         test: /\.css$/,
@@ -29,11 +35,16 @@ module.exports = {
       },
     ],
   },
-  /*
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "./src/index.html", // 생성한 템플릿 파일
+    new HtmlWebPackPlugin({
+      template: "./public/index.html",
+      filename: "index.html",
     }),
   ],
-  */
+  resolve: {
+    alias: {
+      Components: path.resolve(__dirname, 'src/Components'),
+      Routes: path.resolve(__dirname, 'src/Routes'),
+    }
+  }
 };
