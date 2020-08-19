@@ -101,9 +101,9 @@ const LoginPresenter = () => (
     </Form>
 
     <AskSignup className="my-3">
-      이미 가입하셨나요?&nbsp;
-      <Link to={"Login"}>
-        <GotoLogin>로그인하기</GotoLogin>
+      아직 NEVER MIND 회원이 아니신가요?&nbsp;
+      <Link to={"Signup"}>
+        <GotoLogin>회원가입하기</GotoLogin>
       </Link>
     </AskSignup>
   </Container>
