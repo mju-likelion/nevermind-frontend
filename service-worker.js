@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/nevermind-frontend/precache-manifest.5198f992092ab5eebc24569aacb154b6.js"
+  "/nevermind-frontend/precache-manifest.08fa2b28735937d04946713cc6fe9f04.js"
 );
 
 self.addEventListener('message', (event) => {
