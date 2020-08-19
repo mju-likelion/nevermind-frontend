@@ -85,9 +85,11 @@ const LoginPresenter = () => (
               data-html="true"
               required
             />
-            <Link to={"Login"}>
-              <ForgotPW>비밀번호 찾기</ForgotPW>
-            </Link>
+            <div className="pt-2">
+              <Link to={"Login"}>
+                <ForgotPW>비밀번호 찾기</ForgotPW>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
