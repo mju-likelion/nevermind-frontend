@@ -55,38 +55,32 @@ function setSignupTooltipTitleForTermLabels(title_txt) {
 function setSignupTooltip() {
   initTooltip();
   setSignupTooltipTitleByName("username", "이름을 입력하세요");
-  setSignupTooltipTitleByName(
-    "cellphone",
-    "전화번호 입력 후<br>본인인증을 클릭하세요"
-  );
+  setSignupTooltipTitleByName("cellphone", "전화번호 입력 후<br>본인인증을 클릭하세요");
   setSignupTooltipTitleByName("verify_cellphone", "인증 페이지로 이동합니다");
   setSignupTooltipTitleByName("email", "이메일을 입력하세요");
   setSignupTooltipTitleByName("pwd", "비밀번호를 입력하세요");
-  setSignupTooltipTitleByName(
-    "pwd_confirm",
-    "비밀번호를<br>한번 더 입력하세요"
-  );
+  setSignupTooltipTitleByName("pwd_confirm", "비밀번호를<br>한번 더 입력하세요");
   setSignupTooltipTitleForTermLabels("필수 약관입니다");
 }
 
 function setValidation() {
   $('input:not("[type=submit]")').each((i, e) => {
-    const inputHandler = function() {
-      if($(this).val().length > 0) {
-        $(this).addClass('is-valid');
-        $(this).removeClass('is-invalid');
+    const inputHandler = function () {
+      if ($(this).val().length > 0) {
+        $(this).addClass("is-valid");
+        $(this).removeClass("is-invalid");
       } else {
-        $(this).addClass('is-invalid');
-        $(this).removeClass('is-valid');
+        $(this).addClass("is-invalid");
+        $(this).removeClass("is-valid");
       }
     };
     $(e).click(inputHandler);
     $(e).keyup(inputHandler);
   });
-  $('input[name=""]')
+  $('input[name=""]');
 }
 
-const MainPresenter = () => {
+const SignupPresenter = () => {
   useEffect(() => {
     setSignupTooltip();
     setValidation();
@@ -246,11 +240,10 @@ const MainPresenter = () => {
         </div>
       </Form>
       <AskSignup className="my-3">
-        이미 가입하셨나요?{" "}
-        <GotoLogin href="https://naver.com">로그인하기</GotoLogin>
+        이미 가입하셨나요? <GotoLogin href="https://naver.com">로그인하기</GotoLogin>
       </AskSignup>
     </Container>
   );
 };
 
-export default MainPresenter;
+export default SignupPresenter;
