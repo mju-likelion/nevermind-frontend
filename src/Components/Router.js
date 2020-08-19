@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-d
 import Main from "Routes/Main";
 import Signup from "Routes/Signup";
 import Login from "Routes/Login";
+import Service from "Routes/Service";
 
 export default () => (
   <Router>
@@ -12,6 +13,7 @@ export default () => (
         <Route path="/" exact component={Main} />
         <Route path="/Signup" component={Signup} />
         <Route path="/Login" component={Login} />
+        <Route path="/Service" component={Service} />
         <Redirect from="*" to="/" />
       </Switch>
     </>
