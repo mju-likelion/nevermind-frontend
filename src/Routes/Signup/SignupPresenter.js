@@ -240,7 +240,10 @@ const SignupPresenter = () => {
         </div>
       </Form>
       <AskSignup className="my-3">
-        이미 가입하셨나요? <GotoLogin href="https://naver.com">로그인하기</GotoLogin>
+        이미 가입하셨나요?{" "}
+        <Link to={"Login"}>
+          <GotoLogin>로그인하기</GotoLogin>
+        </Link>
       </AskSignup>
     </Container>
   );
