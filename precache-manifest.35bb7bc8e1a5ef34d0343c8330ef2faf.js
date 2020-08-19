@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "02d5e0492027d7c69a5be050da82e58c",
+    "revision": "34d8d45aabe94bed56081edc2ff0315a",
     "url": "/nevermind-frontend/index.html"
   },
   {
-    "revision": "d0d66ace72582f5f31fa",
+    "revision": "f5b722b092841ecc3fbd",
     "url": "/nevermind-frontend/static/css/2.f3cffc9e.chunk.css"
   },
   {
-    "revision": "d0d66ace72582f5f31fa",
-    "url": "/nevermind-frontend/static/js/2.3c7a6b72.chunk.js"
+    "revision": "f5b722b092841ecc3fbd",
+    "url": "/nevermind-frontend/static/js/2.dc71b439.chunk.js"
   },
   {
     "revision": "d3031346469a8a2ef527f1ad705ea3b7",
-    "url": "/nevermind-frontend/static/js/2.3c7a6b72.chunk.js.LICENSE.txt"
+    "url": "/nevermind-frontend/static/js/2.dc71b439.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "30c37ba3fb2d0194d214",
-    "url": "/nevermind-frontend/static/js/main.ca52a3ce.chunk.js"
+    "revision": "e23fb1ac6e70167be04f",
+    "url": "/nevermind-frontend/static/js/main.5bdfd652.chunk.js"
   },
   {
     "revision": "1f8339b45f59fccecb6d",
