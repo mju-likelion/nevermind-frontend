@@ -37,7 +37,7 @@ const AskSignup = styled.p`
   text-align: center;
 `;
 
-const GotoLogin = styled.a`
+const GotoLogin = styled.span`
   color: #ca444a;
 `;
 
