@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.ul`
   list-style-type: none;
@@ -12,6 +13,6 @@ const Container = styled.ul`
   overflow: auto;
 `;
 
-const Sidebarw = () => <Container></Container>;
+const Sidebar = () => <Container></Container>;
 
-export default Sidebarw;
+export default Sidebar;
