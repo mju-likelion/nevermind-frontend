@@ -3,14 +3,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Container = styled.ul`
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 8%;
-  background-color: #263d66;
-  height: 100%;
-  position: fixed;
-  overflow: auto;
+  margin-top: 5%;
+  margin-left: 6%;
+  width: 17%;
+  background-color: white;
 `;
 
 const Sidebar = () => <Container></Container>;

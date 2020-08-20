@@ -11,7 +11,7 @@ const Container = styled.div`
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 8%;
+  width: 6%;
   background-color: #263d66;
   height: 100%;
   display: block;
@@ -19,11 +19,17 @@ const Container = styled.div`
   overflow: auto;
 `;
 
+const Img = styled.div`
+  width: 100%;
+`;
+
 const Navbar = () => (
   <Container>
     <Link to={"Main"}>
       <button type="button" class="mt-4 mb-5 btn w-100">
-        <img src={home} />
+        <Img>
+          <img src={home} />
+        </Img>
       </button>
     </Link>
     <Link to={"Main"}>
