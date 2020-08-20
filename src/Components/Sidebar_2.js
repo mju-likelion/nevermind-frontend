@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import notice from "assets/notice.svg";
 
 const Container = styled.ul`
   list-style-type: none;
@@ -13,12 +12,6 @@ const Container = styled.ul`
   overflow: auto;
 `;
 
-const Sidebar = () => (
-  <Container>
-    <button type="button" class="btn btn-default btn-lg">
-      <img src={notice} />
-    </button>
-  </Container>
-);
+const Sidebar = () => <Container></Container>;
 
 export default Sidebar;
