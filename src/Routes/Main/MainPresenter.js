@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import Logo from "Components/Logo";
-import Sidebar from "Components/Sidebar";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -39,8 +38,6 @@ const MainPresenter = () => (
     <Helmet>
       <title>Main | Nevermind</title>
     </Helmet>
-
-    <Sidebar></Sidebar>
     <ItemContainer>
       <div className="w-100">
         <div className="d-flex justify-content-center">
