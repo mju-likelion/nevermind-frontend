@@ -18,16 +18,16 @@ const Container = styled.ul`
 
 const Navbar = () => (
   <Container>
-    <button type="button" class="btn btn-default btn-lg">
+    <button type="button" class="btn w-100">
       <img src={home} />
     </button>
-    <button type="button" class="btn btn-default btn-lg">
+    <button type="button" class="btn w-100">
       <img src={user} />
     </button>
-    <button type="button" class="btn btn-default btn-lg">
+    <button type="button" class="btn w-100">
       <img src={notice} />
     </button>
-    <button type="button" class="btn btn-default btn-lg">
+    <button type="button" class="btn w-100">
       <img src={service} />
     </button>
   </Container>
