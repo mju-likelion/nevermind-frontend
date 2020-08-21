@@ -25,6 +25,7 @@ const Desc = styled.p`
   font-size: 35px;
   margin-top: 50px;
   text-align: center;
+  word-break: keep-all;
 `;
 
 const Button = styled.p`

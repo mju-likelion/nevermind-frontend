@@ -7,16 +7,14 @@ const globalStyles = createGlobalStyle`
         font-family: 'GmarketSansBold';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
     }
-    html, body, #root {
-        margin: 0;
-        padding: 0;
-        width: 100%;
+    html, body {
         height: 100%;
     }
-    body {
+    #root {
         font-family: 'GmarketSansBold';
         font-weight: normal;
         font-style: normal;
+        height: 100%;
     }
     
 
