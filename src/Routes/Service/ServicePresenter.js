@@ -7,7 +7,7 @@ import Logo from "Components/Logo";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  margin: 0;
+  margin: 0%;
   padding: 0;
   width: 100%;
   height: 100%;
@@ -15,7 +15,7 @@ const Container = styled.div`
 `;
 
 const ViewContainer = styled.div`
-  margin-top: 5%;
+  margin-top: 7%;
   margin-left: 0%;
   width: 100%;
   background-color: #ebebeb;

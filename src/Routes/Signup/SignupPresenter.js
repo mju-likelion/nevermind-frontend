@@ -20,6 +20,7 @@ const Form = styled.form`
 `;
 const TextContainer = styled.div`
   display: flex;
+  margin-top: 5%;
   justify-content: center;
   margin-bottom: 20px;
 `;

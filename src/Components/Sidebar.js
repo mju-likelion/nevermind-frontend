@@ -2,26 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const Container = styled.div`
-  display: grid;
-`;
-
 const NavContainer = styled.ul`
-  margin-top: 5%;
-  margin-left: 6%;
+  margin-top: 7%;
   width: 17%;
   background-color: white;
 `;
 
 const Item = styled.li`
-  padding: 20px;
+  padding: 25px;
 `;
 
 const Button = styled.button`
   all: unset;
   display: flex;
-  margin-top: 10%;
-
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   :hover {
     background-color: #ebebeb;
   }

@@ -22,7 +22,7 @@ const Container = styled.div`
 `;
 
 const ImgLink = ({ to, imgSrc }) => (
-  <Link to={to} className="d-flex h-100">
+  <Link to={to} className="d-flex  h-100">
     <button type="button" className="btn">
       <img src={imgSrc} />
     </button>
