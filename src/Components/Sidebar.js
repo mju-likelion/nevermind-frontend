@@ -14,7 +14,8 @@ const NavContainer = styled.ul`
 `;
 
 const Item = styled.li`
-  text-align: center;
+  padding: 20px;
+
   :visited {
     background-color: black;
     color: red;
@@ -29,6 +30,7 @@ const Button = styled.button`
   :hover {
     background-color: #ebebeb;
   }
+  width: 100%;
 `;
 const Sidebar = () => (
   <NavContainer>
