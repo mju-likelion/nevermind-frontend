@@ -1,46 +1,29 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import $ from "jquery";
 
-const NavContainer = styled.ul`
+const Container = styled.div`
   margin-top: 7%;
-  width: 17%;
   background-color: white;
-`;
-
-const Item = styled.li`
-  padding: 25px;
-`;
-
-const Button = styled.button`
-  all: unset;
+  width: 17%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  :hover {
-    background-color: #ebebeb;
-  }
-  width: 100%;
 `;
+
+const Button = ({ item }) => (
+  <button type="button" className="btn p-4">
+    {item}
+  </button>
+);
+
 const Sidebar = () => (
-  <NavContainer>
-    <Button>
-      <Item>ALL</Item>
-    </Button>
-    <Button>
-      <Item>WEEK</Item>
-    </Button>
-    <Button>
-      <Item>MONTH</Item>
-    </Button>
-    <Button>
-      <Item>YEAR</Item>
-    </Button>
-    <Button>
-      <Item>LIFE TIME</Item>
-    </Button>
-  </NavContainer>
+  <Container>
+    <Button item="ALL" />
+    <Button item="WEEK" />
+    <Button item="YEAR" />
+    <Button item="LIFE TIME" />
+  </Container>
 );
 
 export default Sidebar;
