@@ -15,11 +15,6 @@ const NavContainer = styled.ul`
 
 const Item = styled.li`
   padding: 20px;
-
-  :visited {
-    background-color: black;
-    color: red;
-  }
 `;
 
 const Button = styled.button`
