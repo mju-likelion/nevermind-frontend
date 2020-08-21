@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/nevermind-frontend/static/js/main.b1e8032b.chunk.js",
-    "main.js.map": "/nevermind-frontend/static/js/main.b1e8032b.chunk.js.map",
+    "main.js": "/nevermind-frontend/static/js/main.1832af51.chunk.js",
+    "main.js.map": "/nevermind-frontend/static/js/main.1832af51.chunk.js.map",
     "runtime-main.js": "/nevermind-frontend/static/js/runtime-main.2ae3d0f4.js",
     "runtime-main.js.map": "/nevermind-frontend/static/js/runtime-main.2ae3d0f4.js.map",
     "static/css/2.f3cffc9e.chunk.css": "/nevermind-frontend/static/css/2.f3cffc9e.chunk.css",
     "static/js/2.dac2c57d.chunk.js": "/nevermind-frontend/static/js/2.dac2c57d.chunk.js",
     "static/js/2.dac2c57d.chunk.js.map": "/nevermind-frontend/static/js/2.dac2c57d.chunk.js.map",
     "index.html": "/nevermind-frontend/index.html",
-    "precache-manifest.531c2b6233db9bfc5bb3a009b067ec49.js": "/nevermind-frontend/precache-manifest.531c2b6233db9bfc5bb3a009b067ec49.js",
+    "precache-manifest.215ef9dc2a2fb6dfce5cb4193635baf8.js": "/nevermind-frontend/precache-manifest.215ef9dc2a2fb6dfce5cb4193635baf8.js",
     "service-worker.js": "/nevermind-frontend/service-worker.js",
     "static/css/2.f3cffc9e.chunk.css.map": "/nevermind-frontend/static/css/2.f3cffc9e.chunk.css.map",
     "static/js/2.dac2c57d.chunk.js.LICENSE.txt": "/nevermind-frontend/static/js/2.dac2c57d.chunk.js.LICENSE.txt",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.2ae3d0f4.js",
     "static/css/2.f3cffc9e.chunk.css",
     "static/js/2.dac2c57d.chunk.js",
-    "static/js/main.b1e8032b.chunk.js"
+    "static/js/main.1832af51.chunk.js"
   ]
 }
