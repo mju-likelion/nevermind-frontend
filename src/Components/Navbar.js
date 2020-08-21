@@ -8,45 +8,33 @@ import user from "assets/user.svg";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 6%;
   background-color: #263d66;
+  min-height: 250px;
   height: 100%;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   overflow: auto;
 `;
 
-const Img = styled.div`
-  width: 100%;
-`;
+const ImgLink = ({ to, imgSrc }) => (
+  <Link to={to} className="d-flex h-100">
+    <button type="button" className="btn">
+      <img src={imgSrc} />
+    </button>
+  </Link>
+);
 
 const Navbar = () => (
-  <Container>
-    <Link to={"Main"}>
-      <button type="button" class="mt-4 mb-5 btn w-100">
-        <Img>
-          <img src={home} />
-        </Img>
-      </button>
-    </Link>
-    <Link to={"Main"}>
-      <button type="button" class="mt-5 mb-5 btn w-100">
-        <img src={user} />
-      </button>
-    </Link>
-    <Link to={"Main"}>
-      <button type="button" class="mt-5 mb-5 btn w-100">
-        <img src={notice} />
-      </button>
-    </Link>
-    <Link to={"Service"}>
-      <button type="button" class="mt-5 mb-5 btn w-100">
-        <img src={service} />
-      </button>
-    </Link>
+  <Container className="py-5">
+    <ImgLink to="Main" imgSrc={home} />
+    <ImgLink to="Main" imgSrc={user} />
+    <ImgLink to="Main" imgSrc={notice} />
+    <ImgLink to="Service" imgSrc={service} />
   </Container>
 );
 

@@ -14,7 +14,6 @@ const Container = styled.div`
 `;
 
 const ItemContainer = styled.div`
-  margin-left: 8%;
   display: flex;
   flex-direction: column;
   justify-content: center;
