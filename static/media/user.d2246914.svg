@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="37" height="37" viewBox="0 0 37 37">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="37" height="37" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="User" clip-path="url(#clip-path)">
+    <path id="합치기_1" data-name="합치기 1" d="M0,37V32.376c0-5.089,8.325-9.251,18.5-9.251S37,27.287,37,32.376V37ZM9.249,9.251A9.25,9.25,0,1,1,18.5,18.5,9.251,9.251,0,0,1,9.249,9.251Z" fill="#fff"/>
+  </g>
+</svg>
