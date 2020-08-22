@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 const Button = ({ item }) => (
-  <button type="button" className="nav-btn btn p-4 w-100">
+  <button type="button" className="nav-btn btn p-4 w-100 rounded-0">
     {item}
   </button>
 );

@@ -15,6 +15,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "shebang-regex": "^3.0.0",
     "style-loader": "^1.2.1",
     "styled-components": "^5.1.1",
     "styled-reset": "^4.2.2"
