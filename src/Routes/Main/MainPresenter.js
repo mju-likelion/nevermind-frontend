@@ -28,9 +28,14 @@ const Desc = styled.p`
   word-break: keep-all;
 `;
 
-const Button = styled.p`
+const Button = styled.button`
   text-align: center;
   margin-top: 60px;
+`;
+
+const Align = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 const MainPresenter = () => (
@@ -40,21 +45,21 @@ const MainPresenter = () => (
     </Helmet>
     <ItemContainer>
       <div className="w-100">
-        <div className="d-flex justify-content-center">
+        <Align>
           <Logo width="220px" height="195px"></Logo>
-        </div>
+        </Align>
         <Desc>
           매달 신경쓰였던 '구독정보' <br />
           <br />
           이제 Never Mind가 대신 알려드릴게요
         </Desc>
-        <Link to={"Signup"}>
-          <Button>
-            <button type="button" className="btn btn-outline-dark btn-lg">
+        <Align>
+          <Link to={"Signup"}>
+            <Button type="button" className="btn btn-outline-dark btn-lg">
               START
-            </button>
-          </Button>
-        </Link>
+            </Button>
+          </Link>
+        </Align>
       </div>
     </ItemContainer>
   </Container>
