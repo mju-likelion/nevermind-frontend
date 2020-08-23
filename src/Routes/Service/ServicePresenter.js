@@ -27,10 +27,16 @@ const AddButton = styled.button`
   display: flex;
   position: absolute;
   border-radius: 7px;
-  margin: 50px 90px;
+  margin-top: 3%;
+  margin-left: 5.5%;
   background-color: #e65857;
   border: none;
+  width: 70px;
+  height: 30px;
+  justify-content: center;
   color: white;
+  text-align: center;
+  line-height: 1.9em;
   :hover {
     background-color: white;
     border: 1px solid red;
