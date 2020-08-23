@@ -23,12 +23,29 @@ const ViewContainer = styled.div`
   background-color: #ebebeb;
 `;
 
+const AddButton = styled.button`
+  display: flex;
+  position: absolute;
+  border-radius: 7px;
+  margin: 50px 90px;
+  background-color: #e65857;
+  border: none;
+  color: white;
+  :hover {
+    background-color: white;
+    border: 1px solid red;
+    color: black;
+  }
+`;
+
 const ServicePresenter = () => (
   <Container>
     <Helmet>
       <title>Service | Nevermind</title>
     </Helmet>
+    <AddButton>+ADD</AddButton>
     <Sidebar></Sidebar>
+
     <ViewContainer></ViewContainer>
   </Container>
 );
