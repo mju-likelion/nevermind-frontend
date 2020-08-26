@@ -44,6 +44,15 @@ const AddButton = styled.button`
   }
 `;
 
+const SubscriptionType = styled.div`
+  margin-top: 3%;
+  margin-left: 18%;
+  display: flex;
+  position: absolute;
+  color: #669ed1;
+  font-size: 30px;
+`;
+
 const ServicePresenter = () => (
   <Container>
     <Helmet>
@@ -51,7 +60,7 @@ const ServicePresenter = () => (
     </Helmet>
     <AddButton>+ADD</AddButton>
     <Sidebar></Sidebar>
-
+    <SubscriptionType>ALL</SubscriptionType>
     <ViewContainer></ViewContainer>
   </Container>
 );
