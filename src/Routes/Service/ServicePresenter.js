@@ -21,6 +21,7 @@ const ViewContainer = styled.div`
   margin-left: 0%;
   width: 100%;
   background-color: #ebebeb;
+  display: flex;
 `;
 
 const AddButton = styled.button`
@@ -44,13 +45,46 @@ const AddButton = styled.button`
   }
 `;
 
-const SubscriptionType = styled.div`
+const SubType = styled.div`
   margin-top: 3%;
   margin-left: 18%;
   display: flex;
   position: absolute;
   color: #669ed1;
   font-size: 30px;
+`;
+
+const EstiExpend = styled.div`
+  padding: 10px;
+  background-color: #ec8a7f;
+  width: 43%;
+  height: 25%;
+  margin-left: 5%;
+  margin-top: 2%;
+  border-radius: 20px;
+  display: flex;
+`;
+
+const AlreadyPaid = styled.div`
+  padding: 10px;
+  background-color: #5dbf5d;
+  width: 30%;
+  height: 25%;
+  margin-left: 8%;
+  margin-top: 2%;
+  border-radius: 20px;
+  display: flex;
+`;
+
+const SubItem = styled.div`
+  padding: 10px;
+  background-color: white;
+  width: 69%;
+  height: 23%;
+  margin-left: 4.3%;
+  margin-top: 15%;
+  border-radius: 20px;
+  position: absolute;
 `;
 
 const ServicePresenter = () => (
@@ -60,8 +94,12 @@ const ServicePresenter = () => (
     </Helmet>
     <AddButton>+ADD</AddButton>
     <Sidebar></Sidebar>
-    <SubscriptionType>ALL</SubscriptionType>
-    <ViewContainer></ViewContainer>
+    <SubType>ALL</SubType>
+    <ViewContainer>
+      <EstiExpend></EstiExpend>
+      <Alreadypaid></Alreadypaid>
+      <SubItem></SubItem>
+    </ViewContainer>
   </Container>
 );
 
