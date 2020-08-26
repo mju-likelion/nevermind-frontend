@@ -6,7 +6,10 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.20.0",
+    "axios-cookiejar-support": "^1.0.0",
     "bootstrap": "^4.5.2",
+    "form-data": "^3.0.0",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
@@ -18,7 +21,8 @@
     "shebang-regex": "^3.0.0",
     "style-loader": "^1.2.1",
     "styled-components": "^5.1.1",
-    "styled-reset": "^4.2.2"
+    "styled-reset": "^4.2.2",
+    "tough-cookie": "^4.0.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
