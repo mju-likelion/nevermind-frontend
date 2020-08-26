@@ -26,8 +26,7 @@
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
-    "deploy-dothome": "node deploy-to-dothome.js"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -53,5 +52,5 @@
     "http-server": "^0.12.3",
     "react-app-rewired": "^2.1.6"
   },
-  "homepage": "https://mju-likelion.github.io/nevermind-frontend"
+  "homepage": "https://nevermindapp.netlify.app"
 }
