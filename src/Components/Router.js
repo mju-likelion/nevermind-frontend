@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Main from "Routes/Main";
 import Signup from "Routes/Signup";
@@ -17,7 +12,7 @@ const MainContainer = styled.div`
   height: 100%;
 `;
 
-export default () => (
+const Routers = () => (
   <Router>
     <Navbar />
     <MainContainer>
@@ -31,3 +26,5 @@ export default () => (
     </MainContainer>
   </Router>
 );
+
+export default Routers;

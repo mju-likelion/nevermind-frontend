@@ -97,8 +97,7 @@ const ServicePresenter = () => (
     <SubType>ALL</SubType>
     <ViewContainer>
       <EstiExpend></EstiExpend>
-      <Alreadypaid></Alreadypaid>
-      <SubItem></SubItem>
+      <AlreadyPaid></AlreadyPaid>
     </ViewContainer>
   </Container>
 );
