@@ -1,17 +1,6 @@
 const nevAxios = require("./src/nev-axios");
 
-/*
- *  [ Test module - async ]
- *
- *  Currently added for synchronous procedure
- *  of asynchronous functions
- *
- *  It is recommended to remove it later
- *
- * */
-const async = require("async");
-
-/*
+/**
  *  [ Test function - test_user_auth ]
  *
  *  * Testing methods *
@@ -20,88 +9,23 @@ const async = require("async");
  *  - nevAxios.logout
  *  - nevAxios.unregister
  *
- * */
-function test_user_auth() {
+ */
+async function test_user_auth() {
   const testUser = {
     email: "sample@example.com",
     pwd: "password",
     username: "username",
     cellphone: "01011112222",
   };
-  const waterfallLogin = (callback) => {
-    nevAxios.login(
-      {
-        email: testUser.email,
-        pwd: testUser.pwd,
-      },
-      (response) => {
-        console.log("-------");
-        console.log("Process:", nevAxios.urls.login);
-        console.log("Data:", response.data);
-        console.log("Cookie:", nevAxios.getCookies(nevAxios.urls.register));
-        console.log("-------");
-        callback(null);
-      }
-    );
-  };
-  async.waterfall(
-    [
-      (asyncCB) => {
-        nevAxios.register(testUser, (response) => {
-          console.log("-------");
-          console.log("Process:", nevAxios.urls.register);
-          console.log("Data:", response.data);
-          console.log("-------");
-          asyncCB(null);
-        });
-      },
-      waterfallLogin,
-      (asyncCB) => {
-        nevAxios.logout((response) => {
-          console.log("-------");
-          console.log("Process:", nevAxios.urls.logout);
-          console.log("Data:", response.data);
-          console.log("-------");
-          asyncCB(null);
-        });
-      },
-      waterfallLogin,
-      (asyncCB) => {
-        nevAxios.unregister((response) => {
-          console.log("-------");
-          console.log("Process:", nevAxios.urls.unregister);
-          console.log("Data:", response.data);
-          console.log("-------");
-          asyncCB(null);
-        });
-      },
-    ],
-    (error) => {
-      if (error) throw error;
-      console.log("User Authentication Test completed");
-    }
-  );
+  let res1, res2, res3, res4;
+  res1 = await nevAxios.register(testUser);
+  console.log(res1.data);
+  res2 = await nevAxios.login(testUser);
+  console.log(res2.data);
+  res3 = await nevAxios.issession();
+  console.log(res3.data);
+  res4 = await nevAxios.unregister();
+  console.log(res4.data);
 }
 
-//test_user_auth();
-
-nevAxios.register({
-  email: "sample@example.com",
-  pwd: "password",
-  username: "username",
-  cellphone: "01011112222",
-}, (res) => {
-  console.log(nevAxios.urls.register, res.data);
-  nevAxios.login({
-    email: "sample@example.com",
-    pwd: "password",
-  }, (res) => {
-    console.log(nevAxios.urls.login, res.data);
-    nevAxios.issession((res) => {
-      console.log(nevAxios.urls.issession, res.data);
-      nevAxios.unregister((res) => {
-        console.log(nevAxios.urls.unregister, res.data);
-      });
-    });
-  });
-});
+test_user_auth();

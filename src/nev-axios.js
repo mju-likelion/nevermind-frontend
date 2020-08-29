@@ -3,10 +3,11 @@
  * 
  *  { nev-axios, Custom Axios for Nevermind Web Service }
  * 
- *  Version 1.1.1
+ *  Version 2.1.1
  * 
  **/
 /* ==================================================== */
+
 
 /* ==================================================== */
 /* ------------- */
@@ -34,18 +35,37 @@
  *      yarn (or yarn install)
  *
  * */
+/*
+// Module import with Babel
 import axios from "axios";
 import FormData from "form-data";
 import tough from "tough-cookie";
 import axiosCookieJarSupport from "axios-cookiejar-support";
-const exportd = {};
+*/
+///*
+// Module import without Babel - For Debugging
+const axios = require("axios").default;
+const FormData = require("form-data");
+const tough = require("tough-cookie");
+const axiosCookieJarSupport = require("axios-cookiejar-support").default;
+//*/
 /* ==================================================== */
+
+
+/* ==================================================== */
+/* ------------------------------ */
+/* << Default Exporting Object >> */
+/* ------------------------------ */
+
+const nevAxios = {};
+/* ==================================================== */
+
 
 /* ==================================================== */
 /* --------------------------- */
 /* << RESTful API URL Names >> */
 /* --------------------------- */
-exportd.urls = {
+nevAxios.urls = {
   /*****
    *  ### [ Property - Verify Existing Session ]
    *
@@ -171,6 +191,7 @@ exportd.urls = {
 };
 /* ==================================================== */
 
+
 /* ==================================================== */
 /* ----------------------------------------------- */
 /* << Utility Functions, Variables & Properties >> */
@@ -207,7 +228,7 @@ const cookieJar = new tough.CookieJar();
  *      of the server
  *
  * */
-exportd.defaults = {
+nevAxios.defaultConfig = {
   xsrfCookieName: (axios.defaults.xsrfCookieName = "csrftoken"),
   xsrfHeaderName: (axios.defaults.xsrfHeaderName = "X-CSRFToken"),
   withCredentials: (axios.defaults.withCredentials = true),
@@ -333,6 +354,7 @@ function getFullURL(urlName) {
 }
 /* ==================================================== */
 
+
 /* ==================================================== */
 /* --------------------- */
 /* << Utility Methods >> */
@@ -359,7 +381,7 @@ function getFullURL(urlName) {
  *  @returns {Array} - Array of stringified Cookies
  *
  * */
-exportd.getCookies = function (urlName) {
+nevAxios.getCookies = function (urlName) {
   return cookieJar
     .getCookiesSync(getFullURL(urlName))
     .map((cookie) => cookie.toString());
@@ -387,7 +409,7 @@ exportd.getCookies = function (urlName) {
  *  @param {String} urlName - In-site URL for API
  *
  * */
-exportd.setCookies = function (cookieJSON, urlName) {
+nevAxios.setCookies = function (cookieJSON, urlName) {
   let cookieStr = "";
   for (let key in cookieJSON) {
     cookieStr += `${key}=${cookieJSON[key]}; `;
@@ -396,6 +418,7 @@ exportd.setCookies = function (cookieJSON, urlName) {
   cookieJar.setCookieSync(cookieStr, getFullURL(urlName));
 };
 /* ==================================================== */
+
 
 /* ==================================================== */
 /* -------------------------- */
@@ -412,37 +435,29 @@ exportd.setCookies = function (cookieJSON, urlName) {
  *  #### Usage
  *
  *    ```
- *    nevAxios.get(
+ *    const response = await nevAxios.get(
  *      urls.[URL_NAME],
  *      {
  *        [PARAM_NAME]: [PARAM_VALUE],
  *        ...
- *      },
- *      (response) => {
- *        // Response Callback
- *        // Get data from response.data
- *      },
+ *      }
  *    );
  *    ```
  * 
  *  #### NOTICE
  *
- *  - Must pass an empty object as a request parameter  
- *    for non-parameter request
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
+ *  - Must pass an empty object as a request parameter for  
+ *    non-parameter request
  *
  *  @param {String} url - In-site URL to call API
  *  @param {JSON} formJSON - Request Form data as JSON
- *  @param {ResponseCallback} cb - Callback with response object parameter
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
  *
  * */
-exportd.get = function (url, formJSON, cb) {
-  axios
-    .get(url, {
-      ...getConfig(null),
-      params: formJSON,
-    })
-    .then((res) => cb(res))
-    .catch(onError);
+nevAxios.get = async function (url, formJSON) {
+  return await axios.get(url, { ...getConfig(null), params: formJSON });
 };
 
 /*****
@@ -458,21 +473,22 @@ exportd.get = function (url, formJSON, cb) {
  *
  *  #### NOTICE
  *
- *  - Must pass an empty object as a request parameter for non-parameter request
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
+ *  - Must pass an empty object as a request parameter for  
+ *    non-parameter request
  *
  *  @param {String} url - In-site URL to call API
  *  @param {JSON} formJSON - Request Form data as JSON
- *  @param {ResponseCallback} cb - Callback with response object parameter
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
  *
  * */
-exportd.post = function (url, formJSON, cb) {
+nevAxios.post = async function (url, formJSON) {
   let formData = getFormData(formJSON);
-  axios
-    .post(url, formData, getConfig(formData))
-    .then((res) => cb(res))
-    .catch(onError);
+  return await axios.post(url, formData, getConfig(formData));
 };
 /* ==================================================== */
+
 
 /* ==================================================== */
 /* ------------------------------- */
@@ -489,20 +505,23 @@ exportd.post = function (url, formJSON, cb) {
  *  #### Usage
  * 
  *    ```
+ *    const loginResponse = await nevAxios.login(...);
  *    ...
- *    nevAxios.login(...);
- *    ...
- *    nevAxios.issession((response) => {
- *      // Do something here
- *    });
- *    ...
+ *    const sessionResponse = (await nevAxios.issession());
  *    ```
+ * 
+ *  #### NOTICE
  *
- *  @param {ResponseCallback} cb - Callback with response object parameter
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
+ *  - session_id must be defined in request cookie  
+ *    (nev-axios automatically handles this with CookieJar)
+ *
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
  * 
  * */
-exportd.issession = function (cb) {
-  exportd.post(exportd.urls.issession, {}, (res) => cb(res));
+nevAxios.issession = async function () {
+  return nevAxios.post(nevAxios.urls.issession, {});
 };
 
 /*****
@@ -515,20 +534,23 @@ exportd.issession = function (cb) {
  *  #### Usage
  *
  *    ```
- *    nevAxios.login({
+ *    const loginResponse = await nevAxios.login({
  *      email: $EMAIL,
  *      pwd: $PASSWORD,
- *    }, (response) => {
- *      // Do something here
  *    });
  *    ```
+ * 
+ *  #### NOTICE
+ *
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
  *
  *  @param {JSON} formJSON - JSON-typed request form data
- *  @param {ResponseCallback} cb - Callback with response object parameter
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
  *
  * */
-exportd.login = function (formJSON, cb) {
-  exportd.post(exportd.urls.login, formJSON, (res) => cb(res));
+nevAxios.login = async function (formJSON) {
+  return nevAxios.post(nevAxios.urls.login, formJSON);
 };
 
 /*****
@@ -541,25 +563,23 @@ exportd.login = function (formJSON, cb) {
  *  #### Usage
  *
  *    ```
+ *    const loginResponse = await nevAxios.login(...);
  *    ...
- *    nevAxios.login(...);
- *    ...
- *    nevAxios.logout((response) => {
- *      // Do something here
- *    });
- *    ...
+ *    const logoutResponse = await nevAxios.logout();
  *    ```
  *
  *  #### NOTICE
  *
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
  *  - session_id must be defined in request cookie  
  *    (nev-axios automatically handles this with CookieJar)
  *
- *  @param {ResponseCallback} cb - Callback with response object parameter
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
  *
  * */
-exportd.logout = function (cb) {
-  exportd.post(exportd.urls.logout, {}, (res) => cb(res));
+nevAxios.logout = async function () {
+  return nevAxios.post(nevAxios.urls.logout, {});
 };
 
 /*****
@@ -572,22 +592,25 @@ exportd.logout = function (cb) {
  *  #### Usage
  *  
  *    ```
- *    nevAxios.register({
+ *    const registerResponse = await nevAxios.register({
  *      email: $EMAIL,
  *      pwd: $PASSWORD,
  *      username: $USERNAME,
  *      cellphone: $CELLPHONENO,
- *    }, (response) => {
- *      // Do something here
  *    });
  *    ```
  *
+ *  #### NOTICE
+ *
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
+ * 
  *  @param {JSON} formJSON - JSON-typed request form data
- *  @param {ResponseCallback} cb - Callback with response object parameter
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
  *
  * */
-exportd.register = function (formJSON, cb) {
-  exportd.post(exportd.urls.register, formJSON, (res) => cb(res));
+nevAxios.register = async function (formJSON) {
+  return nevAxios.post(nevAxios.urls.register, formJSON);
 };
 
 /*****
@@ -600,32 +623,31 @@ exportd.register = function (formJSON, cb) {
  *  #### Usage
  * 
  *    ```
+ *    const loginResponse = await nevAxios.login(...);
  *    ...
- *    nevAxios.login(...);
- *    ...
- *    nevAxios.unregister((response) => {
- *      // Do something here
- *    });
- *    ...
+ *    const unregisterResponse = await nevAxios.unregister();
  *    ```
  *
  *  #### NOTICE
  *
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
  *  - session_id must be defined in request cookie  
  *    (nev-axios automatically handles this with CookieJar)
  *
- *  @param {ResponseCallback} cb - Callback with response object parameter
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
  *
  * */
-exportd.unregister = function (cb) {
-  exportd.post(exportd.urls.unregister, {}, (res) => cb(res));
+nevAxios.unregister = async function () {
+  return nevAxios.post(nevAxios.urls.unregister, {});
 };
-
-/**
- *  @callback ResponseCallback
- *  @param {import("axios").AxiosResponse} response - Axios response object
- * 
- * */
 /* ==================================================== */
 
-export default exportd;
+
+/* ==================================================== */
+/* ----------------------------- */
+/* << Module Export - Default >> */
+/* ----------------------------- */
+
+module.exports = nevAxios;
+/* ==================================================== */
