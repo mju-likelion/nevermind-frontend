@@ -83,4 +83,25 @@ function test_user_auth() {
   );
 }
 
-test_user_auth();
+//test_user_auth();
+
+nevAxios.register({
+  email: "sample@example.com",
+  pwd: "password",
+  username: "username",
+  cellphone: "01011112222",
+}, (res) => {
+  console.log(nevAxios.urls.register, res.data);
+  nevAxios.login({
+    email: "sample@example.com",
+    pwd: "password",
+  }, (res) => {
+    console.log(nevAxios.urls.login, res.data);
+    nevAxios.issession((res) => {
+      console.log(nevAxios.urls.issession, res.data);
+      nevAxios.unregister((res) => {
+        console.log(nevAxios.urls.unregister, res.data);
+      });
+    });
+  });
+});

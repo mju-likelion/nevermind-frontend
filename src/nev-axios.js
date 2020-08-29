@@ -35,99 +35,125 @@ const axiosCookieJarSupport = require("axios-cookiejar-support").default;
 /* << RESTful API URL Names >> */
 /* --------------------------- */
 exports.urls = {
-  /*
-   *  [ Property - User Login ]
+  /*****
+   *  ### [ Property - Verify Existing Session ]
    *
-   *  Method: POST
-   *  App: user
-   *  Model: User, Session
+   *  * Method: `POST`
+   *  * App: `user`
+   *  * Model: `Session`
    *
-   *  Request Parameters:
-   *  - email (String)
-   *  - pwd (String)
+   *  * Request Parameters
+   *    - None
+   * 
+   *  * Request Cookies
+   *    - `session_id` (String)
+   * 
+   *  * Response Parameters
+   *    - `is_session` (Boolean)
+   *    - `error_msg` (null | String)
+   * 
+   *  * Response Cookies
+   *    - None
    *
-   *  Request Cookie:
-   *  - None
+   * */
+  issession: "/user/issession",
+
+  /*****
+   *  ### [ Property - User Login ]
    *
-   *  Response Data:
-   *  - is_login (Boolean)
-   *  - username (String | null)
-   *  - email (String | null)
-   *  - error_msg: (null | String)
+   *  * Method: `POST`
+   *  * App: `user`
+   *  * Model: `User`, `Session`
    *
-   *  Response Cookie:
-   *  - session_id (String | null)
+   *  * Request Parameters
+   *    - `email` (String)
+   *    - `pwd` (String)
+   *
+   *  * Request Cookies
+   *    - None
+   *
+   *  * Response Data
+   *    - `is_login` (Boolean)
+   *    - `username` (String | null)
+   *    - `email` (String | null)
+   *    - `error_msg` (null | String)
+   *
+   *  * Response Cookies
+   *    - `session_id` (String | null)
    *
    * */
   login: "/user/login",
 
-  /*
-   *  [ Property - User Logout ]
+  /*****
+   *  ### [ Property - User Logout ]
    *
-   *  Method: POST
-   *  App: user
-   *  Model: Session
+   *  * Method: `POST`
+   *  * App: `user`
+   *  * Model: `Session`
    *
-   *  Request Parameters:
-   *  - None
+   *  * Request Parameters
+   *    - None
    *
-   *  Request Cookie:
-   *  - session_id (String)
+   *  * Request Cookies
+   *    - `session_id` (String)
    *
-   *  Response Data:
-   *  - is_logout (Boolean)
-   *  - error_msg (String | null)
+   *  * Response Data
+   *    - `is_logout` (Boolean)
+   *    - `error_msg` (String | null)
    *
-   *  Response Cookie:
-   *  - None
+   *  * Response Cookies
+   *    - None
    *
    * */
   logout: "/user/logout",
 
-  /*
-   *  [ Property - User Registeration ]
+  /*****
+   *  ### [ Property - User Registeration ]
    *
-   *  Method: POST
-   *  App: user
-   *  Model: User
+   *  * Method: `POST`
+   *  * App: `user`
+   *  * Model: `User`
    *
-   *  Request Parameters:
-   *  - email (String)
-   *  - pwd (String)
-   *  - username (String)
-   *  - cellphone (String)
+   *  * Request Parameters
+   *    - `email` (String)
+   *    - `pwd` (String)
+   *    - `username` (String)
+   *    - `cellphone` (String)
    *
-   *  Request Cookie:
-   *  - None
+   *  * Request Cookies
+   *    - None
    *
-   *  Response Data:
-   *  - is_register (Boolean)
-   *  - create_at (String/timestamp)
+   *  * Response Data
+   *    - `is_register` (Boolean)
+   *    - `create_at` (String/timestamp)
    *
-   *  Response Cookie:
-   *  - None
+   *  * Response Cookies
+   *    - None
    *
    * */
   register: "/user/register",
 
-  /*
-   *  [ Property - User Unregistration ]
+  /*****
+   *  ### [ Property - User Unregistration ]
    *
-   *  Method: POST
-   *  App: user
-   *  Model: User, Session
+   *  * Method: `POST`
+   *  * App: `user`
+   *  * Model: `User`, `Session`
    *
-   *  Request Parameters:
-   *  - None
+   *  * Request Parameters
+   *    - None
    *
-   *  Request Cookie:
-   *  - session_id (String)
+   *  * Request Cookies
+   *    - `session_id` (String)
    *
-   *  Response Data:
-   *  - is_unregister (Boolean)
-   *  - email (String | null)
-   *  - username (String | null)
-   *  - error_msg (String | null)
+   *  * Response Data
+   *    - `is_unregister` (Boolean)
+   *    - `email` (String | null)
+   *    - `username` (String | null)
+   *    - `error_msg` (String | null)
+   * 
+   *  * Response Cookies
+   *    - None
    *
    * */
   unregister: "/user/unregister",
@@ -139,15 +165,35 @@ exports.urls = {
 /* << Utility Functions, Variables & Properties >> */
 /* ----------------------------------------------- */
 
-/*
+/**
  *  [ Axios Cookie Jar ]
+ * 
+ *  Stores cookies for each requests & responses
  *
  * */
 axiosCookieJarSupport(axios);
 const cookieJar = new tough.CookieJar();
 
-/*
- *  [ Property - Axios Default Configurations ]
+/*****
+ *  ### [ Property - Axios Default Configurations ]
+ * 
+ *  * #### xsrfCookieName
+ *    - Cookie variable name corresponding to  
+ *      Django's default CSRF settings
+ * 
+ *  * #### xsrfHeaderName
+ *    - Header name corresponding to default  
+ *      Django's default CSRF settings
+ * 
+ *  * #### withCredentials
+ *    - Regardless of any detail on this, you must  
+ *      set this value as `true` to enable cookies
+ * 
+ *  * #### baseURL
+ *    - Root URL for this API
+ *    - Unless there is no domain name for the server,  
+ *      this value will be changed for each migrations  
+ *      of the server
  *
  * */
 exports.defaults = {
@@ -157,15 +203,16 @@ exports.defaults = {
   baseURL: (axios.defaults.baseURL = "http://3.128.164.186:8000"),
 };
 
-/*
- *  [ Function - getFormData ]
+/*****
+ *  ### [ Function - getFormData ]
  *
- *  Description:
+ *  #### Description
  *
- *    Convert JSON-styled form data into FormData
+ *  - Convert JSON-styled form data into FormData
  *
- *  Usage:
+ *  #### Usage
  *
+ *    ```
  *    Without using getFormData:
  *
  *      let formData = new FormData();
@@ -178,8 +225,9 @@ exports.defaults = {
  *        [PARAM_NAME]: [PARAM_VALUE],
  *        ...
  *      });
+ *    ```
  *
- *  @param {Object} formJSON - Request Form data as JSON
+ *  @param {JSON} formJSON - Request Form data as JSON
  *  @returns {FormData} - Convert FormData from formJSON
  *
  * */
@@ -191,17 +239,18 @@ function getFormData(formJSON) {
   return formData;
 }
 
-/*
- *  [ Function - getConfig ]
+/*****
+ *  ### [ Function - getConfig ]
  *
- *  Description:
+ *  #### Description
  *
- *    Merge pre-defined axios configuration object
- *    with FormData headers and return it as a
+ *  - Merge pre-defined axios configuration object  
+ *    with FormData headers and return it as a  
  *    complete axios configuration object for the app
  *
- *  Usage:
+ *  #### Usage
  *
+ *    ```
  *    axios.get(
  *      [URL_NAME],
  *      {
@@ -209,9 +258,10 @@ function getFormData(formJSON) {
  *        ...getConfig([FORM_DATA]),
  *      }
  *    )...
+ *    ```
  *
  *  @param {FormData} formData - FormData class instance
- *  @returns {Object} - Axios configuration object
+ *  @returns {JSON} - Axios configuration object
  *
  * */
 function getConfig(formData) {
@@ -224,40 +274,44 @@ function getConfig(formData) {
   return config;
 }
 
-/*
- *  [ Function - onError ]
+/*****
+ *  ### [ Function - onError ]
+ * 
+ *  #### Description
  *
- *  Description:
+ *  - Simplified error message handler as a callback
  *
- *    Simplified error message handler as a callback
+ *  #### Usage
  *
- *  Usage:
- *
+ *    ```
  *    axios.get(
  *      ...
  *    ).then([RESPONSE_CALLBACK])
  *    .catch(onError);
+ *    ```
  *
- *  @param {AxiosError} err - Axios error object
+ *  @param {import("axios").AxiosError} err - Axios error object
  *
  * */
 function onError(err) {
   console.log(err);
 }
 
-/*
- *  [ Function - getFullURL ]
+/*****
+ *  ### [ Function - getFullURL ]
  *
- *  Description:
+ *  #### Description
  *
- *    Get full URL by URL name in exports.urls
+ *  - Get full URL by URL name in exports.urls
  *
- *  Usage:
+ *  #### Usage
  *
+ *    ```
  *    // This example is only for inside of this module.
  *    // For external usage, change exports to
  *    // the variable name of this module.
  *    let fullLoginURL = getFullURL(exports.urls.login);
+ *    ```
  *
  *  @param {String} urlName - In-site URL for API
  *  @returns {String} - Full URL with baseURL + urlName
@@ -273,52 +327,56 @@ function getFullURL(urlName) {
 /* << Utility Methods >> */
 /* --------------------- */
 
-/*
- *  [ Method - nevAxios.getCookies ]
+/*****
+ *  ### [ Method - nevAxios.getCookies ]
  *
- *  Description:
+ *  #### Description
  *
- *    Get array of string cookies from tough-cookie.Cookie
+ *  - Get array of string cookies from tough-cookie.Cookie  
  *    of tough-cookie.CookieJar
  *
- *  Usage:
+ *  #### Usage
  *
+ *    ```
  *    let cookieArr = nevAxios.getCookie(nevAxios.urls.login);
  *    let loginCookie = cookieArr[0];
  *    // [ "$KEY=$VALUE; $KEY=$VALUE; ...;", ... ]
+ *    ```
  *
  *
  *  @param {String} urlName - In-site URL for API
  *  @returns {Array} - Array of stringified Cookies
  *
  * */
-exports.getCookies = (urlName) => {
+exports.getCookies = function (urlName) {
   return cookieJar
     .getCookiesSync(getFullURL(urlName))
     .map((cookie) => cookie.toString());
 };
 
-/*
- *  [ Method - nevAxios.setCookies ]
+/*****
+ *  ### [ Method - nevAxios.setCookies ]
  *
- *  Description:
+ *  #### Description
  *
- *    Set Cookie objects to CookieJar using JSON
+ *  - Set Cookie objects to CookieJar using JSON  
  *    (About tough-cookie, refer to nevAxios.getCookies)
  *
- *  Usage:
+ *  #### Usage
  *
+ *    ```
  *    nevAxios.setCookies({
  *      $KEY: $VALUE,
  *      ...
  *    }, nevAxios.urls.login);
  *    // [ "$KEY=$VALUE; $KEY=$VALUE; ...;", ... ]
+ *    ```
  *
- *  @param {Object} cookieJSON - JSON to set cookie
+ *  @param {JSON} cookieJSON - JSON to set cookie
  *  @param {String} urlName - In-site URL for API
  *
  * */
-exports.setCookies = (cookieJSON, urlName) => {
+exports.setCookies = function (cookieJSON, urlName) {
   let cookieStr = "";
   for (let key in cookieJSON) {
     cookieStr += `${key}=${cookieJSON[key]}; `;
@@ -333,15 +391,16 @@ exports.setCookies = (cookieJSON, urlName) => {
 /* << Axios-Like Methods >> */
 /* -------------------------- */
 
-/*
- *  [ Method - nevAxios.get ]
+/*****
+ *  ### [ Method - nevAxios.get ]
  *
- *  Description:
+ *  #### Description
  *
- *    HTTP GET Request for nevermind application
+ *  - HTTP GET Request for nevermind application
  *
- *  Usage:
+ *  #### Usage
  *
+ *    ```
  *    nevAxios.get(
  *      urls.[URL_NAME],
  *      {
@@ -353,18 +412,19 @@ exports.setCookies = (cookieJSON, urlName) => {
  *        // Get data from response.data
  *      },
  *    );
+ *    ```
+ * 
+ *  #### NOTICE
  *
- *    NOTICE:
- *
- *      Must pass an empty object as a request parameter
- *      for non-parameter request
+ *  - Must pass an empty object as a request parameter  
+ *    for non-parameter request
  *
  *  @param {String} url - In-site URL to call API
- *  @param {Object} formJSON - Request Form data as JSON
+ *  @param {JSON} formJSON - Request Form data as JSON
  *  @param {ResponseCallback} cb - Callback with response object parameter
  *
  * */
-exports.get = (url, formJSON, cb) => {
+exports.get = function (url, formJSON, cb) {
   axios
     .get(url, {
       ...getConfig(null),
@@ -374,28 +434,27 @@ exports.get = (url, formJSON, cb) => {
     .catch(onError);
 };
 
-/*
- *  [ Method - nevAxios.post ]
+/*****
+ *  ### [ Method - nevAxios.post ]
  *
- *  Description:
+ *  #### Description
  *
- *    HTTP POST Request for nevermind application
+ *  - HTTP POST Request for nevermind application
  *
- *  Usage:
+ *  #### Usage
  *
- *    Same as nevAxios.get function
+ *  - Same as nevAxios.get function
  *
- *  NOTICE:
+ *  #### NOTICE
  *
- *    Must pass an empty object as a request parameter
- *    for non-parameter request
+ *  - Must pass an empty object as a request parameter for non-parameter request
  *
  *  @param {String} url - In-site URL to call API
- *  @param {Object} formJSON - Request Form data as JSON
+ *  @param {JSON} formJSON - Request Form data as JSON
  *  @param {ResponseCallback} cb - Callback with response object parameter
  *
  * */
-exports.post = (url, formJSON, cb) => {
+exports.post = function (url, formJSON, cb) {
   let formData = getFormData(formJSON);
   axios
     .post(url, formData, getConfig(formData))
@@ -409,39 +468,68 @@ exports.post = (url, formJSON, cb) => {
 /* << API-Name-Oriented Methods >> */
 /* ------------------------------- */
 
-/*
- *  [ Method - nevAxios.login ]
+/*****
+ *  ### [ Method - nevAxios.issession ]
+ * 
+ *  #### Description
+ * 
+ *  - Nevermind User Session Verification Process
+ * 
+ *  #### Usage
+ * 
+ *    ```
+ *    ...
+ *    nevAxios.login(...);
+ *    ...
+ *    nevAxios.issession((response) => {
+ *      // Do something here
+ *    });
+ *    ...
+ *    ```
  *
- *  Description:
+ *  @param {ResponseCallback} cb - Callback with response object parameter
+ * 
+ * */
+exports.issession = function (cb) {
+  exports.post(exports.urls.issession, {}, (res) => cb(res));
+};
+
+/*****
+ *  ### [ Method - nevAxios.login ]
  *
- *    Nevermind Login Process
+ *  #### Description
  *
- *  Usage:
+ *  - Nevermind Login Process
  *
+ *  #### Usage
+ *
+ *    ```
  *    nevAxios.login({
  *      email: $EMAIL,
  *      pwd: $PASSWORD,
  *    }, (response) => {
  *      // Do something here
  *    });
+ *    ```
  *
- *  @param {Object} formJSON - JSON-typed request form data
+ *  @param {JSON} formJSON - JSON-typed request form data
  *  @param {ResponseCallback} cb - Callback with response object parameter
  *
  * */
-exports.login = (formJSON, cb) => {
+exports.login = function (formJSON, cb) {
   exports.post(exports.urls.login, formJSON, (res) => cb(res));
 };
 
-/*
- *  [ Method - nevAxios.logout ]
+/*****
+ *  ### [ Method - nevAxios.logout ]
  *
- *  Description:
+ *  #### Description
  *
- *    Nevermind Logout Process
+ *  - Nevermind Logout Process
  *
- *  Usage:
+ *  #### Usage
  *
+ *    ```
  *    ...
  *    nevAxios.login(...);
  *    ...
@@ -449,28 +537,30 @@ exports.login = (formJSON, cb) => {
  *      // Do something here
  *    });
  *    ...
+ *    ```
  *
- *  NOTICE:
+ *  #### NOTICE
  *
- *    session_id must be defined in request cookie
- *    (nev-axios automatically do this with CookieJar at login process)
+ *  - session_id must be defined in request cookie  
+ *    (nev-axios automatically handles this with CookieJar)
  *
  *  @param {ResponseCallback} cb - Callback with response object parameter
  *
  * */
-exports.logout = (cb) => {
+exports.logout = function (cb) {
   exports.post(exports.urls.logout, {}, (res) => cb(res));
 };
 
-/*
- *  [ Method - nevAxios.register ]
+/*****
+ *  ### [ Method - nevAxios.register ]
  *
- *  Description:
+ *  #### Description
  *
- *    Nevermind User Registration Process
+ *  - Nevermind User Registration Process
  *
- *  Usage:
- *
+ *  #### Usage
+ *  
+ *    ```
  *    nevAxios.register({
  *      email: $EMAIL,
  *      pwd: $PASSWORD,
@@ -479,24 +569,26 @@ exports.logout = (cb) => {
  *    }, (response) => {
  *      // Do something here
  *    });
+ *    ```
  *
- *  @param {Object} formJSON - JSON-typed request form data
+ *  @param {JSON} formJSON - JSON-typed request form data
  *  @param {ResponseCallback} cb - Callback with response object parameter
  *
  * */
-exports.register = (formJSON, cb) => {
+exports.register = function (formJSON, cb) {
   exports.post(exports.urls.register, formJSON, (res) => cb(res));
 };
 
-/*
- *  [ Method - nevAxios.unregister ]
+/*****
+ *  ### [ Method - nevAxios.unregister ]
  *
- *  Description:
+ *  #### Description
  *
- *    Nevermind User Unregistration Process
+ *  - Nevermind User Unregistration Process
  *
- *  Usage:
- *
+ *  #### Usage
+ * 
+ *    ```
  *    ...
  *    nevAxios.login(...);
  *    ...
@@ -504,16 +596,23 @@ exports.register = (formJSON, cb) => {
  *      // Do something here
  *    });
  *    ...
+ *    ```
  *
- *  NOTICE:
+ *  #### NOTICE
  *
- *    session_id must be defined in request cookie
- *    (nev-axios automatically do this with CookieJar at login process)
+ *  - session_id must be defined in request cookie  
+ *    (nev-axios automatically handles this with CookieJar)
  *
  *  @param {ResponseCallback} cb - Callback with response object parameter
  *
  * */
-exports.unregister = (cb) => {
+exports.unregister = function (cb) {
   exports.post(exports.urls.unregister, {}, (res) => cb(res));
 };
+
+/**
+ *  @callback ResponseCallback
+ *  @param {import("axios").AxiosResponse} response - Axios response object
+ * 
+ * */
 /* ==================================================== */
