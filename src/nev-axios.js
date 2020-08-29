@@ -3,7 +3,7 @@
  * 
  *  { nev-axios, Custom Axios for Nevermind Web Service }
  * 
- *  Version 2.1.1
+ *  Version 2.1.2
  * 
  **/
 /* ==================================================== */
@@ -35,20 +35,20 @@
  *      yarn (or yarn install)
  *
  * */
-/*
+///*
 // Module import with Babel
 import axios from "axios";
 import FormData from "form-data";
 import tough from "tough-cookie";
 import axiosCookieJarSupport from "axios-cookiejar-support";
-*/
-///*
+//*/
+/*
 // Module import without Babel - For Debugging
 const axios = require("axios").default;
 const FormData = require("form-data");
 const tough = require("tough-cookie");
 const axiosCookieJarSupport = require("axios-cookiejar-support").default;
-//*/
+*/
 /* ==================================================== */
 
 
