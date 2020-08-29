@@ -1,4 +1,14 @@
 /* ==================================================== */
+/**
+ * 
+ *  { nev-axios, Custom Axios for Nevermind Web Service }
+ * 
+ *  Version 1.1.1
+ * 
+ **/
+/* ==================================================== */
+
+/* ==================================================== */
 /* ------------- */
 /* << Modules >> */
 /* ------------- */
@@ -24,17 +34,18 @@
  *      yarn (or yarn install)
  *
  * */
-const axios = require("axios").default;
-const FormData = require("form-data");
-const tough = require("tough-cookie");
-const axiosCookieJarSupport = require("axios-cookiejar-support").default;
+import axios from "axios";
+import FormData from "form-data";
+import tough from "tough-cookie";
+import axiosCookieJarSupport from "axios-cookiejar-support";
+const exportd = {};
 /* ==================================================== */
 
 /* ==================================================== */
 /* --------------------------- */
 /* << RESTful API URL Names >> */
 /* --------------------------- */
-exports.urls = {
+exportd.urls = {
   /*****
    *  ### [ Property - Verify Existing Session ]
    *
@@ -196,7 +207,7 @@ const cookieJar = new tough.CookieJar();
  *      of the server
  *
  * */
-exports.defaults = {
+exportd.defaults = {
   xsrfCookieName: (axios.defaults.xsrfCookieName = "csrftoken"),
   xsrfHeaderName: (axios.defaults.xsrfHeaderName = "X-CSRFToken"),
   withCredentials: (axios.defaults.withCredentials = true),
@@ -348,7 +359,7 @@ function getFullURL(urlName) {
  *  @returns {Array} - Array of stringified Cookies
  *
  * */
-exports.getCookies = function (urlName) {
+exportd.getCookies = function (urlName) {
   return cookieJar
     .getCookiesSync(getFullURL(urlName))
     .map((cookie) => cookie.toString());
@@ -376,7 +387,7 @@ exports.getCookies = function (urlName) {
  *  @param {String} urlName - In-site URL for API
  *
  * */
-exports.setCookies = function (cookieJSON, urlName) {
+exportd.setCookies = function (cookieJSON, urlName) {
   let cookieStr = "";
   for (let key in cookieJSON) {
     cookieStr += `${key}=${cookieJSON[key]}; `;
@@ -424,7 +435,7 @@ exports.setCookies = function (cookieJSON, urlName) {
  *  @param {ResponseCallback} cb - Callback with response object parameter
  *
  * */
-exports.get = function (url, formJSON, cb) {
+exportd.get = function (url, formJSON, cb) {
   axios
     .get(url, {
       ...getConfig(null),
@@ -454,7 +465,7 @@ exports.get = function (url, formJSON, cb) {
  *  @param {ResponseCallback} cb - Callback with response object parameter
  *
  * */
-exports.post = function (url, formJSON, cb) {
+exportd.post = function (url, formJSON, cb) {
   let formData = getFormData(formJSON);
   axios
     .post(url, formData, getConfig(formData))
@@ -490,8 +501,8 @@ exports.post = function (url, formJSON, cb) {
  *  @param {ResponseCallback} cb - Callback with response object parameter
  * 
  * */
-exports.issession = function (cb) {
-  exports.post(exports.urls.issession, {}, (res) => cb(res));
+exportd.issession = function (cb) {
+  exportd.post(exportd.urls.issession, {}, (res) => cb(res));
 };
 
 /*****
@@ -516,8 +527,8 @@ exports.issession = function (cb) {
  *  @param {ResponseCallback} cb - Callback with response object parameter
  *
  * */
-exports.login = function (formJSON, cb) {
-  exports.post(exports.urls.login, formJSON, (res) => cb(res));
+exportd.login = function (formJSON, cb) {
+  exportd.post(exportd.urls.login, formJSON, (res) => cb(res));
 };
 
 /*****
@@ -547,8 +558,8 @@ exports.login = function (formJSON, cb) {
  *  @param {ResponseCallback} cb - Callback with response object parameter
  *
  * */
-exports.logout = function (cb) {
-  exports.post(exports.urls.logout, {}, (res) => cb(res));
+exportd.logout = function (cb) {
+  exportd.post(exportd.urls.logout, {}, (res) => cb(res));
 };
 
 /*****
@@ -575,8 +586,8 @@ exports.logout = function (cb) {
  *  @param {ResponseCallback} cb - Callback with response object parameter
  *
  * */
-exports.register = function (formJSON, cb) {
-  exports.post(exports.urls.register, formJSON, (res) => cb(res));
+exportd.register = function (formJSON, cb) {
+  exportd.post(exportd.urls.register, formJSON, (res) => cb(res));
 };
 
 /*****
@@ -606,8 +617,8 @@ exports.register = function (formJSON, cb) {
  *  @param {ResponseCallback} cb - Callback with response object parameter
  *
  * */
-exports.unregister = function (cb) {
-  exports.post(exports.urls.unregister, {}, (res) => cb(res));
+exportd.unregister = function (cb) {
+  exportd.post(exportd.urls.unregister, {}, (res) => cb(res));
 };
 
 /**
@@ -616,3 +627,5 @@ exports.unregister = function (cb) {
  * 
  * */
 /* ==================================================== */
+
+export default exportd;
