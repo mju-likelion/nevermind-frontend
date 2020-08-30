@@ -11,7 +11,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const Item = styled.ul`
-  border-left: 5px solid ${(props) => (props.current ? "blue" : "transparent")};
+  border-left: 5px solid ${(props) => (props.current ? "#7BA2E0" : "transparent")};
   transition: border-left 0.5s ease-in-out;
   background-color: ${(props) => (props.current ? "#ebebeb" : "transparent")};
   transition: border-left 0.5s ease-in-out;
