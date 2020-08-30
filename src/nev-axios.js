@@ -3,7 +3,7 @@
  * 
  *  { nev-axios, Custom Axios for Nevermind Web Service }
  * 
- *  Version 2.1.2
+ *  Version 2.1.3
  * 
  **/
 /* ==================================================== */
@@ -300,9 +300,12 @@ function getConfig(formData) {
   let config = {
     jar: cookieJar,
   };
+  /*
+  // Only in Debugging Mode
   if (formData) {
     config["headers"] = formData.getHeaders();
   }
+  */
   return config;
 }
 
@@ -649,5 +652,6 @@ nevAxios.unregister = async function () {
 /* << Module Export - Default >> */
 /* ----------------------------- */
 
-module.exports = nevAxios;
+//module.exports = nevAxios;  // Debugging mode
+export default nevAxios;  // ES6 mode
 /* ==================================================== */
