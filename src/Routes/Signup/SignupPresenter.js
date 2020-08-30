@@ -54,11 +54,17 @@ function setSignupTooltipTitleForTermLabels(title_txt) {
 function setSignupTooltip() {
   initTooltip();
   setSignupTooltipTitleByName("username", "이름을 입력하세요");
-  setSignupTooltipTitleByName("cellphone", "전화번호 입력 후<br>본인인증을 클릭하세요");
+  setSignupTooltipTitleByName(
+    "cellphone",
+    "전화번호 입력 후<br>본인인증을 클릭하세요"
+  );
   setSignupTooltipTitleByName("verify_cellphone", "인증 페이지로 이동합니다");
   setSignupTooltipTitleByName("email", "이메일을 입력하세요");
   setSignupTooltipTitleByName("pwd", "비밀번호를 입력하세요");
-  setSignupTooltipTitleByName("pwd_confirm", "비밀번호를<br>한번 더 입력하세요");
+  setSignupTooltipTitleByName(
+    "pwd_confirm",
+    "비밀번호를<br>한번 더 입력하세요"
+  );
   setSignupTooltipTitleForTermLabels("필수 약관입니다");
 }
 
@@ -76,10 +82,19 @@ function setValidation() {
     $(e).click(inputHandler);
     $(e).keyup(inputHandler);
   });
-  $('input[name=""]');
 }
 
-const SignupPresenter = () => {
+async function register(nevAxios) {
+  const res = await nevAxios.register({
+    email: $('[name="email"]').val(),
+    pwd: $('[name="pwd"]').val(),
+    username: $('[name="username"]').val(),
+    cellphone: $('[name="cellphone"]').val(),
+  });
+  console.log(res.data);
+}
+
+const SignupPresenter = ({ nevAxios }) => {
   useEffect(() => {
     setSignupTooltip();
     setValidation();
@@ -231,7 +246,11 @@ const SignupPresenter = () => {
         </div>
         <div className="d-flex justify-content-center">
           <Link to={"Login"}>
-            <button type="button" className="mt-1 btn btn-outline-dark">
+            <button
+              type="button"
+              className="mt-1 btn btn-outline-dark"
+              onClick={(e) => register(nevAxios)}
+            >
               Submit
             </button>
           </Link>
