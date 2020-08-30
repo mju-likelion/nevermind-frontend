@@ -16,9 +16,6 @@ export default class extends React.Component {
   };
 
   render() {
-    const { email, password } = this.state;
-    console.log(email, password);
-
     return <LoginPresenter onSubmit={this.onSubmit} />;
   }
 }
