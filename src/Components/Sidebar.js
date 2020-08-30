@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { Link, withRouter } from "react-router-dom";
 import $ from "jquery";
 
 const Container = styled.div`
@@ -8,34 +9,29 @@ const Container = styled.div`
   width: 17%;
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
-
-const Button = ({ item }) => (
-  <button type="button" className="nav-btn btn p-4 w-100 rounded-0">
-    {item}
-  </button>
-);
-
-const Sidebar = () => {
-  useEffect(() => {
-    $(".nav-btn").click(function (e) {
-      const cssActive = { "background-color": "#ebebeb" };
-      const cssNone = { "background-color": "inherit" };
-      $(".nav-active").css(cssNone).removeClass("nav-active");
-      $(this).toggleClass("nav-active");
-      $(this).css($(this).hasClass("nav-active") ? cssActive : cssNone);
-    });
-    $(".nav-btn:first-child").click();
-  }, []);
-  return (
-    <Container>
-      <Button item="ALL" />
-      <Button item="WEEK" />
-      <Button item="YEAR" />
-      <Button item="LIFE TIME" />
-    </Container>
-  );
-};
-
-export default Sidebar;
+const Item = styled.ul`
+  border-left: 5px solid ${(props) => (props.current ? "blue" : "transparent")};
+  transition: border-left 0.5s ease-in-out;
+  background-color: ${(props) => (props.current ? "#ebebeb" : "transparent")};
+  transition: border-left 0.5s ease-in-out;
+`;
+const SLink = styled(Link)`
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export default withRouter(({ location: { pathname } }) => (
+  <Container>
+    <Item current={pathname === "/Service"}>
+      <SLink to="/Service">ALL</SLink>
+    </Item>
+    <Item current={pathname === "/week"}>
+      <SLink to="/week">WEEK</SLink>
+    </Item>
+    <Item current={pathname === "/month"}>
+      <SLink to="/month">MONTH</SLink>
+    </Item>
+  </Container>
+));
