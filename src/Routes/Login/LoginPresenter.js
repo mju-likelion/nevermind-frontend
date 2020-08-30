@@ -56,15 +56,14 @@ const LoginPresenter = (props) => (
     </TextContainer>
     <Form
       className="mt-3"
-      onSubmit={function (event) {
+      onSubmit={(event) => {
         event.preventDefault();
         const email = event.target.email.value;
         const pwd = event.target.pwd.value;
         {
           props.onSubmit(email, pwd);
         }
-        alert("Submit!!!");
-      }.bind(this)}
+      }}
     >
       <div className="d-flex">
         <div className="form-group">
