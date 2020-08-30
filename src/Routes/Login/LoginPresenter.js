@@ -45,7 +45,7 @@ const ForgotPW = styled.a`
   font-size: 13px;
 `;
 
-const LoginPresenter = () => (
+const LoginPresenter = (props) => (
   <Container className>
     <Helmet>
       <title>Login | Nevermind</title>
@@ -54,7 +54,18 @@ const LoginPresenter = () => (
       <Logo width="90px" height="80px"></Logo>
       <Text>로그인</Text>
     </TextContainer>
-    <Form className="mt-3">
+    <Form
+      className="mt-3"
+      onSubmit={function (event) {
+        event.preventDefault();
+        const email = event.target.email.value;
+        const pwd = event.target.pwd.value;
+        {
+          props.onSubmit(email, pwd);
+        }
+        alert("Submit!!!");
+      }.bind(this)}
+    >
       <div className="d-flex">
         <div className="form-group">
           <div className="mb-3">
@@ -92,11 +103,9 @@ const LoginPresenter = () => (
         </div>
       </div>
       <div className="d-flex justify-content-center">
-        <Link to={"Login"}>
-          <button type="button" className="mt-1 mb-3 btn btn-outline-dark">
-            로그인
-          </button>
-        </Link>
+        <button type="submit" className="mt-1 mb-3 btn btn-outline-dark">
+          로그인
+        </button>
       </div>
     </Form>
 

@@ -1,6 +1,24 @@
 import React from "react";
 import LoginPresenter from "./LoginPresenter";
 
-const LoginContainer = ({ nevAxios }) => <LoginPresenter nevAxios={nevAxios} />;
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default LoginContainer;
+    this.state = {
+      email: null,
+      password: null,
+    };
+  }
+
+  onSubmit = (email, password) => {
+    this.setState({ email: email, password: password });
+  };
+
+  render() {
+    const { email, password } = this.state;
+    console.log(email, password);
+
+    return <LoginPresenter onSubmit={this.onSubmit} />;
+  }
+}
