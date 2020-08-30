@@ -84,17 +84,7 @@ function setValidation() {
   });
 }
 
-async function register(nevAxios) {
-  const res = await nevAxios.register({
-    email: $('[name="email"]').val(),
-    pwd: $('[name="pwd"]').val(),
-    username: $('[name="username"]').val(),
-    cellphone: $('[name="cellphone"]').val(),
-  });
-  console.log(res.data);
-}
-
-const SignupPresenter = ({ nevAxios }) => {
+const SignupPresenter = () => {
   useEffect(() => {
     setSignupTooltip();
     setValidation();
@@ -246,11 +236,7 @@ const SignupPresenter = ({ nevAxios }) => {
         </div>
         <div className="d-flex justify-content-center">
           <Link to={"Login"}>
-            <button
-              type="button"
-              className="mt-1 btn btn-outline-dark"
-              onClick={(e) => register(nevAxios)}
-            >
+            <button type="button" className="mt-1 btn btn-outline-dark">
               Submit
             </button>
           </Link>

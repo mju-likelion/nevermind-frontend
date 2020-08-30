@@ -1,6 +1,6 @@
 import React from "react";
 import ServicePresenter from "./ServicePresenter";
 
-const ServiceContainer = ({ nevAxios }) => <ServicePresenter nevAxios={nevAxios} />;
+const ServiceContainer = () => <ServicePresenter />;
 
 export default ServiceContainer;

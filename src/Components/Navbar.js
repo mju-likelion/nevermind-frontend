@@ -1,5 +1,5 @@
 // 로그인 된 후의 상황인 Navbar
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import notice from "assets/notice.svg";
 import home from "assets/home.svg";
@@ -29,25 +29,13 @@ const ImgLink = ({ to, imgSrc }) => (
   </Link>
 );
 
-const Navbar = ({ nevAxios }) => {
-  const [is_session, sessionExists] = useState();
-  useEffect(() => {
-    (async () => {
-      const res = await nevAxios.issession();
-      sessionExists(res.data.is_session);
-    })();
-  });
-  if (!is_session) {
-    return <Container className="py-5" />;
-  }
-  return (
-    <Container className="py-5">
-      <ImgLink to="Main" imgSrc={home} />
-      <ImgLink to="Main" imgSrc={user} />
-      <ImgLink to="Main" imgSrc={notice} />
-      <ImgLink to="Service" imgSrc={service} />
-    </Container>
-  );
-};
+const Navbar = () => (
+  <Container className="py-5">
+    <ImgLink to="Main" imgSrc={home} />
+    <ImgLink to="Main" imgSrc={user} />
+    <ImgLink to="Main" imgSrc={notice} />
+    <ImgLink to="Service" imgSrc={service} />
+  </Container>
+);
 
 export default Navbar;
