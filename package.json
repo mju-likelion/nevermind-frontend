@@ -22,7 +22,8 @@
     "style-loader": "^1.2.1",
     "styled-components": "^5.1.1",
     "styled-reset": "^4.2.2",
-    "tough-cookie": "^4.0.0"
+    "tough-cookie": "^4.0.0",
+    "universal-cookie": "^4.0.3"
   },
   "scripts": {
     "start": "react-app-rewired start",

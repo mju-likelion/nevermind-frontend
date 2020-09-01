@@ -3,7 +3,7 @@
  * 
  *  { nev-axios, Custom Axios for Nevermind Web Service }
  * 
- *  Version 2.1.3
+ *  Version 3.0.1
  * 
  **/
 /* ==================================================== */
@@ -28,27 +28,18 @@
  *
  *    Copy & run following command to install required packages:
  *
- *      yarn add axios tough-cookie axios-cookiejar-support form-data
+ *      yarn add axios tough-cookie axios-cookiejar-support form-data react-cookie
  *
  *    Or if you want to install from package.json, obviously do:
  *
  *      yarn (or yarn install)
  *
  * */
-///*
-// Module import with Babel
-import axios from "axios";
-import FormData from "form-data";
-import tough from "tough-cookie";
-import axiosCookieJarSupport from "axios-cookiejar-support";
-//*/
-/*
-// Module import without Babel - For Debugging
-const axios = require("axios").default;
+const axios = require("axios");
 const FormData = require("form-data");
 const tough = require("tough-cookie");
-const axiosCookieJarSupport = require("axios-cookiejar-support").default;
-*/
+const axiosCookieJarSupport = require("axios-cookiejar-support");
+const UnivCookie = require("universal-cookie").default;
 /* ==================================================== */
 
 
@@ -74,10 +65,10 @@ nevAxios.urls = {
    *  * Model: `Session`
    *
    *  * Request Parameters
-   *    - None
+   *    - `session_id` (String)
    * 
    *  * Request Cookies
-   *    - `session_id` (String)
+   *    - None
    * 
    *  * Response Parameters
    *    - `is_session` (Boolean)
@@ -108,9 +99,10 @@ nevAxios.urls = {
    *    - `username` (String | null)
    *    - `email` (String | null)
    *    - `error_msg` (null | String)
+   *    - `session_id` (String | null)
    *
    *  * Response Cookies
-   *    - `session_id` (String | null)
+   *    - None
    *
    * */
   login: "/user/login",
@@ -123,14 +115,14 @@ nevAxios.urls = {
    *  * Model: `Session`
    *
    *  * Request Parameters
-   *    - None
+   *    - `session_id` (String)
    *
    *  * Request Cookies
-   *    - `session_id` (String)
+   *    - None
    *
    *  * Response Data
    *    - `is_logout` (Boolean)
-   *    - `error_msg` (String | null)
+   *    - `error_msg` (null | String)
    *
    *  * Response Cookies
    *    - None
@@ -157,6 +149,7 @@ nevAxios.urls = {
    *  * Response Data
    *    - `is_register` (Boolean)
    *    - `create_at` (String/timestamp)
+   *    - `error_msg` (null | String)
    *
    *  * Response Cookies
    *    - None
@@ -172,16 +165,16 @@ nevAxios.urls = {
    *  * Model: `User`, `Session`
    *
    *  * Request Parameters
-   *    - None
+   *    - `session_id` (String)
    *
    *  * Request Cookies
-   *    - `session_id` (String)
+   *    - None
    *
    *  * Response Data
    *    - `is_unregister` (Boolean)
    *    - `email` (String | null)
    *    - `username` (String | null)
-   *    - `error_msg` (String | null)
+   *    - `error_msg` (null | String)
    * 
    *  * Response Cookies
    *    - None
@@ -198,13 +191,17 @@ nevAxios.urls = {
 /* ----------------------------------------------- */
 
 /**
- *  [ Axios Cookie Jar ]
+ *  [ Cookie Utilities ]
  * 
- *  Stores cookies for each requests & responses
+ *  * cookieJar
+ *    - Stores cookies for each requests & responses
+ *  * univCookie
+ *    - universal-cookie class
  *
  * */
 axiosCookieJarSupport(axios);
 const cookieJar = new tough.CookieJar();
+const univCookie = new UnivCookie();
 
 /*****
  *  ### [ Property - Axios Default Configurations ]
@@ -277,7 +274,7 @@ function getFormData(formJSON) {
  *  #### Description
  *
  *  - Merge pre-defined axios configuration object  
- *    with FormData headers and return it as a  
+ *    with adding axios configuration object for  
  *    complete axios configuration object for the app
  *
  *  #### Usage
@@ -292,134 +289,49 @@ function getFormData(formJSON) {
  *    )...
  *    ```
  *
- *  @param {FormData} formData - FormData class instance
- *  @returns {JSON} - Axios configuration object
+ *  @param {JSON} insConfig - Inserting axios configuration object
+ *  @returns {JSON} - Merged axios configuration object
  *
  * */
-function getConfig(formData) {
+function getConfig(insConfig) {
   let config = {
     jar: cookieJar,
+    ...insConfig,
   };
-  /*
-  // Only in Debugging Mode
-  if (formData) {
-    config["headers"] = formData.getHeaders();
-  }
-  */
   return config;
 }
 
-/*****
- *  ### [ Function - onError ]
- * 
- *  #### Description
- *
- *  - Simplified error message handler as a callback
- *
- *  #### Usage
- *
- *    ```
- *    axios.get(
- *      ...
- *    ).then([RESPONSE_CALLBACK])
- *    .catch(onError);
- *    ```
- *
- *  @param {import("axios").AxiosError} err - Axios error object
- *
- * */
-function onError(err) {
-  console.log(err);
-}
-
-/*****
- *  ### [ Function - getFullURL ]
- *
- *  #### Description
- *
- *  - Get full URL by URL name in exports.urls
- *
- *  #### Usage
- *
- *    ```
- *    // This example is only for inside of this module.
- *    // For external usage, change exports to
- *    // the variable name of this module.
- *    let fullLoginURL = getFullURL(exports.urls.login);
- *    ```
- *
- *  @param {String} urlName - In-site URL for API
- *  @returns {String} - Full URL with baseURL + urlName
- *
- * */
-function getFullURL(urlName) {
-  return axios.defaults.baseURL + urlName;
-}
-/* ==================================================== */
-
-
-/* ==================================================== */
-/* --------------------- */
-/* << Utility Methods >> */
-/* --------------------- */
-
-/*****
- *  ### [ Method - nevAxios.getCookies ]
- *
- *  #### Description
- *
- *  - Get array of string cookies from tough-cookie.Cookie  
- *    of tough-cookie.CookieJar
- *
- *  #### Usage
- *
- *    ```
- *    let cookieArr = nevAxios.getCookie(nevAxios.urls.login);
- *    let loginCookie = cookieArr[0];
- *    // [ "$KEY=$VALUE; $KEY=$VALUE; ...;", ... ]
- *    ```
- *
- *
- *  @param {String} urlName - In-site URL for API
- *  @returns {Array} - Array of stringified Cookies
- *
- * */
-nevAxios.getCookies = function (urlName) {
-  return cookieJar
-    .getCookiesSync(getFullURL(urlName))
-    .map((cookie) => cookie.toString());
-};
-
-/*****
- *  ### [ Method - nevAxios.setCookies ]
- *
- *  #### Description
- *
- *  - Set Cookie objects to CookieJar using JSON  
- *    (About tough-cookie, refer to nevAxios.getCookies)
- *
- *  #### Usage
- *
- *    ```
- *    nevAxios.setCookies({
- *      $KEY: $VALUE,
- *      ...
- *    }, nevAxios.urls.login);
- *    // [ "$KEY=$VALUE; $KEY=$VALUE; ...;", ... ]
- *    ```
- *
- *  @param {JSON} cookieJSON - JSON to set cookie
- *  @param {String} urlName - In-site URL for API
- *
- * */
-nevAxios.setCookies = function (cookieJSON, urlName) {
-  let cookieStr = "";
-  for (let key in cookieJSON) {
-    cookieStr += `${key}=${cookieJSON[key]}; `;
+function getCookie(keys) {
+  if (keys.length > 1) {
+    return keys.map(key => univCookie.get(key));
+  } else if (keys.length == 1) {
+    return univCookie.get(keys[0]);
   }
-  cookieStr = cookieStr.trim();
-  cookieJar.setCookieSync(cookieStr, getFullURL(urlName));
-};
+  return univCookie.getAll();
+}
+
+function setCookie(cookieJSON) {
+  const options = {
+    path: "/",
+  };
+  for (let key in cookieJSON) {
+    univCookie.set(key, cookieJSON[key], options);
+  }
+}
+
+function removeCookie(keys) {
+  const options = {
+    path: "/",
+  }
+  if(keys.length > 1) {
+    keys.forEach(key => univCookie.remove(key, options));
+    return true;
+  } else if (keys.length == 1) {
+    univCookie.remove(keys[0], options);
+    return true;
+  }
+  return false;
+}
 /* ==================================================== */
 
 
@@ -487,8 +399,8 @@ nevAxios.get = async function (url, formJSON) {
  *
  * */
 nevAxios.post = async function (url, formJSON) {
-  let formData = getFormData(formJSON);
-  return await axios.post(url, formData, getConfig(formData));
+  const formData = getFormData(formJSON);
+  return await axios.post(url, formData, getConfig({}));
 };
 /* ==================================================== */
 
@@ -524,7 +436,9 @@ nevAxios.post = async function (url, formJSON) {
  * 
  * */
 nevAxios.issession = async function () {
-  return nevAxios.post(nevAxios.urls.issession, {});
+  return nevAxios.post(nevAxios.urls.issession, {
+    session_id: getCookie(["session_id"]),
+  });
 };
 
 /*****
@@ -553,7 +467,12 @@ nevAxios.issession = async function () {
  *
  * */
 nevAxios.login = async function (formJSON) {
-  return nevAxios.post(nevAxios.urls.login, formJSON);
+  const res = await nevAxios.post(nevAxios.urls.login, formJSON);
+  if (res.data.is_login) {
+    setCookie({ session_id: res.data.session_id });
+  }
+  delete res.data.session_id;
+  return res;
 };
 
 /*****
@@ -582,7 +501,13 @@ nevAxios.login = async function (formJSON) {
  *
  * */
 nevAxios.logout = async function () {
-  return nevAxios.post(nevAxios.urls.logout, {});
+  const res = await nevAxios.post(nevAxios.urls.logout, {
+    session_id: getCookie(["session_id"]),
+  });
+  if (res.data.is_logout) {
+    removeCookie(["session_id"]);
+  }
+  return res;
 };
 
 /*****
@@ -642,7 +567,13 @@ nevAxios.register = async function (formJSON) {
  *
  * */
 nevAxios.unregister = async function () {
-  return nevAxios.post(nevAxios.urls.unregister, {});
+  const res = await nevAxios.post(nevAxios.urls.unregister, {
+    session_id: getCookie(["session_id"]),
+  });
+  if (res.data.is_unregister) {
+    removeCookie(["session_id"]);
+  }
+  return res;
 };
 /* ==================================================== */
 
@@ -652,6 +583,5 @@ nevAxios.unregister = async function () {
 /* << Module Export - Default >> */
 /* ----------------------------- */
 
-//module.exports = nevAxios;  // Debugging mode
-export default nevAxios;  // ES6 mode
+export default nevAxios;
 /* ==================================================== */
