@@ -1,5 +1,6 @@
 import React from "react";
 import LoginPresenter from "./LoginPresenter";
+import nevAxios from "Src/nev-axios";
 
 export default class extends React.Component {
   constructor(props) {
@@ -12,6 +13,10 @@ export default class extends React.Component {
   }
 
   onSubmit = (email, password) => {
+    (async (email, pwd) => {
+      const res = await nevAxios.login({ email, pwd });
+      console.log(res.data);
+    })(email, password);
     this.setState({ email: email, password: password });
   };
 

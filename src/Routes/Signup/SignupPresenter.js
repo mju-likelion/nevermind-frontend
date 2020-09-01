@@ -5,6 +5,7 @@ import Helmet from "react-helmet";
 import Logo from "Components/Logo";
 import { Link } from "react-router-dom";
 import $ from "jquery";
+import nevAxios from "Src/nev-axios";
 
 const Container = styled.div`
   margin: 0;
@@ -82,6 +83,16 @@ function setValidation() {
     $(e).click(inputHandler);
     $(e).keyup(inputHandler);
   });
+}
+
+async function register() {
+  const res = await nevAxios.register({
+    email: $('[name="email"]').val(),
+    pwd: $('[name="pwd"]').val(),
+    username: $('[name="username"]').val(),
+    cellphone: $('[name="cellphone"]').val(),
+  });
+  console.log(res.data);
 }
 
 const SignupPresenter = () => {
@@ -236,7 +247,7 @@ const SignupPresenter = () => {
         </div>
         <div className="d-flex justify-content-center">
           <Link to={"Login"}>
-            <button type="button" className="mt-1 btn btn-outline-dark">
+            <button type="button" className="mt-1 btn btn-outline-dark" onClick={(e) => register()}>
               Submit
             </button>
           </Link>
