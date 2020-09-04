@@ -19,6 +19,12 @@ const Container = styled.div`
 const Form = styled.form`
   margin: 0px auto;
 `;
+const TextContainer = styled.div`
+  display: flex;
+  margin-top: 5%;
+  justify-content: center;
+  margin-bottom: 20px;
+`;
 
 const AddPresenter = ({
   appName,
@@ -30,16 +36,20 @@ const AddPresenter = ({
   handleEndDateChange,
 }) => (
   <Container>
-    <DatePicker
-      dateFormat="yyyy-MM-dd"
-      selected={startDate}
-      onChange={handleStartDateChange}
-    ></DatePicker>
-    <DatePicker
-      dateFormat="yyyy-MM-dd"
-      selected={endDate}
-      onChange={handleEndDateChange}
-    ></DatePicker>
+    <Form>
+      <TextContainer>
+        <DatePicker
+          dateFormat="yyyy-MM-dd"
+          selected={startDate}
+          onChange={handleStartDateChange}
+        ></DatePicker>
+        <DatePicker
+          dateFormat="yyyy-MM-dd"
+          selected={endDate}
+          onChange={handleEndDateChange}
+        ></DatePicker>
+      </TextContainer>
+    </Form>
   </Container>
 );
 

@@ -9,8 +9,8 @@ export default class extends React.Component {
       appName: null,
       bill: 0,
       type: "all",
-      startDate: new Date("2020-09-23"),
-      endDate: new Date("2020-09-23"),
+      startDate: new Date(""),
+      endDate: new Date(""),
     };
   }
 
