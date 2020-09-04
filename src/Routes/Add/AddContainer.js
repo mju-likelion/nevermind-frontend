@@ -1,44 +1,45 @@
 import React from "react";
-import DayPickerInput from "react-day-picker/DayPickerInput";
-import "react-day-picker/lib/style.css";
-import LoginPresenter from "./AddPresenter";
+import AddPresenter from "./AddPresenter";
 import nevAxios from "Src/nev-axios";
 
 export default class extends React.Component {
   constructor(props) {
     super(props);
-    this.handleDayChange = this.handleDayChange.bind(this);
     this.state = {
       appName: null,
       bill: 0,
       type: "all",
-      startDay: undefined,
-      endDay: undefined,
+      startDate: new Date("2020-09-23"),
+      endDate: new Date("2020-09-23"),
     };
   }
 
-  handleStartDayChange = (day) => {
-    this.setState({ startDay: day });
+  handleStartDateChange = (date) => {
+    this.setState({
+      startDate: date,
+    });
   };
 
-  handleEndDayChange = (day) => {
-    this.setState({ endDay: day });
+  handleEndDateChange = (date) => {
+    this.setState({
+      endDate: date,
+    });
   };
 
-  onSubmit = (appName, bill, type, startDay, endDay) => {};
+  onSubmit = (appName, bill, type, startDate, endDate) => {};
 
   render() {
-    const { appName, bill, type, startDay, endDay } = this.state;
+    const { appName, bill, type, startDate, endDate } = this.state;
+    console.log(this.state);
     return (
       <AddPresenter
         appName={appName}
         bill={bill}
         type={type}
-        startDay={startDay}
-        endDay={endDay}
-        onSubmit={this.onSubmit}
-        handleStartDayChange={this.handleStartDayChange}
-        handleEndDayChange={this.handleEndDayChange}
+        startDate={startDate}
+        endDate={endDate}
+        handleStartDateChange={this.handleStartDateChange}
+        handleEndDateChange={this.handleEndDateChange}
       />
     );
   }
