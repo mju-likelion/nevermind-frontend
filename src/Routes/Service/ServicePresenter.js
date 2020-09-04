@@ -5,6 +5,8 @@ import Sidebar from "Components/Sidebar";
 import Helmet from "react-helmet";
 import Logo from "Components/Logo";
 import { Link } from "react-router-dom";
+import AddPresenter from "Routes/Add";
+import $ from "jquery";
 
 const Container = styled.div`
   margin: 0%;
@@ -92,7 +94,11 @@ const ServicePresenter = () => (
     <Helmet>
       <title>Service | Nevermind</title>
     </Helmet>
-    <AddButton>+ADD</AddButton>
+    <AddButton data-toggle="modal" data-target="#exampleModalLong">
+      +ADD
+    </AddButton>
+
+    <AddPresenter></AddPresenter>
     <Sidebar></Sidebar>
     <SubType>ALL</SubType>
     <ViewContainer>

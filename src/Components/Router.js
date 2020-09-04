@@ -6,7 +6,6 @@ import Signup from "Routes/Signup";
 import Login from "Routes/Login";
 import Service from "Routes/Service";
 import Navbar from "./Navbar";
-import Add from "Routes/Add";
 
 const MainContainer = styled.div`
   margin-left: 5em;
@@ -22,7 +21,6 @@ const Routers = () => (
         <Route path="/Signup" component={Signup} />
         <Route path="/Login" component={Login} />
         <Route path="/Service" component={Service} />
-        <Route path="/Add" component={Add} />
         <Redirect from="*" to="/" />
       </Switch>
     </MainContainer>

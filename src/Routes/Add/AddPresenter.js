@@ -6,16 +6,6 @@ import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Container = styled.div`
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
 const Form = styled.form`
   margin: 0px auto;
 `;
@@ -35,22 +25,36 @@ const AddPresenter = ({
   handleStartDateChange,
   handleEndDateChange,
 }) => (
-  <Container>
-    <Form>
-      <TextContainer>
-        <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={startDate}
-          onChange={handleStartDateChange}
-        ></DatePicker>
-        <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={endDate}
-          onChange={handleEndDateChange}
-        ></DatePicker>
-      </TextContainer>
-    </Form>
-  </Container>
+  <div
+    className="modal fade"
+    id="exampleModalLong"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true"
+  >
+    <div className="modal-dialog" role="document">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title" id="exampleModalLongTitle">
+            Modal title
+          </h5>
+          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div className="modal-body">...</div>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" className="btn btn-primary">
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 );
 
 AddPresenter.propTypes = {
