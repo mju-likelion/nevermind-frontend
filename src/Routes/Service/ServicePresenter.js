@@ -5,7 +5,7 @@ import Sidebar from "Components/Sidebar";
 import Helmet from "react-helmet";
 import Logo from "Components/Logo";
 import { Link } from "react-router-dom";
-import AddPresenter from "Routes/Add";
+import AddContainer from "Routes/Add";
 import $ from "jquery";
 
 const Container = styled.div`
@@ -90,7 +90,7 @@ const SubItem = styled.div`
 `;
 
 const ServicePresenter = () => (
-  <Container>
+  <Container className="position-relative">
     <Helmet>
       <title>Service | Nevermind</title>
     </Helmet>
@@ -98,7 +98,7 @@ const ServicePresenter = () => (
       +ADD
     </AddButton>
 
-    <AddPresenter></AddPresenter>
+    <AddContainer />
     <Sidebar></Sidebar>
     <SubType>ALL</SubType>
     <ViewContainer>
