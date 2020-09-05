@@ -7,7 +7,7 @@ export default class extends React.Component {
     super(props);
     this.state = {
       appName: null,
-      bill: 0,
+      fee: 0,
       type: "all",
       startDate: new Date(),
       endDate: new Date(),
@@ -26,20 +26,24 @@ export default class extends React.Component {
     });
   };
 
-  onSubmit = (appName, bill, type, startDate, endDate) => {};
+  handleSubmit = (appName, fee, type) => {
+    this.setState({
+      appName: appName,
+      fee: fee,
+      type: type,
+    });
+  };
 
   render() {
-    const { appName, bill, type, startDate, endDate } = this.state;
     console.log(this.state);
+    const { startDate, endDate } = this.state;
     return (
       <AddPresenter
-        appName={appName}
-        bill={bill}
-        type={type}
         startDate={startDate}
         endDate={endDate}
         handleStartDateChange={this.handleStartDateChange}
         handleEndDateChange={this.handleEndDateChange}
+        handleSubmit={this.handleSubmit}
       />
     );
   }

@@ -97,7 +97,6 @@ const ServicePresenter = () => (
     <AddButton data-toggle="modal" data-target="#exampleModalLong">
       +ADD
     </AddButton>
-
     <AddContainer />
     <Sidebar></Sidebar>
     <SubType>ALL</SubType>

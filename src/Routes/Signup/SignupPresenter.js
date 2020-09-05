@@ -55,17 +55,11 @@ function setSignupTooltipTitleForTermLabels(title_txt) {
 function setSignupTooltip() {
   initTooltip();
   setSignupTooltipTitleByName("username", "이름을 입력하세요");
-  setSignupTooltipTitleByName(
-    "cellphone",
-    "전화번호 입력 후<br>본인인증을 클릭하세요"
-  );
+  setSignupTooltipTitleByName("cellphone", "전화번호 입력 후<br>본인인증을 클릭하세요");
   setSignupTooltipTitleByName("verify_cellphone", "인증 페이지로 이동합니다");
   setSignupTooltipTitleByName("email", "이메일을 입력하세요");
   setSignupTooltipTitleByName("pwd", "비밀번호를 입력하세요");
-  setSignupTooltipTitleByName(
-    "pwd_confirm",
-    "비밀번호를<br>한번 더 입력하세요"
-  );
+  setSignupTooltipTitleByName("pwd_confirm", "비밀번호를<br>한번 더 입력하세요");
   setSignupTooltipTitleForTermLabels("필수 약관입니다");
 }
 
