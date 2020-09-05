@@ -60,9 +60,7 @@ const LoginPresenter = (props) => (
         event.preventDefault();
         const email = event.target.email.value;
         const pwd = event.target.pwd.value;
-        {
-          props.onSubmit(email, pwd);
-        }
+        props.onSubmit(email, pwd);
       }}
     >
       <div className="d-flex">
@@ -116,5 +114,8 @@ const LoginPresenter = (props) => (
     </AskSignup>
   </Container>
 );
+LoginPresenter.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default LoginPresenter;
