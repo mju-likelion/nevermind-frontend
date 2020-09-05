@@ -79,7 +79,7 @@ const AddPresenter = ({
         >
           <div className="modal-body">
             <div className="form-row">
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <label htmlFor="validationServer01">App Name</label>
                 <input
                   type="text"
@@ -92,7 +92,7 @@ const AddPresenter = ({
                   required
                 />
               </div>
-              <div class="form-group form-inline col-md-6">
+              <div className="form-group form-inline col-md-6">
                 <label htmlFor="validationServer01">Subscription Fee</label>
                 <input
                   type="text"
@@ -108,11 +108,11 @@ const AddPresenter = ({
                 &nbsp; 원
               </div>
             </div>
-            <div class="form-group">
-              <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">
+            <div className="form-group">
+              <label className="mr-sm-2 sr-only" for="inlineFormCustomSelect">
                 Subscription Type
               </label>
-              <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="type">
+              <select className="custom-select mr-sm-2" id="inlineFormCustomSelect" name="type">
                 <option selected>Subscription Type</option>
                 <option value="week">Week</option>
                 <option value="month">Month</option>
