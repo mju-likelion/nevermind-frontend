@@ -15,7 +15,11 @@ export default class extends React.Component {
   onSubmit = (email, password) => {
     (async (email, pwd) => {
       const res = await nevAxios.login({ email, pwd });
-      console.log(res.data);
+      if (res.data.is_login) {
+        window.location.href = "/Service";
+      } else {
+        alert("아이디 또는 비밀번호를 좀 제대로 입력해보십시오.");
+      }
     })(email, password);
     this.setState({ email: email, password: password });
   };
