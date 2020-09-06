@@ -1,12 +1,11 @@
 // 로그인 된 후의 상황인 Navbar
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import notice from "assets/notice.svg";
 import home from "assets/home.svg";
 import service from "assets/service.svg";
 import user from "assets/user.svg";
 import logout from "assets/logout.png"; // 임시 로그아웃 이미지
-import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import nevAxios from "Src/nev-axios";
 
@@ -35,44 +34,62 @@ const ImgLinkContainer = styled.div`
 const ImgLink = ({ to, imgSrc }) => (
   <Link to={to} className="d-flex h-100">
     <button type="button" className="btn">
-      <img src={imgSrc} />
+      <img src={imgSrc} alt={imgSrc.split("/").pop()} />
     </button>
   </Link>
 );
 
-const Navbar = () => {
-  const [isSession, setSessionState] = useState(false);
-  useEffect(() => {
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isSession: false };
+  }
+
+  setSessionState() {
     (async () => {
       const sessionRes = await nevAxios.issession();
-      setSessionState(sessionRes.data.is_session);
+      this.setState({ isSession: sessionRes.data.is_session });
     })();
-  });
+  }
 
-  // 임시 로그아웃 버튼 삽입
-  return (
-    <Container className="py-5">
-      {isSession ? (
-        <ImgLinkContainer>
-          <ImgLink to="Main" imgSrc={home} />
-          <ImgLink to="Main" imgSrc={user} />
-          <ImgLink to="Main" imgSrc={notice} />
-          <ImgLink to="Service" imgSrc={service} />
-          <Link
-            to="Main"
-            className="d-flex h-100"
-            onClick={(e) => nevAxios.logout()}
-          >
-            <button type="button" className="btn">
-              <img src={logout} />
-            </button>
-          </Link>
-        </ImgLinkContainer>
-      ) : (
-        <div></div>
-      )}
-    </Container>
-  );
-};
+  componentDidMount() {
+    this.setSessionState();
+  }
 
-export default withRouter(Navbar);
+  componentDidUpdate() {
+    this.setSessionState();
+  }
+
+  render() {
+    return (
+      <Container className="py-5">
+        {this.state.isSession ? (
+          <ImgLinkContainer>
+            <ImgLink to="Main" imgSrc={home} />
+            <ImgLink to="Main" imgSrc={user} />
+            <ImgLink to="Main" imgSrc={notice} />
+            <ImgLink to="Service" imgSrc={service} />
+            <Link
+              to="Main"
+              className="d-flex h-100"
+              onClick={(e) => {
+                (async () => {
+                  await nevAxios.logout();
+                  this.forceUpdate();
+                })();
+              }}
+            >
+              <button type="button" className="btn">
+                <img src={logout} alt="logout.png" />
+              </button>
+            </Link>
+          </ImgLinkContainer>
+        ) : (
+          <div></div>
+        )}
+      </Container>
+    );
+  }
+}
+
+export default Navbar;

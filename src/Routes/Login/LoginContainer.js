@@ -2,9 +2,9 @@ import React from "react";
 import LoginPresenter from "./LoginPresenter";
 import nevAxios from "Src/nev-axios";
 
-export default class extends React.Component {
-  constructor(props) {
-    super(props);
+class LoginContainer extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       email: null,
@@ -16,7 +16,9 @@ export default class extends React.Component {
     (async (email, pwd) => {
       const res = await nevAxios.login({ email, pwd });
       if (res.data.is_login) {
-        window.location.href = "/Service";
+        this.forceUpdate(() => {
+          alert("로그인이 되어버렸습니다.");
+        });
       } else {
         alert("아이디 또는 비밀번호를 좀 제대로 입력해보십시오.");
       }
@@ -28,3 +30,5 @@ export default class extends React.Component {
     return <LoginPresenter onSubmit={this.onSubmit} />;
   }
 }
+
+export default LoginContainer;
