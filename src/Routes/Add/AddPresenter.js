@@ -78,11 +78,11 @@ const AddPresenter = ({
           }}
         >
           <div className="modal-body">
-            <div className="form-row">
-              <div className="form-group col-md-6">
+            <div className="d-flex">
+              <div className="form-group">
                 <label htmlFor="validationServer01">App Name</label>
                 <input
-                  type="text"
+                  type="tel"
                   name="appname"
                   className="mt-2 form-control"
                   aria-describedby="validatedInputGroupPrepend"
@@ -92,22 +92,34 @@ const AddPresenter = ({
                   required
                 />
               </div>
-              <div className="form-group form-inline col-md-6">
-                <label htmlFor="validationServer01">Subscription Fee</label>
-                <input
-                  type="text"
-                  name="fee"
-                  id="fee"
-                  className="mt-2 form-control"
-                  aria-describedby="validatedInputGroupPrepend"
+              <div className="d-flex flex-column justify-content-center mt-2 ml-3">
+                <button
+                  type="button"
+                  className="btn btn-light"
+                  name="auto_appname"
                   data-toggle="tooltip"
                   data-placement="top"
                   data-html="true"
-                  required
-                />
-                &nbsp; 원
+                >
+                  App_List
+                </button>
               </div>
             </div>
+            <div className="form-group">
+              <label htmlFor="validationServer01">Subscription Fee&nbsp; (KRW)</label>
+              <input
+                type="text"
+                name="fee"
+                id="fee"
+                className="mt-2 form-control"
+                aria-describedby="validatedInputGroupPrepend"
+                data-toggle="tooltip"
+                data-placement="top"
+                data-html="true"
+                required
+              />
+            </div>
+
             <div className="form-group">
               <label className="mr-sm-2 sr-only" for="inlineFormCustomSelect">
                 Subscription Type
