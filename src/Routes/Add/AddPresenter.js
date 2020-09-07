@@ -5,6 +5,7 @@ import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Poster from "Components/Poster";
 import $ from "jquery";
 
 const TextContainer = styled.div`
@@ -51,14 +52,14 @@ const AddPresenter = ({
   handleSubmit,
 }) => (
   <div
-    className="modal fade"
+    className="modal fade "
     id="exampleModalLong"
     tabindex="-1"
     role="dialog"
     aria-labelledby="exampleModalLongTitle"
     aria-hidden="true"
   >
-    <div className="modal-dialog modal-lg" role="document">
+    <div className="modal-dialog modal-xl" role="document">
       <div className="modal-content">
         <div className="modal-header">
           <h5 className="modal-title" id="exampleModalLongTitle">
@@ -97,12 +98,13 @@ const AddPresenter = ({
                   type="button"
                   className="btn btn-light"
                   name="auto_appname"
-                  data-toggle="tooltip"
-                  data-placement="top"
+                  data-toggle="modal"
+                  data-target="#appList"
                   data-html="true"
                 >
                   App_List
                 </button>
+                <Poster />
               </div>
             </div>
             <div className="form-group">
