@@ -152,9 +152,9 @@ const AddPresenter = ({
 );
 
 AddPresenter.propTypes = {
-  appName: PropTypes.string,
-  bill: PropTypes.number,
-  type: PropTypes.string,
+  appName: PropTypes.string.isRequired,
+  bill: PropTypes.number.isRequired,
+  type: PropTypes.oneOf(["week", "month", "year", "lifetime"]).isRequired,
   handleStartDateChange: PropTypes.func.isRequired,
   handleEndDateChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
