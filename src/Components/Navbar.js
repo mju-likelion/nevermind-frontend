@@ -57,7 +57,7 @@ class Navbar extends React.Component {
   }
 
   componentDidUpdate() {
-    this.setSessionState();
+    //this.setSessionState();
   }
 
   render() {
