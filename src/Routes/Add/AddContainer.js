@@ -1,6 +1,5 @@
 import React from "react";
 import AddPresenter from "./AddPresenter";
-import nevAxios from "Src/nev-axios";
 import axios from "axios";
 
 const api = axios.create({
@@ -8,7 +7,8 @@ const api = axios.create({
 });
 
 export default class extends React.Component {
-  constructor(props) {
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       appName: null,
       list: null,

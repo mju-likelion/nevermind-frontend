@@ -16,6 +16,7 @@ class LoginContainer extends React.Component {
     (async (email, pwd) => {
       const res = await nevAxios.login({ email, pwd });
       if (res.data.is_login) {
+        this.props.onLogin();
         alert("로그인이 되어버렸습니다.");
       } else {
         alert("아이디 또는 비밀번호를 좀 제대로 입력해보십시오.");

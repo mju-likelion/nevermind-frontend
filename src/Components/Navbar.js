@@ -39,57 +39,30 @@ const ImgLink = ({ to, imgSrc }) => (
   </Link>
 );
 
-class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isSession: false };
-  }
-
-  setSessionState() {
-    (async () => {
-      const sessionRes = await nevAxios.issession();
-      this.setState({ isSession: sessionRes.data.is_session });
-    })();
-  }
-
-  componentDidMount() {
-    this.setSessionState();
-  }
-
-  componentDidUpdate() {
-    //this.setSessionState();
-  }
-
-  render() {
-    return (
-      <Container className="py-5">
-        {this.state.isSession ? (
-          <ImgLinkContainer>
-            <ImgLink to="Main" imgSrc={home} />
-            <ImgLink to="Main" imgSrc={user} />
-            <ImgLink to="Main" imgSrc={notice} />
-            <ImgLink to="Service" imgSrc={service} />
-            <Link
-              to="Main"
-              className="d-flex h-100"
-              onClick={(e) => {
-                (async () => {
-                  await nevAxios.logout();
-                  this.forceUpdate();
-                })();
-              }}
-            >
-              <button type="button" className="btn">
-                <img src={logout} alt="logout.png" />
-              </button>
-            </Link>
-          </ImgLinkContainer>
-        ) : (
-          <div></div>
-        )}
-      </Container>
-    );
-  }
-}
+const Navbar = ({ isLogin, onLogout }) => {
+  return (
+    <Container className="py-5">
+      {isLogin ? (
+        <ImgLinkContainer>
+          <ImgLink to="Main" imgSrc={home} />
+          <ImgLink to="Main" imgSrc={user} />
+          <ImgLink to="Main" imgSrc={notice} />
+          <ImgLink to="Service" imgSrc={service} />
+          <Link
+            to="Main"
+            className="d-flex h-100"
+            onClick={(e) => onLogout()}
+          >
+            <button type="button" className="btn">
+              <img src={logout} alt="logout.png" />
+            </button>
+          </Link>
+        </ImgLinkContainer>
+      ) : (
+        <div></div>
+      )}
+    </Container>
+  );
+};
 
 export default Navbar;
