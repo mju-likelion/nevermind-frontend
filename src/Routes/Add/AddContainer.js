@@ -26,23 +26,23 @@ export default class extends React.Component {
     } catch {}
   }
 
-  handleStartDateChange = (date) => {
+  handleStartDateChange = (startDate) => {
     this.setState({
-      startDate: date,
+      startDate,
     });
   };
 
-  handleEndDateChange = (date) => {
+  handleEndDateChange = (endDate) => {
     this.setState({
-      endDate: date,
+      endDate,
     });
   };
 
   handleSubmit = (appName, fee, type) => {
     this.setState({
-      appName: appName,
-      fee: fee,
-      type: type,
+      appName,
+      fee,
+      type,
     });
   };
 
