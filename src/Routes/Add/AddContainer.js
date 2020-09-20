@@ -38,19 +38,17 @@ export default class extends React.Component {
     });
   };
 
-  handleSubmit = (appName, fee, type, startDate, endDate) => {
+  handleSubmit = (appName, fee, type) => {
     this.setState({
-      appName,
-      fee,
-      type,
-      startDate,
-      endDate,
+      appName: appName,
+      fee: fee,
+      type: type,
     });
   };
 
   render() {
-    const { appName, fee, type, startDate, endDate } = this.state;
-    console.log(appName, fee, type, startDate, endDate);
+    console.log(this.state);
+    const { startDate, endDate } = this.state;
     return (
       <AddPresenter
         startDate={startDate}

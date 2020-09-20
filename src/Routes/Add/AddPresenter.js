@@ -65,12 +65,7 @@ const AddPresenter = ({
           <h5 className="modal-title" id="exampleModalLongTitle">
             구독 추가
           </h5>
-          <button
-            type="button"
-            className="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
+          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -80,7 +75,7 @@ const AddPresenter = ({
             const appName = event.target.appname.value;
             const fee = event.target.fee.value;
             const type = event.target.type.value;
-            handleSubmit(appName, fee, type, startDate, endDate);
+            handleSubmit(appName, fee, type);
           }}
         >
           <div className="modal-body">
@@ -113,9 +108,7 @@ const AddPresenter = ({
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="validationServer01">
-                Subscription Fee&nbsp; (KRW)
-              </label>
+              <label htmlFor="validationServer01">Subscription Fee&nbsp; (KRW)</label>
               <input
                 type="text"
                 name="fee"
@@ -133,11 +126,7 @@ const AddPresenter = ({
               <label className="mr-sm-2 sr-only" for="inlineFormCustomSelect">
                 Subscription Type
               </label>
-              <select
-                className="custom-select mr-sm-2"
-                id="inlineFormCustomSelect"
-                name="type"
-              >
+              <select className="custom-select mr-sm-2" id="inlineFormCustomSelect" name="type">
                 <option selected>Subscription Type</option>
                 <option value="week">Week</option>
                 <option value="month">Month</option>
@@ -163,11 +152,7 @@ const AddPresenter = ({
             </TextContainer>
           </div>
           <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-dismiss="modal"
-            >
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">
               Close
             </button>
             <button type="submit" className="btn btn-primary">
