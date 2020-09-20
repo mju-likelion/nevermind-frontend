@@ -5,7 +5,7 @@ import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Poster from "Components/Poster";
+import AppList from "Components/AppList";
 import $ from "jquery";
 
 const TextContainer = styled.div`
@@ -104,7 +104,7 @@ const AddPresenter = ({
                 >
                   App_List
                 </button>
-                <Poster />
+                <AppList />
               </div>
             </div>
             <div className="form-group">
