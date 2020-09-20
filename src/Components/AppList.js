@@ -100,23 +100,13 @@ export default class extends Component {
       appImg: null,
       appName: null,
     };
-    this.onModalCloseHandler = this.onModalCloseHandler.bind(this);
-    this.OnclickAppList = this.OnclickAppList.bind(this);
   }
 
-  onModalCloseHandler(e) {
+  onModalCloseHandler() {
     $("#appList").modal("hide");
   }
 
-  OnclickAppList(appImg, appName) {
-    this.setState({
-      appImg,
-      appName,
-    });
-  }
-
   render() {
-    const { appImg, appName } = this.state;
     return (
       <div
         className="modal fade"
@@ -147,7 +137,8 @@ export default class extends Component {
                       event.preventDefault();
                       const AppImg = event.target.firstChild.src;
                       const AppName = event.target.lastChild.textContent;
-                      this.OnclickAppList(AppImg, AppName);
+                      this.props.onClickAppHandler(AppImg, AppName);
+                      this.onModalCloseHandler();
                     }}
                   >
                     <img
