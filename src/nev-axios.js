@@ -3,7 +3,7 @@
  * 
  *  { nev-axios, Custom Axios for Nevermind Web Service }
  * 
- *  Version 3.2.1
+ *  Version 3.3.1
  * 
  **/
 /* ==================================================== */
@@ -181,6 +181,30 @@ nevAxios.urls = {
    *
    * */
   unregister: "/user/unregister",
+
+  /*****
+   *  ### [ Property - Application List ]
+   *
+   *  * Method: `GET`
+   *  * App: `subscription`
+   *  * Model: None
+   * 
+   *  * Request Parameters
+   *    - None
+   *
+   *  * Request Cookies
+   *    - None
+   * 
+   *  * Response Data
+   *    - `is_applist` (Boolean)
+   *    - `applist` (JSON | null)
+   * 
+   *  * Response Cookies
+   *    - None
+   * 
+   */
+  applist: "/subscription/applist",
+
 };
 /* ==================================================== */
 
@@ -574,6 +598,30 @@ nevAxios.unregister = async function () {
     removeCookie(["session_id"]);
   }
   return res;
+};
+
+/*****
+ *  ### [ Method - nevAxios.applist ]
+ * 
+ *  #### Description
+ * 
+ *  - Nevermind subscription App list
+ * 
+ *  #### Usage
+ * 
+ *    ```
+ *    const appListRes = nevAxios.applist();
+ *    ```
+ *  #### NOTICE
+ *
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
+ * 
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
+ * 
+ */
+nevAxios.applist = async function () {
+  return nevAxios.get(nevAxios.urls.applist, {});
 };
 /* ==================================================== */
 
