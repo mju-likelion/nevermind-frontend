@@ -81,9 +81,8 @@ const AddPresenter = ({
           }}
         >
           <div className="modal-body">
-            <div className="form-group">
-              <input
-                type="image"
+            <div className="form-group d-flex flex-column align-items-center">
+              <img
                 src=""
                 width="100"
                 height="100"
