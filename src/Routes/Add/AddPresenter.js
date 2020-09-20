@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import AppList from "Components/AppList";
 import $ from "jquery";
+import Logo from "Components/Logo";
 
 const TextContainer = styled.div`
   display: flex;
@@ -72,13 +73,28 @@ const AddPresenter = ({
         <Form
           onSubmit={(event) => {
             event.preventDefault();
+            const appImg = event.target.appimg.value;
             const appName = event.target.appname.value;
             const fee = event.target.fee.value;
             const type = event.target.type.value;
-            handleSubmit(appName, fee, type);
+            handleSubmit(appImg, appName, fee, type);
           }}
         >
           <div className="modal-body">
+            <div className="form-group">
+              <input
+                type="image"
+                src=""
+                width="100"
+                height="100"
+                name="appimg"
+                aria-describedby="validatedInputGroupPrepend"
+                data-toggle="tooltip"
+                data-placement="top"
+                data-html="true"
+                required
+              />
+            </div>
             <div className="d-flex">
               <div className="form-group">
                 <label htmlFor="validationServer01">App Name</label>
@@ -142,6 +158,7 @@ const AddPresenter = ({
                 onChange={handleStartDateChange}
               ></DatePicker>
             </TextContainer>
+
             <TextContainer>
               End Date :&nbsp;
               <DatePicker

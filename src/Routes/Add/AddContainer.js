@@ -5,6 +5,7 @@ export default class extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      appImg: null,
       appName: null,
       list: null,
       fee: 0,
@@ -38,8 +39,9 @@ export default class extends React.Component {
     });
   };
 
-  handleSubmit = (appName, fee, type) => {
+  handleSubmit = (appImg, appName, fee, type) => {
     this.setState({
+      appImg,
       appName,
       fee,
       type,
