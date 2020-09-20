@@ -145,8 +145,8 @@ export default class extends Component {
                     className="text-left d-flex m-2 rounded-lg btn btn-outline-dark"
                     onClick={(event) => {
                       event.preventDefault();
-                      const AppImg = event.target.appimg;
-                      const AppName = event.target.appname;
+                      const AppImg = event.target.firstChild.src;
+                      const AppName = event.target.lastChild.textContent;
                       this.OnclickAppList(AppImg, AppName);
                     }}
                   >
