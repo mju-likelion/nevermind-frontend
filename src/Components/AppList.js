@@ -93,7 +93,7 @@ const applist = [
   },
 ];
 
-class AppList extends Component {
+export default class extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -116,6 +116,7 @@ class AppList extends Component {
   }
 
   render() {
+    const { appImg, appName } = this.state;
     return (
       <div
         className="modal fade"
@@ -144,9 +145,9 @@ class AppList extends Component {
                     className="text-left d-flex m-2 rounded-lg btn btn-outline-dark"
                     onClick={(event) => {
                       event.preventDefault();
-                      const AppImg = event.target.appimg.value;
-                      const AppNmae = event.target.appname.value;
-                      this.OnclickAppList(AppImg, AppNmae);
+                      const AppImg = event.target.appimg;
+                      const AppName = event.target.appname;
+                      this.OnclickAppList(AppImg, AppName);
                     }}
                   >
                     <img
@@ -168,10 +169,3 @@ class AppList extends Component {
     );
   }
 }
-
-AppList.propTypes = {
-  appImg: PropTypes.string.isRequired,
-  appName: PropTypes.string.isRequired,
-};
-
-export default AppList;
