@@ -1,6 +1,5 @@
 import React from "react";
 import AddPresenter from "./AddPresenter";
-import axios from "axios";
 
 export default class extends React.Component {
   constructor(props, context) {
@@ -22,7 +21,7 @@ export default class extends React.Component {
         results: { results: list },
       } = await api.get("top-free/all/100/explicit.json");
       */
-      console.log(applist);
+      //console.log(applist);
       //this.setState(results);
     } catch {}
   }

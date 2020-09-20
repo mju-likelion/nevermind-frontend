@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import $ from "jquery";
 import styled from "styled-components";
+import axios from "axios";
 
 const api = axios.create({
   baseURL: "https://rss.itunes.apple.com/api/v1/kr/ios-apps/",
@@ -118,7 +119,24 @@ const Poster = () => (
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div className="modal-body">...</div>
+        <div className="modal-body">
+          <div className="d-flex flex-column">
+            {applist.map((app) => (
+              <button
+                key={app.id}
+                type="button"
+                className="text-left d-flex m-2 rounded-lg btn btn-outline-dark"
+              >
+                <img
+                  src={app.artworkUrl100}
+                  style={{ width: "30px", height: "30px" }}
+                  className="m-2 mr-3"
+                />
+                <div className="mt-3">{app.name}</div>
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="modal-footer">
           <button
             type="button"
