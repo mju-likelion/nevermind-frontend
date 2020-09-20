@@ -43,8 +43,7 @@ const applist = [
     kind: "iosSoftware",
     copyright: "© 2020 hyoungbin kook",
     artistId: "1358650986",
-    artistUrl:
-      "https://apps.apple.com/kr/developer/hyoungbin-kook/id1358650986",
+    artistUrl: "https://apps.apple.com/kr/developer/hyoungbin-kook/id1358650986",
     artworkUrl100:
       "https://is3-ssl.mzstatic.com/image/thumb/Purple114/v4/ad/49/63/ad496399-75ce-bc45-bb48-cf2d9adcb6a2/AppIcon-1x_U007emarketing-0-7-0-85-220.png/200x200bb.png",
     genres: [
@@ -97,11 +96,23 @@ const applist = [
 class AppList extends Component {
   constructor(props, context) {
     super(props, context);
+    this.state = {
+      appImg: null,
+      appName: null,
+    };
     this.onModalCloseHandler = this.onModalCloseHandler.bind(this);
+    this.OnclickAppList = this.OnclickAppList.bind(this);
   }
 
   onModalCloseHandler(e) {
     $("#appList").modal("hide");
+  }
+
+  OnclickAppList(appImg, appName) {
+    this.setState({
+      appImg,
+      appName,
+    });
   }
 
   render() {
@@ -120,11 +131,7 @@ class AppList extends Component {
               <h5 className="modal-title" id="exampleModalLabel">
                 App List
               </h5>
-              <button
-                type="button"
-                className="close"
-                onClick={this.onModalCloseHandler}
-              >
+              <button type="button" className="close" onClick={this.onModalCloseHandler}>
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -135,28 +142,25 @@ class AppList extends Component {
                     key={app.id}
                     type="button"
                     className="text-left d-flex m-2 rounded-lg btn btn-outline-dark"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      const AppImg = event.target.appimg.value;
+                      const AppNmae = event.target.appname.value;
+                      this.OnclickAppList(AppImg, AppNmae);
+                    }}
                   >
                     <img
+                      name="appimg"
                       src={app.artworkUrl100}
                       style={{ width: "30px", height: "30px" }}
                       className="m-2 mr-3"
                     />
-                    <div className="mt-3">{app.name}</div>
+                    <div name="appname" className="mt-3">
+                      {app.name}
+                    </div>
                   </button>
                 ))}
               </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={this.onModalCloseHandler}
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
             </div>
           </div>
         </div>
@@ -166,9 +170,8 @@ class AppList extends Component {
 }
 
 AppList.propTypes = {
-  id: PropTypes.number.isRequired,
-  imageUrl: PropTypes.string,
-  appname: PropTypes.string.isRequired,
+  appImg: PropTypes.string.isRequired,
+  appName: PropTypes.string.isRequired,
 };
 
 export default AppList;
