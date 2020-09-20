@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import $ from "jquery";
+import styled from "styled-components";
 import axios from "axios";
 
 const api = axios.create({
@@ -94,81 +95,71 @@ const applist = [
   },
 ];
 
-class AppList extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.onModalCloseHandler = this.onModalCloseHandler.bind(this);
-  }
-
-  onModalCloseHandler(e) {
-    $("#appList").modal("hide");
-  }
-
-  render() {
-    return (
-      <div
-        className="modal fade"
-        id="appList"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                App List
-              </h5>
+const Poster = () => (
+  <div
+    className="modal"
+    id="appList"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div className="modal-dialog">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title" id="exampleModalLabel">
+            App List
+          </h5>
+          <button
+            type="button"
+            className="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div className="modal-body">
+          <div className="d-flex flex-column">
+            {applist.map((app) => (
               <button
+                key={app.id}
                 type="button"
-                className="close"
-                onClick={this.onModalCloseHandler}
+                className="text-left d-flex m-2 rounded-lg btn btn-outline-dark"
               >
-                <span aria-hidden="true">&times;</span>
+                <img
+                  src={app.artworkUrl100}
+                  style={{ width: "30px", height: "30px" }}
+                  className="m-2 mr-3"
+                />
+                <div className="mt-3">{app.name}</div>
               </button>
-            </div>
-            <div className="modal-body">
-              <div className="d-flex flex-column">
-                {applist.map((app) => (
-                  <button
-                    key={app.id}
-                    type="button"
-                    className="text-left d-flex m-2 rounded-lg btn btn-outline-dark"
-                  >
-                    <img
-                      src={app.artworkUrl100}
-                      style={{ width: "30px", height: "30px" }}
-                      className="m-2 mr-3"
-                    />
-                    <div className="mt-3">{app.name}</div>
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={this.onModalCloseHandler}
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
-            </div>
+            ))}
           </div>
         </div>
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={(e) => {
+              $("#appList").modal("hide");
+            }}
+          >
+            Close
+          </button>
+          <button type="button" className="btn btn-primary">
+            Save changes
+          </button>
+        </div>
       </div>
-    );
-  }
-}
+    </div>
+  </div>
+);
 
-AppList.propTypes = {
+Poster.propTypes = {
   id: PropTypes.number.isRequired,
   imageUrl: PropTypes.string,
   appname: PropTypes.string.isRequired,
 };
 
-export default AppList;
+export default Poster;
