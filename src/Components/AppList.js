@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import $ from "jquery";
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "https://rss.itunes.apple.com/api/v1/kr/ios-apps/",
-});
+import nevAxios from "Src/nev-axios";
 
 const applist = [
   {
@@ -43,7 +39,8 @@ const applist = [
     kind: "iosSoftware",
     copyright: "© 2020 hyoungbin kook",
     artistId: "1358650986",
-    artistUrl: "https://apps.apple.com/kr/developer/hyoungbin-kook/id1358650986",
+    artistUrl:
+      "https://apps.apple.com/kr/developer/hyoungbin-kook/id1358650986",
     artworkUrl100:
       "https://is3-ssl.mzstatic.com/image/thumb/Purple114/v4/ad/49/63/ad496399-75ce-bc45-bb48-cf2d9adcb6a2/AppIcon-1x_U007emarketing-0-7-0-85-220.png/200x200bb.png",
     genres: [
@@ -93,16 +90,24 @@ const applist = [
   },
 ];
 
-export default class extends Component {
+export default class AppList extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       appImg: null,
       appName: null,
+      appList: null,
     };
   }
 
-  onModalCloseHandler() {
+  componentDidMount() {
+    (async () => {
+      const appListRes = await nevAxios.applist();
+      this.setState({ appList: appListRes.data.applist.feed.results });
+    })();
+  }
+
+  handleClose() {
     $("#appList").modal("hide");
   }
 
@@ -116,42 +121,51 @@ export default class extends Component {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-scrollable">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
                 App List
               </h5>
-              <button type="button" className="close" onClick={this.onModalCloseHandler}>
+              <button
+                type="button"
+                className="close"
+                onClick={this.handleClose}
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div className="modal-body">
               <div className="d-flex flex-column">
-                {applist.map((app) => (
-                  <button
-                    key={app.id}
-                    type="button"
-                    className="text-left d-flex m-2 rounded-lg btn btn-outline-dark"
-                    onClick={(event) => {
-                      event.preventDefault();
-                      const AppImg = event.target.firstChild.src;
-                      const AppName = event.target.lastChild.textContent;
-                      this.props.onClickAppHandler(AppImg, AppName);
-                      this.onModalCloseHandler();
-                    }}
-                  >
-                    <img
-                      name="appimg"
-                      src={app.artworkUrl100}
-                      style={{ width: "30px", height: "30px" }}
-                      className="m-2 mr-3"
-                    />
-                    <div name="appname" className="mt-3">
-                      {app.name}
-                    </div>
-                  </button>
-                ))}
+                {this.state.appList ? (
+                  this.state.appList.map((app) => (
+                    <button
+                      key={app.id}
+                      type="button"
+                      className="text-left d-flex m-2 rounded-lg btn btn-outline-dark"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        const AppImg = event.target.firstChild.src;
+                        const AppName = event.target.lastChild.textContent;
+                        this.props.handleAppNameSelect(AppName);
+                        this.props.handleAppSelect(AppImg, AppName);
+                        this.handleClose();
+                      }}
+                    >
+                      <img
+                        name="appimg"
+                        src={app.artworkUrl100}
+                        style={{ width: "30px", height: "30px" }}
+                        className="m-2 mr-3"
+                      />
+                      <div name="appname" className="mt-3">
+                        {app.name}
+                      </div>
+                    </button>
+                  ))
+                ) : (
+                  <h3>Loading...</h3>
+                )}
               </div>
             </div>
           </div>

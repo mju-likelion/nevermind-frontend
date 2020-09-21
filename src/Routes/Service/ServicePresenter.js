@@ -94,7 +94,7 @@ const ServicePresenter = () => (
     <Helmet>
       <title>Service | Nevermind</title>
     </Helmet>
-    <AddButton data-toggle="modal" data-target="#exampleModalLong">
+    <AddButton data-toggle="modal" data-target="#addForm">
       +ADD
     </AddButton>
     <AddContainer />

@@ -23,30 +23,52 @@ const Form = styled.form`
 class AddPresenter extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      appImg: "",
-      appName: "",
-    };
+    this.state = { appName: "" };
 
-    $(function () {
-      var $input = $("#fee");
-      $input.on("keyup", function () {
-        // 입력 값 알아내기
-        var _this = this;
-        this.numberFormat(_this);
-      });
-    });
-
-    this.onClickAppHandler = this.onClickAppHandler.bind(this);
-    this.onInputChangeHandler = this.onInputChangeHandler.bind(this);
+    this.handleAppNameSelect = this.handleAppNameSelect.bind(this);
+    this.handleAppNameChange = this.handleAppNameChange.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
-  onClickAppHandler(appImg, appName) {
-    this.setState({ appImg, appName });
+  componentDidMount() {
+    $(
+      function () {
+        var $input = $("#fee");
+        $input.on(
+          "keyup",
+          function (event) {
+            // 입력 값 알아내기
+            this.numberFormat(event.target);
+          }.bind(this)
+        );
+      }.bind(this)
+    );
+
+    $("#addForm").on(
+      "hidden.bs.modal",
+      function (event) {
+        if (event.target.id === "addForm") {
+          $("#fee").val("");
+          $("#type").val("default");
+          this.handleAppNameSelect("");
+          this.props.initForm();
+        }
+      }.bind(this)
+    );
   }
 
-  onInputChangeHandler(event) {
-    this.setState({ appName: event.target.value });
+  handleAppNameSelect(appName) {
+    this.setState({ appName });
+  }
+
+  handleAppNameChange(event) {
+    let appName = event.target.value;
+    this.handleAppNameSelect(appName);
+    this.props.handleAppSelect(null, appName);
+  }
+
+  handleClose() {
+    $("#addForm").modal("hide");
   }
 
   comma(str) {
@@ -67,16 +89,16 @@ class AddPresenter extends Component {
     return (
       <div
         className="modal fade "
-        id="exampleModalLong"
+        id="addForm"
         tabindex="-1"
         role="dialog"
-        aria-labelledby="exampleModalLongTitle"
+        aria-labelledby="addFormTitle"
         aria-hidden="true"
       >
         <div className="modal-dialog " role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLongTitle">
+              <h5 className="modal-title" id="addFormTitle">
                 구독 추가
               </h5>
               <button
@@ -91,17 +113,27 @@ class AddPresenter extends Component {
             <Form
               onSubmit={(event) => {
                 event.preventDefault();
-                const appImg = event.target.appimg.value;
+                const appImg = this.props.appImg;
                 const appName = event.target.appname.value;
                 const fee = event.target.fee.value;
                 const type = event.target.type.value;
-                this.props.handleSubmit(appImg, appName, fee, type);
+                const startDate = this.props.startDate;
+                const endDate = this.props.endDate;
+                this.props.handleSubmit(
+                  appImg,
+                  appName,
+                  fee,
+                  type,
+                  startDate,
+                  endDate
+                );
+                this.handleClose();
               }}
             >
               <div className="modal-body">
                 <div className="form-group d-flex flex-column align-items-center">
                   <img
-                    src={this.state.appImg}
+                    src={this.props.appImg}
                     width="100"
                     height="100"
                     name="appimg"
@@ -116,10 +148,9 @@ class AddPresenter extends Component {
                   <div className="form-group">
                     <label htmlFor="validationServer01">App Name</label>
                     <input
-                      type="tel"
                       name="appname"
                       value={this.state.appName}
-                      onChange={this.onInputChangeHandler}
+                      onChange={this.handleAppNameChange}
                       className="mt-2 form-control"
                       aria-describedby="validatedInputGroupPrepend"
                       data-toggle="tooltip"
@@ -139,7 +170,10 @@ class AddPresenter extends Component {
                     >
                       App_List
                     </button>
-                    <AppList onClickAppHandler={this.onClickAppHandler} />
+                    <AppList
+                      handleAppSelect={this.props.handleAppSelect}
+                      handleAppNameSelect={this.handleAppNameSelect}
+                    />
                   </div>
                 </div>
                 <div className="form-group">
@@ -160,18 +194,18 @@ class AddPresenter extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label
-                    className="mr-sm-2 sr-only"
-                    for="inlineFormCustomSelect"
-                  >
+                  <label className="mr-sm-2 sr-only" for="type">
                     Subscription Type
                   </label>
                   <select
                     className="custom-select mr-sm-2"
-                    id="inlineFormCustomSelect"
+                    id="type"
                     name="type"
+                    required
                   >
-                    <option selected>Subscription Type</option>
+                    <option value="default" selected>
+                      Subscription Type
+                    </option>
                     <option value="week">Week</option>
                     <option value="month">Month</option>
                     <option value="year">Year</option>
