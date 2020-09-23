@@ -142,6 +142,7 @@ class AddPresenter extends Component {
                     data-placement="top"
                     data-html="true"
                     required
+                    className="rounded-lg"
                   />
                 </div>
                 <div className="d-flex">

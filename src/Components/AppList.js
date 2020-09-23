@@ -69,7 +69,7 @@ export default class AppList extends Component {
                         name="appimg"
                         src={app.artworkUrl100}
                         style={{ width: "30px", height: "30px" }}
-                        className="m-2 mr-3"
+                        className="m-2 mr-3 rounded-lg"
                       />
                       <div name="appname" className="mt-3">
                         {app.name}
