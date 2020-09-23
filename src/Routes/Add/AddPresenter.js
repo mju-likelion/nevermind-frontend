@@ -101,12 +101,7 @@ class AddPresenter extends Component {
               <h5 className="modal-title" id="addFormTitle">
                 구독 추가
               </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -119,14 +114,7 @@ class AddPresenter extends Component {
                 const type = event.target.type.value;
                 const startDate = this.props.startDate;
                 const endDate = this.props.endDate;
-                this.props.handleSubmit(
-                  appImg,
-                  appName,
-                  fee,
-                  type,
-                  startDate,
-                  endDate
-                );
+                this.props.handleSubmit(appImg, appName, fee, type, startDate, endDate);
                 this.handleClose();
               }}
             >
@@ -178,9 +166,7 @@ class AddPresenter extends Component {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="validationServer01">
-                    Subscription Fee&nbsp; (KRW)
-                  </label>
+                  <label htmlFor="validationServer01">Subscription Fee&nbsp; (KRW)</label>
                   <input
                     type="text"
                     name="fee"
@@ -198,12 +184,7 @@ class AddPresenter extends Component {
                   <label className="mr-sm-2 sr-only" for="type">
                     Subscription Type
                   </label>
-                  <select
-                    className="custom-select mr-sm-2"
-                    id="type"
-                    name="type"
-                    required
-                  >
+                  <select className="custom-select mr-sm-2" id="type" name="type" required>
                     <option value="default" selected>
                       Subscription Type
                     </option>
@@ -223,7 +204,7 @@ class AddPresenter extends Component {
                 </TextContainer>
 
                 <TextContainer>
-                  End Date :&nbsp;
+                  End&nbsp;&nbsp; Date :&nbsp;
                   <DatePicker
                     dateFormat="yyyy-MM-dd"
                     selected={this.props.endDate}
@@ -232,11 +213,7 @@ class AddPresenter extends Component {
                 </TextContainer>
               </div>
               <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
+                <button type="button" className="btn btn-secondary" data-dismiss="modal">
                   Close
                 </button>
                 <button type="submit" className="btn btn-primary">
