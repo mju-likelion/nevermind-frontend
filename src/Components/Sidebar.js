@@ -3,14 +3,14 @@ import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import $ from "jquery";
 
-const Container = styled.div`
+const SideBarContainer = styled.div`
   margin-top: 7%;
   background-color: white;
   width: 17%;
   display: flex;
   flex-direction: column;
 `;
-const Item = styled.ul`
+const SideBarItem = styled.ul`
   border-left: 5px solid ${(props) => (props.current ? "#7BA2E0" : "transparent")};
   transition: border-left 0.5s ease-in-out;
   background-color: ${(props) => (props.current ? "#ebebeb" : "transparent")};
@@ -32,6 +32,9 @@ export default withRouter(({ location: { pathname } }) => (
     </Item>
     <Item current={pathname === "/month"}>
       <SLink to="/month">MONTH</SLink>
+    </Item>
+    <Item current={pathname === "/lifetime"}>
+      <SLink to="/month">Life Time</SLink>
     </Item>
   </Container>
 ));

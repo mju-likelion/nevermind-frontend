@@ -8,6 +8,19 @@ import "react-datepicker/dist/react-datepicker.css";
 import AppList from "Components/AppList";
 import $ from "jquery";
 import Logo from "Components/Logo";
+const SideBarContainer = styled.div`
+  margin-top: 7%;
+  background-color: white;
+  width: 17%;
+  display: flex;
+  flex-direction: column;
+`;
+const SideBarItem = styled.ul`
+  border-left: 5px solid ${(props) => (props.current ? "#7BA2E0" : "transparent")};
+  transition: border-left 0.5s ease-in-out;
+  background-color: ${(props) => (props.current ? "#ebebeb" : "transparent")};
+  transition: border-left 0.5s ease-in-out;
+`;
 
 const TextContainer = styled.div`
   display: flex;
