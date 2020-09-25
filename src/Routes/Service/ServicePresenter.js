@@ -1,12 +1,29 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Sidebar from "Components/Sidebar";
 import Helmet from "react-helmet";
 import Logo from "Components/Logo";
 import { Link } from "react-router-dom";
 import AddContainer from "Routes/Add";
 import $ from "jquery";
+
+const SideBarContainer = styled.div`
+  margin-top: 7%;
+  background-color: white;
+  width: 17%;
+  display: flex;
+  flex-direction: column;
+`;
+const SideBarItem = styled.ul`
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 5px solid ${(props) => (props.current ? "#7BA2E0" : "transparent")};
+  transition: border-left 0.5s ease-in-out;
+  background-color: ${(props) => (props.current ? "#ebebeb" : "transparent")};
+  transition: border-left 0.5s ease-in-out;
+`;
 
 const Container = styled.div`
   margin: 0%;
@@ -98,7 +115,20 @@ const ServicePresenter = () => (
       +ADD
     </AddButton>
     <AddContainer />
-    <Sidebar></Sidebar>
+    <SideBarContainer>
+      <button>
+        <SideBarItem>ALL</SideBarItem>
+      </button>
+      <button>
+        <SideBarItem>Week</SideBarItem>
+      </button>
+      <button>
+        <SideBarItem>Month</SideBarItem>
+      </button>
+      <button>
+        <SideBarItem>Life Time</SideBarItem>
+      </button>
+    </SideBarContainer>
     <SubType>ALL</SubType>
     <ViewContainer>
       <EstiExpend></EstiExpend>
