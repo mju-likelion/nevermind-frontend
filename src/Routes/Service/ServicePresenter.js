@@ -19,7 +19,8 @@ const SideBarItem = styled.ul`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 5px solid ${(props) => (props.current ? "#7BA2E0" : "transparent")};
+  border-left: 5px solid
+    ${(props) => (props.current ? "#7BA2E0" : "transparent")};
   transition: border-left 0.5s ease-in-out;
   background-color: ${(props) => (props.current ? "#ebebeb" : "transparent")};
   transition: border-left 0.5s ease-in-out;
@@ -40,7 +41,8 @@ const ViewContainer = styled.div`
   margin-left: 0%;
   width: 100%;
   background-color: #ebebeb;
-  display: flex;
+  display: block;
+  overflow: scroll;
 `;
 
 const AddButton = styled.button`
@@ -81,18 +83,18 @@ const EstiExpend = styled.div`
   margin-left: 5%;
   margin-top: 2%;
   border-radius: 20px;
-  display: flex;
+  display: inline-block;
 `;
 
 const AlreadyPaid = styled.div`
   padding: 10px;
   background-color: #5dbf5d;
-  width: 30%;
+  width: 39%;
   height: 25%;
   margin-left: 8%;
   margin-top: 2%;
   border-radius: 20px;
-  display: flex;
+  display: inline-block;
 `;
 
 const SubItem = styled.div`
@@ -106,7 +108,46 @@ const SubItem = styled.div`
   position: absolute;
 `;
 
-const ServicePresenter = () => (
+const ItemContainer = styled.div`
+  padding: 10px;
+  background-color: #ffffff;
+  width: 90%;
+  height: 25%;
+  margin-left: 5%;
+  margin-top: 2%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const AppImage = styled.div`
+  background-image: url(${(props) => props.bgImage});
+  height: 100px;
+  width: 100px;
+  background-size: cover;
+  border-radius: 15px;
+  border: solid 1px lightblue;
+
+  margin-left: 3%;
+`;
+
+const AppInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 4%;
+`;
+
+const AppName = styled.div`
+  margin-bottom: 40px;
+  font-size: 18px;
+`;
+
+const Company = styled.div`
+  color: grey;
+  font-size: 13px;
+`;
+const ServicePresenter = ({ applist }) => (
   <Container className="position-relative">
     <Helmet>
       <title>Service | Nevermind</title>
@@ -133,6 +174,16 @@ const ServicePresenter = () => (
     <ViewContainer>
       <EstiExpend></EstiExpend>
       <AlreadyPaid></AlreadyPaid>
+
+      {applist.map((item) => (
+        <ItemContainer>
+          <AppImage key={item.id} bgImage={item.artworkUrl100}></AppImage>
+          <AppInfo>
+            <AppName>{item.name}</AppName>
+            <Company>{item.artistName}</Company>
+          </AppInfo>
+        </ItemContainer>
+      ))}
     </ViewContainer>
   </Container>
 );

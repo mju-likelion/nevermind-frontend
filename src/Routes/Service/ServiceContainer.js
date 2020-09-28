@@ -123,7 +123,7 @@ class ServiceContainer extends React.Component {
   }
 
   render() {
-    return <ServicePresenter />;
+    return <ServicePresenter applist={applist} />;
   }
 }
 
