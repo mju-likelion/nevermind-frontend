@@ -55,11 +55,17 @@ function setSignupTooltipTitleForTermLabels(title_txt) {
 function setSignupTooltip() {
   initTooltip();
   setSignupTooltipTitleByName("username", "이름을 입력하세요");
-  setSignupTooltipTitleByName("cellphone", "전화번호 입력 후<br>본인인증을 클릭하세요");
+  setSignupTooltipTitleByName(
+    "cellphone",
+    "전화번호 입력 후<br>본인인증을 클릭하세요"
+  );
   setSignupTooltipTitleByName("verify_cellphone", "인증 페이지로 이동합니다");
   setSignupTooltipTitleByName("email", "이메일을 입력하세요");
   setSignupTooltipTitleByName("pwd", "비밀번호를 입력하세요");
-  setSignupTooltipTitleByName("pwd_confirm", "비밀번호를<br>한번 더 입력하세요");
+  setSignupTooltipTitleByName(
+    "pwd_confirm",
+    "비밀번호를<br>한번 더 입력하세요"
+  );
   setSignupTooltipTitleForTermLabels("필수 약관입니다");
 }
 
@@ -117,12 +123,27 @@ const SignupPresenter = () => {
             required
           />
         </div>
+
+        <div className="mb-3">
+          <label htmlFor="validationServer01">Cell_Phone</label>
+          <input
+            type="tel"
+            name="cellphone"
+            className="mt-2 form-control"
+            aria-describedby="validatedInputGroupPrepend"
+            data-toggle="tooltip"
+            data-placement="top"
+            data-html="true"
+            required
+          />
+        </div>
+
         <div className="d-flex">
           <div className="form-group">
-            <label htmlFor="validationServer01">Cell_Phone</label>
+            <label htmlFor="validationServer01">E-mail</label>
             <input
-              type="tel"
-              name="cellphone"
+              type="text"
+              name="email"
               className="mt-2 form-control"
               aria-describedby="validatedInputGroupPrepend"
               data-toggle="tooltip"
@@ -144,21 +165,6 @@ const SignupPresenter = () => {
             </button>
           </div>
         </div>
-
-        <div className="mb-3">
-          <label htmlFor="validationServer01">E-mail</label>
-          <input
-            type="text"
-            name="email"
-            className="mt-2 form-control"
-            aria-describedby="validatedInputGroupPrepend"
-            data-toggle="tooltip"
-            data-placement="top"
-            data-html="true"
-            required
-          />
-        </div>
-
         <div className="mb-3">
           <label htmlFor="validationServer01">Password</label>
           <input
@@ -241,7 +247,11 @@ const SignupPresenter = () => {
         </div>
         <div className="d-flex justify-content-center">
           <Link to={"Login"}>
-            <button type="button" className="mt-1 btn btn-outline-dark" onClick={(e) => register()}>
+            <button
+              type="button"
+              className="mt-1 btn btn-outline-dark"
+              onClick={(e) => register()}
+            >
               Submit
             </button>
           </Link>
