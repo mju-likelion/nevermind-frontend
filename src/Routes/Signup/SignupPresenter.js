@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
@@ -6,6 +6,7 @@ import Logo from "Components/Logo";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import nevAxios from "Src/nev-axios";
+import EmailAuth from "Components/EmailAuth";
 
 const Container = styled.div`
   margin: 0;
@@ -55,12 +56,12 @@ function setSignupTooltipTitleForTermLabels(title_txt) {
 function setSignupTooltip() {
   initTooltip();
   setSignupTooltipTitleByName("username", "이름을 입력하세요");
-  setSignupTooltipTitleByName(
-    "cellphone",
-    "전화번호 입력 후<br>본인인증을 클릭하세요"
-  );
+  setSignupTooltipTitleByName("cellphone", "전화번호를 입력하세요");
   setSignupTooltipTitleByName("verify_cellphone", "인증 페이지로 이동합니다");
-  setSignupTooltipTitleByName("email", "이메일을 입력하세요");
+  setSignupTooltipTitleByName(
+    "email",
+    "이메일 입력 후<br>본인인증을 클릭하세요"
+  );
   setSignupTooltipTitleByName("pwd", "비밀번호를 입력하세요");
   setSignupTooltipTitleByName(
     "pwd_confirm",
@@ -100,6 +101,8 @@ const SignupPresenter = () => {
     setSignupTooltip();
     setValidation();
   });
+  const [email, setEmail] = useState("");
+
   return (
     <Container>
       <Helmet>
@@ -142,6 +145,7 @@ const SignupPresenter = () => {
           <div className="form-group">
             <label htmlFor="validationServer01">E-mail</label>
             <input
+              id="email"
               type="text"
               name="email"
               className="mt-2 form-control"
@@ -150,14 +154,16 @@ const SignupPresenter = () => {
               data-placement="top"
               data-html="true"
               required
+              onChange={({ target: { value } }) => setEmail(value)}
             />
           </div>
           <div className="d-flex flex-column justify-content-center mt-2 ml-3">
             <button
+              id="call_input_text"
               type="button"
               className="btn btn-light"
-              name="verify_cellphone"
-              data-toggle="tooltip"
+              data-toggle="modal"
+              data-target="#EmailAuth"
               data-placement="top"
               data-html="true"
             >
@@ -165,6 +171,9 @@ const SignupPresenter = () => {
             </button>
           </div>
         </div>
+
+        <EmailAuth email={email} />
+
         <div className="mb-3">
           <label htmlFor="validationServer01">Password</label>
           <input
@@ -245,6 +254,7 @@ const SignupPresenter = () => {
             개인정보 처리 방침
           </label>
         </div>
+
         <div className="d-flex justify-content-center">
           <Link to={"Login"}>
             <button
