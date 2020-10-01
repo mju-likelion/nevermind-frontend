@@ -35,8 +35,33 @@ export default class EmailAuth extends Component {
               </button>
             </div>
             <div className="modal-body">
-              <div className="d-flex flex-column"></div>
-              <p>Email: {this.props.email}</p>
+              <div className="d-flex">
+                <div className="form-group">
+                  <div>E-mail</div>
+                  <input
+                    id="email"
+                    type="text"
+                    name="email"
+                    value={this.props.email}
+                    className="mt-2 "
+                    data-placement="top"
+                    data-html="true"
+                  />
+                </div>
+                <div className="d-flex flex-column justify-content-center mt-2 ml-3">
+                  <button
+                    id="call_input_text"
+                    type="button"
+                    className="btn btn-light"
+                    data-toggle="modal"
+                    data-target="#EmailAuth"
+                    data-placement="top"
+                    data-html="true"
+                  >
+                    인증 메일 발송
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
