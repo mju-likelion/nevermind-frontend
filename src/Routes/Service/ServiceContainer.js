@@ -14,12 +14,12 @@ NOTE: Must considered as application-layer states
   subscribedApps: [
     // From Server-Side, NOT by Client-Side 
     {
-      appName,
-      appImgURL,
-      type,
+      app_name,
+      app_img_url,
+      sub_type,
       bill,
-      startDate,
-      endDate,
+      startdate,
+      enddate,
     }
   ],
 }
@@ -27,6 +27,7 @@ NOTE: Must considered as application-layer states
 
 import React from "react";
 import ServicePresenter from "./ServicePresenter";
+import nevAxios from "../../nev-axios";
 
 const applist = [
   {
@@ -120,6 +121,17 @@ class ServiceContainer extends React.Component {
     super(props, context);
 
     this.state = {};
+    (async () => {
+      const res = await nevAxios.addsubscription({
+        app_name: "Among Us!",
+        app_img_url: "https://is2-ssl.mzstatic.com/image/thumb/Purple114/v4/d5/14/a7/d514a7fb-69e6-7519-e753-2527d12939f1/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/200x200bb.png",
+        sub_type: "week",
+        bill: 12000,
+        startdate: new Date(),
+        enddate: new Date(),
+      });
+      console.log(res.data);
+    })();
   }
 
   render() {
