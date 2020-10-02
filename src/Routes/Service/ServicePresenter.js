@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Component, useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
@@ -14,15 +14,15 @@ const SideBarContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const SideBarItem = styled.ul`
+const SideBarItem = styled.button`
   height: 55px;
+  border: 0;
+  outline: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 5px solid
-    ${(props) => (props.current ? "#7BA2E0" : "transparent")};
+  border-left: 5px solid ${(props) => (props.onClick ? "#7BA2E0" : "transparent")};
   transition: border-left 0.5s ease-in-out;
-  background-color: ${(props) => (props.current ? "#ebebeb" : "transparent")};
   transition: border-left 0.5s ease-in-out;
 `;
 
@@ -147,45 +147,61 @@ const Company = styled.div`
   color: grey;
   font-size: 13px;
 `;
-const ServicePresenter = ({ applist }) => (
-  <Container className="position-relative">
-    <Helmet>
-      <title>Service | Nevermind</title>
-    </Helmet>
-    <AddButton data-toggle="modal" data-target="#addForm">
-      +ADD
-    </AddButton>
-    <AddContainer />
-    <SideBarContainer>
-      <button>
-        <SideBarItem>ALL</SideBarItem>
-      </button>
-      <button>
-        <SideBarItem>Week</SideBarItem>
-      </button>
-      <button>
-        <SideBarItem>Month</SideBarItem>
-      </button>
-      <button>
-        <SideBarItem>Life Time</SideBarItem>
-      </button>
-    </SideBarContainer>
-    <SubType>ALL</SubType>
-    <ViewContainer>
-      <EstiExpend></EstiExpend>
-      <AlreadyPaid></AlreadyPaid>
 
-      {applist.map((item) => (
-        <ItemContainer>
-          <AppImage key={item.id} bgImage={item.artworkUrl100}></AppImage>
-          <AppInfo>
-            <AppName>{item.name}</AppName>
-            <Company>{item.artistName}</Company>
-          </AppInfo>
-        </ItemContainer>
-      ))}
-    </ViewContainer>
-  </Container>
-);
+class ServicePresenter extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = { type: null, bgColor: true };
+  }
+  handleTypeChange = (type) => {
+    this.setState({
+      type,
+      bgColor: true,
+    });
+  };
+  ChangeColor() {
+    this.setState({ bgColor: !this.state.bgColor });
+  }
+  render() {
+    let bgColor = this.state.bgColor ? "#ebebeb" : "white";
+    return (
+      <Container className="position-relative">
+        <Helmet>
+          <title>Service | Nevermind</title>
+        </Helmet>
+        <AddButton data-toggle="modal" data-target="#addForm">
+          +ADD
+        </AddButton>
+        <AddContainer />
+        <SideBarContainer>
+          <SideBarItem style={{ backgroundColor: bgColor }} onClick={this.ChangeColor.bind(this)}>
+            ALL
+          </SideBarItem>
+
+          <SideBarItem style={{ backgroundColor: bgColor }} onClick={this.ChangeColor.bind(this)}>
+            Week
+          </SideBarItem>
+
+          <SideBarItem style={{ backgroundColor: bgColor }} onClick={this.ChangeColor.bind(this)}>
+            Month
+          </SideBarItem>
+          <SideBarItem style={{ backgroundColor: bgColor }} onClick={this.ChangeColor.bind(this)}>
+            Year
+          </SideBarItem>
+
+          <SideBarItem style={{ backgroundColor: bgColor }} onClick={this.ChangeColor.bind(this)}>
+            Life Time
+          </SideBarItem>
+        </SideBarContainer>
+        <SubType>ALL</SubType>
+        <ViewContainer>
+          <EstiExpend></EstiExpend>
+          <AlreadyPaid></AlreadyPaid>
+        </ViewContainer>
+      </Container>
+    );
+  }
+}
 
 export default ServicePresenter;
