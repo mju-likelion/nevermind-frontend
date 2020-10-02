@@ -26,6 +26,7 @@ NOTE: Must considered as application-layer states
 */
 
 import React from "react";
+import nevAxios from "../../nev-axios";
 import ServicePresenter from "./ServicePresenter";
 
 const applist = [
@@ -119,10 +120,28 @@ class ServiceContainer extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {};
+    this.state = {
+      error: null,
+      subList: {},
+    };
+  }
+
+  async componentDidMount() {
+    try {
+      const {
+        data: { subscriptions: subList },
+      } = await nevAxios.getsubscription();
+      console.log(subList);
+      this.setState({ subList });
+    } catch {
+      this.setState({
+        error: "can't find subsciption information",
+      });
+    }
   }
 
   render() {
+    console.log(this.state.subList);
     return <ServicePresenter applist={applist} />;
   }
 }
