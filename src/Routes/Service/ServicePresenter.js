@@ -6,26 +6,7 @@ import Logo from "Components/Logo";
 import { Link } from "react-router-dom";
 import AddContainer from "Routes/Add";
 import $ from "jquery";
-
-const SideBarContainer = styled.div`
-  margin-top: 7%;
-  background-color: white;
-  width: 17%;
-  display: flex;
-  flex-direction: column;
-`;
-const SideBarItem = styled.button`
-  height: 55px;
-  border: 0;
-  outline: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${(props) => (props.onClick ? "#7BA2E0" : "transparent")};
-  border-left: 5px solid ${(props) => (props.onClick ? "#ebebeb" : "transparent")};
-  transition: border-left 0.5s ease-in-out;
-  transition: border-left 0.5s ease-in-out;
-`;
+import Sidebar from "../../Components/Sidebar";
 
 const Container = styled.div`
   margin: 0%;
@@ -167,16 +148,7 @@ class ServicePresenter extends Component {
           +ADD
         </AddButton>
         <AddContainer />
-        <SideBarContainer>
-          <SideBarItem>ALL</SideBarItem>
-
-          <SideBarItem>Week</SideBarItem>
-
-          <SideBarItem>Month</SideBarItem>
-          <SideBarItem>Year</SideBarItem>
-
-          <SideBarItem>Life Time</SideBarItem>
-        </SideBarContainer>
+        <Sidebar />
         <SubType>ALL</SubType>
         <ViewContainer>
           <EstiExpend></EstiExpend>
