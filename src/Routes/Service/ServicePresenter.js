@@ -198,6 +198,15 @@ class ServicePresenter extends Component {
         <ViewContainer>
           <EstiExpend></EstiExpend>
           <AlreadyPaid></AlreadyPaid>
+          {this.props.applist.map((item) => (
+            <ItemContainer>
+              <AppImage key={item.id} bgImage={item.artworkUrl100}></AppImage>
+              <AppInfo>
+                <AppName>{item.name}</AppName>
+                <Company>{item.artistName}</Company>
+              </AppInfo>
+            </ItemContainer>
+          ))}
         </ViewContainer>
       </Container>
     );
