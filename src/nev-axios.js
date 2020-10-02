@@ -3,7 +3,7 @@
  * 
  *  { nev-axios, Custom Axios for Nevermind Web Service }
  * 
- *  Version 3.3.1
+ *  Version 3.3.2
  * 
  **/
 /* ==================================================== */
@@ -67,15 +67,9 @@ nevAxios.urls = {
    *  * Request Parameters
    *    - `session_id` (String)
    * 
-   *  * Request Cookies
-   *    - None
-   * 
    *  * Response Parameters
    *    - `is_session` (Boolean)
    *    - `error_msg` (null | String)
-   * 
-   *  * Response Cookies
-   *    - None
    *
    * */
   issession: "/user/issession",
@@ -91,18 +85,12 @@ nevAxios.urls = {
    *    - `email` (String)
    *    - `pwd` (String)
    *
-   *  * Request Cookies
-   *    - None
-   *
    *  * Response Data
    *    - `is_login` (Boolean)
    *    - `username` (String | null)
    *    - `email` (String | null)
    *    - `error_msg` (null | String)
    *    - `session_id` (String | null)
-   *
-   *  * Response Cookies
-   *    - None
    *
    * */
   login: "/user/login",
@@ -117,15 +105,9 @@ nevAxios.urls = {
    *  * Request Parameters
    *    - `session_id` (String)
    *
-   *  * Request Cookies
-   *    - None
-   *
    *  * Response Data
    *    - `is_logout` (Boolean)
    *    - `error_msg` (null | String)
-   *
-   *  * Response Cookies
-   *    - None
    *
    * */
   logout: "/user/logout",
@@ -143,16 +125,10 @@ nevAxios.urls = {
    *    - `username` (String)
    *    - `cellphone` (String)
    *
-   *  * Request Cookies
-   *    - None
-   *
    *  * Response Data
    *    - `is_register` (Boolean)
    *    - `create_at` (String/timestamp)
    *    - `error_msg` (null | String)
-   *
-   *  * Response Cookies
-   *    - None
    *
    * */
   register: "/user/register",
@@ -167,20 +143,37 @@ nevAxios.urls = {
    *  * Request Parameters
    *    - `session_id` (String)
    *
-   *  * Request Cookies
-   *    - None
-   *
    *  * Response Data
    *    - `is_unregister` (Boolean)
    *    - `email` (String | null)
    *    - `username` (String | null)
    *    - `error_msg` (null | String)
-   * 
-   *  * Response Cookies
-   *    - None
    *
    * */
   unregister: "/user/unregister",
+
+  /*****
+   *  ### [ Property - Add Subscription ]
+   * 
+   *  * Method: `POST`
+   *  * App: `subscription`
+   *  * Model: `Application`, `Subscription`, `Subscription_Bill`, `User`
+   * 
+   *  * Request Parameters:
+   *    - `session_id` (String)
+   *    - `app_name` (String)
+   *    - `app_img_url` (String | null)
+   *    - `sub_type` (String)
+   *    - `bill` (Number)
+   *    - `startdate` (Date)
+   *    - `enddate` (Date | null)
+   * 
+   *  * Response Data:
+   *    - `is_add` (Boolean)
+   *    - `error_msg` (null | String)
+   * 
+   */
+  addsubscription: "/subscription/add",
 
   /*****
    *  ### [ Property - Application List ]
@@ -597,6 +590,42 @@ nevAxios.unregister = async function () {
   if (res.data.is_unregister) {
     removeCookie(["session_id"]);
   }
+  return res;
+};
+
+/*****
+ *  ### [ Method - nevAxios.addsubscription ]
+ * 
+ *  #### Description
+ * 
+ *  - Add subscription information
+ * 
+ *  #### Usage
+ * 
+ *  ```
+ *  const loginResponse = await nevAxios.login(...);
+ *  ...
+ *  const addSubscriptionRes = await nevAxios.addsubscription({  
+ *    app_name, app_img_url, sub_type, bill, startdate, enddate
+ *  })
+ *  ```
+ *
+ *  #### NOTICE
+ *
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
+ *  - session_id must be defined in request cookie  
+ *    (nev-axios automatically handles this with CookieJar)
+ * 
+ *  @param {JSON} formJSON - JSON-typed request form data
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
+ * 
+ */
+nevAxios.addsubscription = async function (formJSON) {
+  const res = await nevAxios.post(nevAxios.urls.addsubscription, {
+    session_id: getCookie(["session_id"]),
+    ...formJSON,
+  });
   return res;
 };
 
