@@ -1,5 +1,6 @@
 import React from "react";
 import AddPresenter from "./AddPresenter";
+import nevAxios from "Src/nev-axios";
 
 export default class extends React.Component {
   constructor(props, context) {
@@ -36,14 +37,17 @@ export default class extends React.Component {
   handleSubmit = (appImg, appName, fee, type, startDate, endDate) => {
     // TODO: Send data to server using nev-axios
     //       & refresh ServiceContainer
-    console.log({
-      appImg,
-      appName,
-      fee,
-      type,
-      startDate,
-      endDate,
-    });
+    (async () => {
+      const res = await nevAxios.addsubscription({
+        app_name: appName,
+        app_img_url: appImg,
+        sub_type: type,
+        bill: fee,
+        startdate: startDate.getTime(),
+        enddate: endDate.getTime(),
+      });
+      console.log(res.data);
+    })();
   };
 
   initForm = () => {
