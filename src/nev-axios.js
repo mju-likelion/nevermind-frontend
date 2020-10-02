@@ -3,7 +3,7 @@
  * 
  *  { nev-axios, Custom Axios for Nevermind Web Service }
  * 
- *  Version 3.3.2
+ *  Version 3.3.3
  * 
  **/
 /* ==================================================== */
@@ -174,6 +174,24 @@ nevAxios.urls = {
    * 
    */
   addsubscription: "/subscription/add",
+
+  /*****
+   *  ### [ Property - Get Subscription ]
+   * 
+   *  * Method: `POST`
+   *  * App: `subscription`
+   *  * Model: `Subscription`, `Subscription_Bill`, `Session`
+   * 
+   *  * Request Parameters:
+   *  - `session_id` (String)
+   * 
+   *  * Response Data:
+   *  - `is_get` (Boolean)
+   *  - `error_msg` (null | String)
+   *  - `subscriptions` (Array)
+   * 
+   */
+  getsubscription: "/subscription/get",
 
   /*****
    *  ### [ Property - Application List ]
@@ -628,6 +646,37 @@ nevAxios.addsubscription = async function (formJSON) {
   });
   return res;
 };
+
+/*****
+ *  ### [ Method - nevAxios.getsubscription ]
+ * 
+ *  #### Description
+ * 
+ *  - Get subscription list of the user
+ * 
+ *  #### Usage
+ * 
+ *  ```
+ *  const loginResponse = await nevAxios.login(...);
+ *  ...
+ *  const getSubscriptionRes = await nevAxios.getsubscription();
+ *  ```
+ * 
+ *  #### NOTICE
+ *
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
+ *  - session_id must be defined in request cookie  
+ *    (nev-axios automatically handles this with CookieJar)
+ * 
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
+ * 
+ */
+nevAxios.getsubscription = async function () {
+  return nevAxios.post(nevAxios.urls.getsubscription, {
+    session_id: getCookie(["session_id"]),
+  });
+}
 
 /*****
  *  ### [ Method - nevAxios.applist ]
