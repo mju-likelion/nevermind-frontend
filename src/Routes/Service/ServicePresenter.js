@@ -21,7 +21,8 @@ const SideBarItem = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 5px solid ${(props) => (props.onClick ? "#7BA2E0" : "transparent")};
+  background-color: ${(props) => (props.onClick ? "#7BA2E0" : "transparent")};
+  border-left: 5px solid ${(props) => (props.onClick ? "#ebebeb" : "transparent")};
   transition: border-left 0.5s ease-in-out;
   transition: border-left 0.5s ease-in-out;
 `;
@@ -152,17 +153,9 @@ class ServicePresenter extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { type: null, bgColor: true };
+    this.state = {};
   }
-  handleTypeChange = (type) => {
-    this.setState({
-      type,
-      bgColor: true,
-    });
-  };
-  ChangeColor() {
-    this.setState({ bgColor: !this.state.bgColor });
-  }
+
   render() {
     let bgColor = this.state.bgColor ? "#ebebeb" : "white";
     return (
@@ -175,24 +168,14 @@ class ServicePresenter extends Component {
         </AddButton>
         <AddContainer />
         <SideBarContainer>
-          <SideBarItem style={{ backgroundColor: bgColor }} onClick={this.ChangeColor.bind(this)}>
-            ALL
-          </SideBarItem>
+          <SideBarItem>ALL</SideBarItem>
 
-          <SideBarItem style={{ backgroundColor: bgColor }} onClick={this.ChangeColor.bind(this)}>
-            Week
-          </SideBarItem>
+          <SideBarItem>Week</SideBarItem>
 
-          <SideBarItem style={{ backgroundColor: bgColor }} onClick={this.ChangeColor.bind(this)}>
-            Month
-          </SideBarItem>
-          <SideBarItem style={{ backgroundColor: bgColor }} onClick={this.ChangeColor.bind(this)}>
-            Year
-          </SideBarItem>
+          <SideBarItem>Month</SideBarItem>
+          <SideBarItem>Year</SideBarItem>
 
-          <SideBarItem style={{ backgroundColor: bgColor }} onClick={this.ChangeColor.bind(this)}>
-            Life Time
-          </SideBarItem>
+          <SideBarItem>Life Time</SideBarItem>
         </SideBarContainer>
         <SubType>ALL</SubType>
         <ViewContainer>
