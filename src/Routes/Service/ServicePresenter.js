@@ -138,13 +138,15 @@ const Period = styled.div`
 const AppBill = styled.div`
   font-size: 15px;
 `;
+const AppType = styled.div`
+  font-size: 15px;
+`;
 class ServicePresenter extends Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {};
   }
-  HandleChangeType() {}
 
   render() {
     const calcBill = this.props.calculateBill();
@@ -193,7 +195,7 @@ class ServicePresenter extends Component {
                 </Period>
               </AppInfo>
               <AppBill>{item.bill}원</AppBill>
-              <AppBill>{item.sub_type}</AppBill>
+              <AppTpye>{item.sub_type}</AppTpye>
             </ItemContainer>
           ))}
         </ViewContainer>
