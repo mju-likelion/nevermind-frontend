@@ -195,7 +195,7 @@ class ServicePresenter extends Component {
                 </Period>
               </AppInfo>
               <AppBill>{item.bill}원</AppBill>
-              <AppTpye>{item.sub_type}</AppTpye>
+              <AppType>{item.sub_type}</AppType>
             </ItemContainer>
           ))}
         </ViewContainer>
