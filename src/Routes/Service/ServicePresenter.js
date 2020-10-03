@@ -144,7 +144,6 @@ class ServicePresenter extends Component {
 
     this.state = {};
   }
-  HandleChangeType() {}
 
   render() {
     const calcBill = this.props.calculateBill();
