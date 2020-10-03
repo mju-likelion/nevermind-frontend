@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import $ from "jquery";
+import nevAxios from "../nev-axios";
 
 export default class EmailAuth extends Component {
   constructor(props, context) {
@@ -11,13 +12,16 @@ export default class EmailAuth extends Component {
     $("#EmailAuth").modal("hide");
   }
 
-  handleSendEmail(e) {
-    alert("Email sent!");
+  async handleSendEmail(e) {
+    const res = await nevAxios.emailauth({ email: $("#auth_email").val() });
+    console.log(res.data);
+    alert("이메일이 전송되었습니다.\n메일 수신함을 확인해주세요.");
   }
 
-  handleVerifyAuthNum(e) {
-    //
-    alert("Verified");
+  async handleVerifyAuthNum(e) {
+    const res = await nevAxios.emailauth({ authnum: $("#auth_num").val() });
+    console.log(res.data);
+    alert("인증되었습니다.");
     this.handleClose();
   }
 
