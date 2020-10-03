@@ -86,17 +86,21 @@ function setValidation() {
   });
 }
 
-async function register() {
-  const res = await nevAxios.register({
-    email: $('[name="email"]').val(),
-    pwd: $('[name="pwd"]').val(),
-    username: $('[name="username"]').val(),
-    cellphone: $('[name="cellphone"]').val(),
-  });
-  console.log(res.data);
+async function register(authnum) {
+  if (authnum) {
+    const res = await nevAxios.register({
+      email: $('[name="email"]').val(),
+      pwd: $('[name="pwd"]').val(),
+      username: $('[name="username"]').val(),
+      cellphone: $('[name="cellphone"]').val(),
+    });
+    console.log(res.data);
+  } else {
+    alert("이메일 인증을 완료해주세요.");
+  }
 }
 
-const SignupPresenter = () => {
+const SignupPresenter = ({ authnum }) => {
   useEffect(() => {
     setSignupTooltip();
     setValidation();
@@ -159,7 +163,7 @@ const SignupPresenter = () => {
           </div>
           <div className="d-flex flex-column justify-content-center mt-2 ml-3">
             <button
-              id="call_input_text"
+              id="call_input_text_"
               type="button"
               className="btn btn-light"
               data-toggle="modal"
@@ -256,11 +260,11 @@ const SignupPresenter = () => {
         </div>
 
         <div className="d-flex justify-content-center">
-          <Link to={"Login"}>
+          <Link to={authnum ? "Login" : "signup"}>
             <button
               type="button"
               className="mt-1 btn btn-outline-dark"
-              onClick={(e) => register()}
+              onClick={(e) => register(authnum)}
             >
               Submit
             </button>
@@ -275,6 +279,10 @@ const SignupPresenter = () => {
       </AskSignup>
     </Container>
   );
+};
+
+SignupPresenter.propTypes = {
+  authnum: PropTypes.bool.isRequired,
 };
 
 export default SignupPresenter;
