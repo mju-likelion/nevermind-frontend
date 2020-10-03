@@ -162,11 +162,8 @@ class ServicePresenter extends Component {
           </EstiExpend>
           <AlreadyPaid></AlreadyPaid>
           {this.props.applist.map((item) => (
-            <ItemContainer>
-              <AppImage
-                key={item.app_name}
-                bgImage={item.app_img_url}
-              ></AppImage>
+            <ItemContainer key={item.app_id}>
+              <AppImage bgImage={item.app_img_url} />
               <AppInfo>
                 <AppName>{item.app_name}</AppName>
                 <Period>

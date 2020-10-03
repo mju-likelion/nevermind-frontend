@@ -176,14 +176,8 @@ class ServiceContainer extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.applist.length > 0) {
-      const calcBill = this.calculateBill();
-      console.log("--------------------------------");
+    if (this.state.typeClicked) {
       console.log("sub_type:", this.state.typeClicked);
-      console.log("week_bill:", calcBill.week_bill);
-      console.log("month_bill:", calcBill.month_bill);
-      console.log("year_bill:", calcBill.year_bill);
-      console.log("--------------------------------");
     } else {
       $("#sub_type").text("Loading...");
     }
