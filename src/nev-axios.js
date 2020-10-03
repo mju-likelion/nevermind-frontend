@@ -3,7 +3,7 @@
  * 
  *  { nev-axios, Custom Axios for Nevermind Web Service }
  * 
- *  Version 3.3.3
+ *  Version 3.4.0
  * 
  **/
 /* ==================================================== */
@@ -113,6 +113,23 @@ nevAxios.urls = {
   logout: "/user/logout",
 
   /*****
+   *  ### [ Property - User Email Authentication ]
+   *
+   *  * Method: `POST`
+   *  * App: `user`
+   *  * Model: `User` (or None, TBD)
+   * 
+   *  * Request Parameters
+   *    - `email` (String) | `authnum` (String)
+   * 
+   *  * Response Data
+   *    - `is_emailauth` (Boolean)
+   *    - `error_msg` (null | String)
+   *
+   */
+  emailauth: "/user/emailauth",
+
+  /*****
    *  ### [ Property - User Registeration ]
    *
    *  * Method: `POST`
@@ -183,12 +200,12 @@ nevAxios.urls = {
    *  * Model: `Subscription`, `Subscription_Bill`, `Session`
    * 
    *  * Request Parameters:
-   *  - `session_id` (String)
+   *    - `session_id` (String)
    * 
    *  * Response Data:
-   *  - `is_get` (Boolean)
-   *  - `error_msg` (null | String)
-   *  - `subscriptions` (Array)
+   *    - `is_get` (Boolean)
+   *    - `error_msg` (null | String)
+   *    - `subscriptions` (Array)
    * 
    */
   getsubscription: "/subscription/get",
@@ -544,6 +561,39 @@ nevAxios.logout = async function () {
   }
   return res;
 };
+
+/*****
+ *  ### [ Method - nevAxios.emailauth ]
+ * 
+ *  #### Description
+ * 
+ *  - Send email verification mail to the user  
+ *    and authenticate email with the number  
+ *    sent in the mail.
+ * 
+ *  #### Usage
+ * 
+ *  ```
+ *  const emailAuthRes = await nevAxios.emailauth({
+ *    email,
+ *  });
+ *  ...
+ *  const authNumRes = await nevAxios.emailauth({
+ *    authnum,
+ *  });
+ *  ```
+ * 
+ *  #### NOTICE
+ *
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
+ *
+ *  @param {JSON} formJSON - JSON-typed request form data
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
+ */
+nevAxios.emailauth = async function (formJSON) {
+  return await nevAxios.post(nevAxios.urls.emailauth, formJSON);
+}
 
 /*****
  *  ### [ Method - nevAxios.register ]
