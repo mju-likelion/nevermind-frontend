@@ -125,7 +125,7 @@ const AppName = styled.div`
   font-size: 18px;
 `;
 
-const Company = styled.div`
+const Period = styled.div`
   color: grey;
   font-size: 13px;
 `;
@@ -157,10 +157,10 @@ class ServicePresenter extends Component {
           <AlreadyPaid></AlreadyPaid>
           {this.props.applist.map((item) => (
             <ItemContainer>
-              <AppImage key={item.id} bgImage={item.artworkUrl100}></AppImage>
+              <AppImage key={item.app_name} bgImage={item.app_img_url}></AppImage>
               <AppInfo>
-                <AppName>{item.name}</AppName>
-                <Company>{item.artistName}</Company>
+                <AppName>{item.app_name}</AppName>
+                <Period>{item.startdate} ~ {item.enddate}</Period>
               </AppInfo>
             </ItemContainer>
           ))}

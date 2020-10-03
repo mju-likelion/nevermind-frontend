@@ -29,7 +29,7 @@ import React from "react";
 import nevAxios from "../../nev-axios";
 import ServicePresenter from "./ServicePresenter";
 import $ from "jquery";
-
+/*
 const applist = [
   {
     artistName: "(주)씨엔티테크",
@@ -116,14 +116,14 @@ const applist = [
     url: "https://apps.apple.com/kr/app/among-us/id1351168404",
   },
 ];
-
+*/
 class ServiceContainer extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
       error: null,
-      subList: {},
+      applist: [],
       typeClicked: null,
     };
 
@@ -145,8 +145,7 @@ class ServiceContainer extends React.Component {
       const {
         data: { subscriptions: subList },
       } = await nevAxios.getsubscription();
-      console.log(subList);
-      this.setState({ subList });
+      this.setState({ applist: subList });
     } catch {
       this.setState({
         error: "can't find subsciption information",
@@ -154,10 +153,19 @@ class ServiceContainer extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    console.log(this.state.applist);
+  }
+
   render() {
     return (
       <ServicePresenter
-        applist={applist}
+        applist={this.state.applist.filter(
+          (item) =>
+            item.sub_type ===
+              this.state.typeClicked.split("-").pop()[0].toUpperCase() ||
+            this.state.typeClicked === "type-all"
+        )}
         handleSidebarClick={this.handleSidebarClick}
         typeClicked={this.state.typeClicked}
       />
