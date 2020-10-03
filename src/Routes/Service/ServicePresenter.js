@@ -58,14 +58,15 @@ const SubType = styled.div`
 `;
 
 const EstiExpend = styled.div`
-  padding: 10px;
+  padding: 20px;
   background-color: #ec8a7f;
   width: 43%;
   height: 25%;
   margin-left: 5%;
   margin-top: 2%;
   border-radius: 20px;
-  display: inline-block;
+  display: flex;
+  float: left;
 `;
 
 const AlreadyPaid = styled.div`
@@ -138,6 +139,8 @@ class ServicePresenter extends Component {
   }
 
   render() {
+    const calcBill = this.props.calculateBill();
+    console.log(calcBill);
     return (
       <Container className="position-relative">
         <Helmet>
@@ -153,14 +156,22 @@ class ServicePresenter extends Component {
         />
         <SubType id="sub_type" />
         <ViewContainer>
-          <EstiExpend></EstiExpend>
+          <EstiExpend>
+            {calcBill["week_bill"]} | {calcBill["month_bill"]} |{" "}
+            {calcBill["year_bill"]}
+          </EstiExpend>
           <AlreadyPaid></AlreadyPaid>
           {this.props.applist.map((item) => (
             <ItemContainer>
-              <AppImage key={item.app_name} bgImage={item.app_img_url}></AppImage>
+              <AppImage
+                key={item.app_name}
+                bgImage={item.app_img_url}
+              ></AppImage>
               <AppInfo>
                 <AppName>{item.app_name}</AppName>
-                <Period>{item.startdate} ~ {item.enddate}</Period>
+                <Period>
+                  {item.startdate} ~ {item.enddate}
+                </Period>
               </AppInfo>
             </ItemContainer>
           ))}
