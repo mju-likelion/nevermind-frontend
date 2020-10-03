@@ -5,9 +5,20 @@ export default class EmailAuth extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {};
+    this.handleVerifyAuthNum = this.handleVerifyAuthNum.bind(this);
   }
   handleClose() {
     $("#EmailAuth").modal("hide");
+  }
+
+  handleSendEmail(e) {
+    alert("Email sent!");
+  }
+
+  handleVerifyAuthNum(e) {
+    //
+    alert("Verified");
+    this.handleClose();
   }
 
   render() {
@@ -15,7 +26,7 @@ export default class EmailAuth extends Component {
       <div
         className="modal fade"
         id="EmailAuth"
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -39,13 +50,14 @@ export default class EmailAuth extends Component {
                 <div className="form-group">
                   <div>E-mail</div>
                   <input
-                    id="email"
-                    type="text"
+                    id="auth_email"
+                    type="email"
                     name="email"
                     value={this.props.email}
                     className="mt-2 "
                     data-placement="top"
                     data-html="true"
+                    readOnly
                   />
                 </div>
                 <div className="d-flex flex-column justify-content-center mt-2 ml-3">
@@ -53,12 +65,25 @@ export default class EmailAuth extends Component {
                     id="call_input_text"
                     type="button"
                     className="btn btn-light"
-                    data-toggle="modal"
-                    data-target="#EmailAuth"
-                    data-placement="top"
-                    data-html="true"
+                    onClick={this.handleSendEmail}
                   >
                     인증 메일 발송
+                  </button>
+                </div>
+              </div>
+              <div className="d-flex">
+                <div className="form-group mt-3">
+                  <div>인증번호</div>
+                  <input id="auth_num" type="text" className="mt-2" />
+                </div>
+                <div className="d-flex flex-column justify-content-center mt-3 ml-3">
+                  <button
+                    id="submit_authnum"
+                    type="button"
+                    className="btn btn-outline-dark"
+                    onClick={this.handleVerifyAuthNum}
+                  >
+                    인증번호 확인
                   </button>
                 </div>
               </div>
