@@ -138,7 +138,6 @@ class ServicePresenter extends Component {
   }
 
   render() {
-    let bgColor = this.state.bgColor ? "#ebebeb" : "white";
     return (
       <Container className="position-relative">
         <Helmet>
@@ -148,8 +147,11 @@ class ServicePresenter extends Component {
           +ADD
         </AddButton>
         <AddContainer />
-        <Sidebar />
-        <SubType>ALL</SubType>
+        <Sidebar
+          handleSidebarClick={this.props.handleSidebarClick}
+          typeClicked={this.props.typeClicked}
+        />
+        <SubType id="sub_type" />
         <ViewContainer>
           <EstiExpend></EstiExpend>
           <AlreadyPaid></AlreadyPaid>

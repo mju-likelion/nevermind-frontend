@@ -10,17 +10,18 @@ const SideBarContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const SideBarItem = styled.button`
+const SideBarItem = styled.div`
   height: 55px;
   border: 0;
   outline: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => (props.onClick ? "#7BA2E0" : "transparent")};
-  border-left: 5px solid ${(props) => (props.onClick ? "#ebebeb" : "transparent")};
-  transition: border-left 0.5s ease-in-out;
-  transition: border-left 0.5s ease-in-out;
+  background-color: white;
+  border-left: 5px solid white;
+  cursor: pointer;
+  transition: border-left-color 0.5s ease-in-out,
+    background-color 0.5s ease-in-out;
 `;
 
 class Sidebar extends Component {
@@ -30,14 +31,59 @@ class Sidebar extends Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    $("#type-all").trigger("click");
+  }
+
+  componentDidUpdate() {
+    const typeClicked = this.props.typeClicked;
+    if (typeClicked) {
+      $(`#${typeClicked}`).css({
+        "border-left-color": "#7ba2e0",
+        "background-color": "#ebebeb",
+      });
+      $("#sub_type").text($(`#${typeClicked}`).text());
+    }
+  }
+
   render() {
     return (
       <SideBarContainer>
-        <SideBarItem>ALL</SideBarItem>
-        <SideBarItem>Week</SideBarItem>
-        <SideBarItem>Month</SideBarItem>
-        <SideBarItem>Year</SideBarItem>
-        <SideBarItem>Life Time</SideBarItem>
+        <SideBarItem
+          className="sbitem"
+          id="type-all"
+          onClick={this.props.handleSidebarClick}
+        >
+          ALL
+        </SideBarItem>
+        <SideBarItem
+          className="sbitem"
+          id="type-week"
+          onClick={this.props.handleSidebarClick}
+        >
+          Week
+        </SideBarItem>
+        <SideBarItem
+          className="sbitem"
+          id="type-month"
+          onClick={this.props.handleSidebarClick}
+        >
+          Month
+        </SideBarItem>
+        <SideBarItem
+          className="sbitem"
+          id="type-year"
+          onClick={this.props.handleSidebarClick}
+        >
+          Year
+        </SideBarItem>
+        <SideBarItem
+          className="sbitem"
+          id="type-lifetime"
+          onClick={this.props.handleSidebarClick}
+        >
+          Life Time
+        </SideBarItem>
       </SideBarContainer>
     );
   }

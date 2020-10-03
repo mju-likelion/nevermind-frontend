@@ -28,6 +28,7 @@ NOTE: Must considered as application-layer states
 import React from "react";
 import nevAxios from "../../nev-axios";
 import ServicePresenter from "./ServicePresenter";
+import $ from "jquery";
 
 const applist = [
   {
@@ -123,7 +124,20 @@ class ServiceContainer extends React.Component {
     this.state = {
       error: null,
       subList: {},
+      typeClicked: null,
     };
+
+    this.handleSidebarClick = this.handleSidebarClick.bind(this);
+  }
+
+  handleSidebarClick(e) {
+    $(".sbitem").css({
+      "border-left-color": "white",
+      "background-color": "white",
+    });
+    this.setState({
+      typeClicked: $(e.target).attr("id"),
+    });
   }
 
   async componentDidMount() {
@@ -141,8 +155,13 @@ class ServiceContainer extends React.Component {
   }
 
   render() {
-    console.log(this.state.subList);
-    return <ServicePresenter applist={applist} />;
+    return (
+      <ServicePresenter
+        applist={applist}
+        handleSidebarClick={this.handleSidebarClick}
+        typeClicked={this.state.typeClicked}
+      />
+    );
   }
 }
 
