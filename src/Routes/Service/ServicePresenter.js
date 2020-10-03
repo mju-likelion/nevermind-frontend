@@ -63,21 +63,26 @@ const EstiExpend = styled.div`
   width: 43%;
   height: 25%;
   margin-left: 5%;
+  margin-right: 8%;
   margin-top: 2%;
   border-radius: 20px;
   display: flex;
+  flex-direction: column;
   float: left;
+  color: white;
 `;
 
 const AlreadyPaid = styled.div`
-  padding: 10px;
+  padding: 20px;
   background-color: #5dbf5d;
   width: 39%;
   height: 25%;
   margin-left: 8%;
   margin-top: 2%;
   border-radius: 20px;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  color: white;
 `;
 
 const SubItem = styled.div`
@@ -130,7 +135,9 @@ const Period = styled.div`
   color: grey;
   font-size: 13px;
 `;
-
+const AppBill = styled.div`
+  font-size: 15px;
+`;
 class ServicePresenter extends Component {
   constructor(props, context) {
     super(props, context);
@@ -157,10 +164,24 @@ class ServicePresenter extends Component {
         <SubType id="sub_type" />
         <ViewContainer>
           <EstiExpend>
-            {calcBill["week_bill"]} | {calcBill["month_bill"]} |{" "}
-            {calcBill["year_bill"]}
+            <div className="h5 pb-5">예상 지출 :</div>
+            <dl className="row">
+              <dt className="col-md-4 pb-1 h5  text-center ">한 주에</dt>
+              <dt className="col-md-4 h5 text-center ">달마다</dt>
+              <dt className="col-md-4 h5 text-center ">연간</dt>
+            </dl>
+            <dl className="row">
+              <dt className="col-md-4 h5 text-center">{calcBill["week_bill"]}원</dt>
+              <dt className="col-md-4 h5 text-center">{calcBill["month_bill"]}원</dt>
+              <dt className="col-md-4 h5 text-center">{calcBill["year_bill"]}원</dt>
+            </dl>
           </EstiExpend>
-          <AlreadyPaid></AlreadyPaid>
+          <AlreadyPaid>
+            <div className="h5 pb-5">이미 지불한 비용:</div>
+            <dl className="row ">
+              <dt className="pb-1 h5 align-items-center "></dt>
+            </dl>
+          </AlreadyPaid>
           {this.props.applist.map((item) => (
             <ItemContainer key={item.app_id}>
               <AppImage bgImage={item.app_img_url} />
@@ -170,6 +191,7 @@ class ServicePresenter extends Component {
                   {item.startdate} ~ {item.enddate}
                 </Period>
               </AppInfo>
+              <AppBill>{item.bill}원</AppBill>
             </ItemContainer>
           ))}
         </ViewContainer>
