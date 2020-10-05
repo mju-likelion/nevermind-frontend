@@ -128,7 +128,7 @@ const AppInfo = styled.div`
 
 const AppName = styled.div`
   margin-bottom: 40px;
-  font-size: 18px;
+  font-size: 20px;
 `;
 
 const Period = styled.div`
@@ -139,15 +139,17 @@ const Period = styled.div`
 const AppInfo_2 = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 3%;
+  margin-right: 4%;
   text-align: center;
 `;
 
 const AppBill = styled.div`
-  font-size: 18px;
+  font-size: 20px;
+  margin-bottom: 40px;
 `;
 const AppType = styled.div`
-  font-size: 16px;
+  color: grey;
+  font-size: 18px;
 `;
 class ServicePresenter extends Component {
   constructor(props, context) {
@@ -182,15 +184,9 @@ class ServicePresenter extends Component {
               <dt className="col-md-4 h5 text-center ">연간</dt>
             </dl>
             <dl className="row">
-              <dt className="col-md-4 h5 text-center">
-                {calcBill["week_bill"]}원
-              </dt>
-              <dt className="col-md-4 h5 text-center">
-                {calcBill["month_bill"]}원
-              </dt>
-              <dt className="col-md-4 h5 text-center">
-                {calcBill["year_bill"]}원
-              </dt>
+              <dt className="col-md-4 h5 text-center">{calcBill["week_bill"]}원</dt>
+              <dt className="col-md-4 h5 text-center">{calcBill["month_bill"]}원</dt>
+              <dt className="col-md-4 h5 text-center">{calcBill["year_bill"]}원</dt>
             </dl>
           </EstiExpend>
           <AlreadyPaid>
