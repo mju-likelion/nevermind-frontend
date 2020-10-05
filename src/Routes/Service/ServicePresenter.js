@@ -135,11 +135,18 @@ const Period = styled.div`
   color: grey;
   font-size: 13px;
 `;
+
+const AppInfo_2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`;
+
 const AppBill = styled.div`
-  font-size: 15px;
+  font-size: 18px;
 `;
 const AppType = styled.div`
-  font-size: 15px;
+  font-size: 16px;
 `;
 class ServicePresenter extends Component {
   constructor(props, context) {
@@ -194,8 +201,10 @@ class ServicePresenter extends Component {
                   {item.startdate} ~ {item.enddate}
                 </Period>
               </AppInfo>
-              <AppBill>{item.bill}원</AppBill>
-              <AppType>{item.sub_type}</AppType>
+              <AppInfo_2>
+                <AppBill>{item.bill}원</AppBill>
+                <AppType>{item.sub_type_label}</AppType>
+              </AppInfo_2>
             </ItemContainer>
           ))}
         </ViewContainer>
