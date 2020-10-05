@@ -139,6 +139,7 @@ const Period = styled.div`
 const AppInfo_2 = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: 3%;
   text-align: center;
 `;
 
@@ -181,9 +182,15 @@ class ServicePresenter extends Component {
               <dt className="col-md-4 h5 text-center ">연간</dt>
             </dl>
             <dl className="row">
-              <dt className="col-md-4 h5 text-center">{calcBill["week_bill"]}원</dt>
-              <dt className="col-md-4 h5 text-center">{calcBill["month_bill"]}원</dt>
-              <dt className="col-md-4 h5 text-center">{calcBill["year_bill"]}원</dt>
+              <dt className="col-md-4 h5 text-center">
+                {calcBill["week_bill"]}원
+              </dt>
+              <dt className="col-md-4 h5 text-center">
+                {calcBill["month_bill"]}원
+              </dt>
+              <dt className="col-md-4 h5 text-center">
+                {calcBill["year_bill"]}원
+              </dt>
             </dl>
           </EstiExpend>
           <AlreadyPaid>
@@ -194,14 +201,16 @@ class ServicePresenter extends Component {
           </AlreadyPaid>
           {this.props.applist.map((item) => (
             <ItemContainer key={item.app_id}>
-              <AppImage bgImage={item.app_img_url} />
-              <AppInfo>
-                <AppName>{item.app_name}</AppName>
-                <Period>
-                  {item.startdate} ~ {item.enddate}
-                </Period>
-              </AppInfo>
-              <AppInfo_2>
+              <div className="d-flex align-items-center flex-grow-1">
+                <AppImage bgImage={item.app_img_url} />
+                <AppInfo>
+                  <AppName>{item.app_name}</AppName>
+                  <Period>
+                    {item.startdate} ~ {item.enddate}
+                  </Period>
+                </AppInfo>
+              </div>
+              <AppInfo_2 className="flex-grow-1 align-items-end">
                 <AppBill>{item.bill}원</AppBill>
                 <AppType>{item.sub_type_label}</AppType>
               </AppInfo_2>
