@@ -223,24 +223,6 @@ const SignupPresenter = ({ authnum }) => {
           </label>
         </div>
 
-        <div className="custom-control custom-checkbox mb-2 was-validated">
-          <input
-            type="checkbox"
-            className="custom-control-input"
-            id="agree_open_banking_term_of_use"
-            required
-          />
-          <label
-            className="mt-2 pt-1 custom-control-label term-label"
-            htmlFor="agree_open_banking_term_of_use"
-            data-toggle="tooltip"
-            data-placement="top"
-            data-html="true"
-          >
-            오픈뱅킹서비스 이용약관
-          </label>
-        </div>
-
         <div className="custom-control custom-checkbox mb-3 was-validated">
           <input
             type="checkbox"
@@ -257,6 +239,7 @@ const SignupPresenter = ({ authnum }) => {
           >
             개인정보 처리 방침
           </label>
+          <div>전체보기</div>
         </div>
 
         <div className="d-flex justify-content-center">
