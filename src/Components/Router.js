@@ -9,6 +9,7 @@ import styled from "styled-components";
 import Main from "Routes/Main";
 import Signup from "Routes/Signup";
 import Login from "Routes/Login";
+import Info from "Routes/Info";
 import Service from "Routes/Service";
 import Navbar from "./Navbar";
 
@@ -57,11 +58,10 @@ class Routers extends Component {
             <Route path="/Signup" component={Signup} />
             <Route
               path="/Login"
-              render={(props) => (
-                <Login {...props} onLogin={this.onLogin} />
-              )}
+              render={(props) => <Login {...props} onLogin={this.onLogin} />}
             />
             <Route path="/Service" component={Service} />
+            <Route path="/Info" component={Info} />
             <Redirect from="*" to="/" />
           </Switch>
         </MainContainer>

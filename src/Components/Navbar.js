@@ -45,14 +45,10 @@ const Navbar = ({ isLogin, onLogout }) => {
       {isLogin ? (
         <ImgLinkContainer>
           <ImgLink to="Main" imgSrc={home} />
-          <ImgLink to="Main" imgSrc={user} />
+          <ImgLink to="Info" imgSrc={user} />
           <ImgLink to="Main" imgSrc={notice} />
           <ImgLink to="Service" imgSrc={service} />
-          <Link
-            to="Main"
-            className="d-flex h-100"
-            onClick={(e) => onLogout()}
-          >
+          <Link to="Main" className="d-flex h-100" onClick={(e) => onLogout()}>
             <button type="button" className="btn">
               <img src={logout} alt="logout.png" />
             </button>
