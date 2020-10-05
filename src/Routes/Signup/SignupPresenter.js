@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import $ from "jquery";
 import nevAxios from "Src/nev-axios";
 import EmailAuth from "Components/EmailAuth";
+import TermsOfUse from "Components/TermsOfUse";
 
 const Container = styled.div`
   margin: 0;
@@ -40,6 +41,10 @@ const AskSignup = styled.p`
 
 const GotoLogin = styled.span`
   color: #ca444a;
+`;
+
+const ShowTerm = styled.a`
+  margin-top: 1%;
 `;
 
 function initTooltip() {
@@ -175,7 +180,7 @@ const SignupPresenter = ({ authnum, handleEmailAuth }) => {
               data-placement="top"
               data-html="true"
             >
-              본인인증
+              이메일인증
             </button>
           </div>
         </div>
@@ -225,27 +230,20 @@ const SignupPresenter = ({ authnum, handleEmailAuth }) => {
           >
             Never Mind 이용을 위한 필수 이용약관
           </label>
-        </div>
-
-        <div className="custom-control custom-checkbox mb-3 was-validated">
-          <input
-            type="checkbox"
-            className="custom-control-input"
-            id="agree_privacy_policy"
-            required
-          />
-          <label
-            className="mt-2 pt-1 custom-control-label term-label"
-            htmlFor="agree_privacy_policy"
-            data-toggle="tooltip"
+          <br />
+          <ShowTerm
+            id="modalbutton"
+            type="button"
+            data-toggle="modal"
+            data-target="#TermsofUse"
             data-placement="top"
             data-html="true"
           >
-            개인정보 처리 방침
-          </label>
-          <div>전체보기</div>
+            전체보기
+          </ShowTerm>
         </div>
 
+        <TermsOfUse />
         <div className="d-flex justify-content-center">
           <Link to={authnum ? "Login" : "signup"}>
             <button
