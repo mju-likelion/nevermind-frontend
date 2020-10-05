@@ -15,9 +15,13 @@ export default class EmailAuth extends Component {
 
   async handleSendEmail(e) {
     try {
-      const res = await nevAxios.emailauth({ email: $("#auth_email").val() });
-      console.log(res.data);
-      alert("이메일이 전송되었습니다.\n메일 수신함을 확인해주세요.");
+      if ($("#auth_email").val().length === 0) {
+        alert("이메일을 입력해주세요");
+      } else {
+        const res = await nevAxios.emailauth({ email: $("#auth_email").val() });
+        console.log(res.data);
+        alert("이메일이 전송되었습니다.\n메일 수신함을 확인해주세요.");
+      }
     } catch {
       console.log("can't send Email verification code");
     }
