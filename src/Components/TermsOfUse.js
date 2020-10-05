@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import $ from "jquery";
 
-export default class TermsofUse extends Component {
+export default class TermsOfUse extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {};
