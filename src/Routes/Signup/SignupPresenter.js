@@ -87,20 +87,24 @@ function setValidation() {
 }
 
 async function register(authnum) {
-  if (authnum) {
-    const res = await nevAxios.register({
-      email: $('[name="email"]').val(),
-      pwd: $('[name="pwd"]').val(),
-      username: $('[name="username"]').val(),
-      cellphone: $('[name="cellphone"]').val(),
-    });
-    console.log(res.data);
-  } else {
-    alert("이메일 인증을 완료해주세요.");
+  try {
+    if (authnum) {
+      const res = await nevAxios.register({
+        email: $('[name="email"]').val(),
+        pwd: $('[name="pwd"]').val(),
+        username: $('[name="username"]').val(),
+        cellphone: $('[name="cellphone"]').val(),
+      });
+      console.log(res.data);
+    } else {
+      alert("이메일 인증을 완료해주세요.");
+    }
+  } catch {
+    console.log("can't register");
   }
 }
 
-const SignupPresenter = ({ authnum }) => {
+const SignupPresenter = ({ authnum, handleEmailAuth }) => {
   useEffect(() => {
     setSignupTooltip();
     setValidation();
@@ -176,7 +180,7 @@ const SignupPresenter = ({ authnum }) => {
           </div>
         </div>
 
-        <EmailAuth email={email} />
+        <EmailAuth email={email} handleEmailAuth={handleEmailAuth} />
 
         <div className="mb-3">
           <label htmlFor="validationServer01">Password</label>
@@ -266,6 +270,7 @@ const SignupPresenter = ({ authnum }) => {
 
 SignupPresenter.propTypes = {
   authnum: PropTypes.bool.isRequired,
+  handleEmailAuth: PropTypes.func.isRequired,
 };
 
 export default SignupPresenter;

@@ -1,5 +1,4 @@
 import React from "react";
-import nevAxios from "Src/nev-axios";
 import SignupPresenter from "./SignupPresenter";
 
 export default class extends React.Component {
@@ -8,18 +7,20 @@ export default class extends React.Component {
     this.state = {
       authnum: false,
     };
+    this.handleEmailAuth = this.handleEmailAuth.bind(this);
   }
 
-  async componentDidMount() {
-    try {
-      //TODO: Fetch EmailAuth Data Using nev-Axios
-    } catch {
-      console.log("can't find Email verification success code ");
-    }
+  handleEmailAuth(is_emailauth) {
+    this.setState({ authnum: is_emailauth });
   }
 
   render() {
     const { authnum } = this.state;
-    return <SignupPresenter authnum={authnum} />;
+    return (
+      <SignupPresenter
+        authnum={authnum}
+        handleEmailAuth={this.handleEmailAuth}
+      />
+    );
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import nevAxios from "../nev-axios";
+import PropTypes from "prop-types";
 
 export default class EmailAuth extends Component {
   constructor(props, context) {
@@ -13,16 +14,29 @@ export default class EmailAuth extends Component {
   }
 
   async handleSendEmail(e) {
-    const res = await nevAxios.emailauth({ email: $("#auth_email").val() });
-    console.log(res.data);
-    alert("이메일이 전송되었습니다.\n메일 수신함을 확인해주세요.");
+    try {
+      const res = await nevAxios.emailauth({ email: $("#auth_email").val() });
+      console.log(res.data);
+      alert("이메일이 전송되었습니다.\n메일 수신함을 확인해주세요.");
+    } catch {
+      console.log("can't send Email verification code");
+    }
   }
 
   async handleVerifyAuthNum(e) {
-    const res = await nevAxios.emailauth({ authnum: $("#auth_num").val() });
-    console.log(res.data);
-    alert("인증되었습니다.");
-    this.handleClose();
+    try {
+      const res = await nevAxios.emailauth({ authnum: $("#auth_num").val() });
+      console.log(res.data);
+      this.props.handleEmailAuth(res.data.is_emailauth);
+      if (res.data.is_emailauth) {
+        alert("인증 되었습니다.");
+        this.handleClose();
+      } else {
+        alert("인증이 완료되지 않았습니다.");
+      }
+    } catch {
+      console.log("can't Fetch Email verification success code ");
+    }
   }
 
   render() {
@@ -98,3 +112,7 @@ export default class EmailAuth extends Component {
     );
   }
 }
+
+EmailAuth.propTypes = {
+  handleEmailAuth: PropTypes.func.isRequired,
+};
