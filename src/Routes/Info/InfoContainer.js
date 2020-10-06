@@ -10,8 +10,10 @@ export default class InfoContainer extends React.Component {
     this.state = {
       email: null,
       username: null,
+      cellphone: null,
     };
     this.handleUnregister = this.handleUnregister.bind(this);
+    this.handleuserinfo = this.handleuserinfo.bind(this);
   }
 
   handleClose() {
@@ -20,7 +22,11 @@ export default class InfoContainer extends React.Component {
 
   async handleuserinfo() {
     const res = await nevAxios.getprofile();
-    this.setState({ email: res.data.email, username: res.data.username });
+    this.setState({
+      email: res.data.email,
+      username: res.data.username,
+      cellphone: res.data.cellphone,
+    });
   }
 
   async handleUnregister() {
@@ -38,12 +44,13 @@ export default class InfoContainer extends React.Component {
   }
 
   render() {
-    const { email, username } = this.state;
+    const { email, username, cellphone } = this.state;
 
     return (
       <InfoPresenter
         email={email}
         username={username}
+        cellphone={cellphone}
         handleuserinfo={this.handleuserinfo}
         handleUnregister={this.handleUnregister}
         handleClose={this.handleClose}
