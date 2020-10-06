@@ -68,16 +68,11 @@ export default class InfoPresenter extends React.Component {
         <Item className="mt-3">
           <div className="mb-3 d-flex">
             <div className="mt-2">이메일</div>
-            <div className="mt-2 ml-2">가나다</div>
-          </div>
-
-          <div className="mb-3 d-flex">
-            <div className="mt-2">아이디</div>
-            <div className="mt-2 ml-2">가나다</div>
+            <div className="mt-2 ml-2">{this.props.email}</div>
           </div>
           <div className="mb-3 d-flex">
             <div className="mt-2">이름</div>
-            <div className="mt-2 ml-4">가나다</div>
+            <div className="mt-2 ml-4">{this.props.username}</div>
           </div>
         </Item>
 
