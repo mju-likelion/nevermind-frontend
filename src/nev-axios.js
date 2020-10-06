@@ -3,7 +3,7 @@
  * 
  *  { nev-axios, Custom Axios for Nevermind Web Service }
  * 
- *  Version 3.4.0
+ *  Version 3.5.0
  * 
  **/
 /* ==================================================== */
@@ -174,7 +174,7 @@ nevAxios.urls = {
    * 
    *  * Method: `POST`
    *  * App: `subscription`
-   *  * Model: `Application`, `Subscription`, `Subscription_Bill`, `User`
+   *  * Model: `Application`, `Subscription`, `Subscription_Bill`, `Session`
    * 
    *  * Request Parameters:
    *    - `session_id` (String)
@@ -197,7 +197,7 @@ nevAxios.urls = {
    * 
    *  * Method: `POST`
    *  * App: `subscription`
-   *  * Model: `Subscription`, `Subscription_Bill`, `Session`
+   *  * Model: `Application`, `Subscription`, `Subscription_Bill`, `Session`
    * 
    *  * Request Parameters:
    *    - `session_id` (String)
@@ -209,6 +209,48 @@ nevAxios.urls = {
    * 
    */
   getsubscription: "/subscription/get",
+
+  /*****
+   *  ### [ Property - Update Subscription ]
+   * 
+   *  * Method: `POST`
+   *  * App: `subscription`
+   *  * Model: `Application`, `Subscription`, `Subscription_Bill`, `Session`
+   * 
+   *  * Request Parameters:
+   *    - `session_id` (String)
+   *    - `app_id` (String)
+   *    - `app_name` (String)
+   *    - `app_img_url` (String)
+   *    - `sub_type` (String)
+   *    - `bill` (Number)
+   *    - `starddate` (Date)
+   *    - `enddate` (Date | null)
+   * 
+   *  * Response Data:
+   *    - `is_update` (Boolean)
+   *    - `error_msg` (null | String)
+   * 
+   */
+  updatesubscription: "/subscription/update",
+
+  /*****
+   *  ### [ Property - Delete Subscription ]
+   * 
+   *  * Method: `POST`
+   *  * App: `subscription`
+   *  * Model: `Application`, `Subscription`, `Subscription_Bill`, `Session`
+   * 
+   *  * Request Parameter:
+   *    - `session_id` (String)
+   *    - `app_id` (String)
+   * 
+   *  * Response Data:
+   *    - is_delete (Boolean)
+   *    - error_msg (null | String)
+   * 
+   */
+  deletesubscription: "/subscription/delete",
 
   /*****
    *  ### [ Property - Application List ]
@@ -725,6 +767,76 @@ nevAxios.addsubscription = async function (formJSON) {
 nevAxios.getsubscription = async function () {
   return nevAxios.post(nevAxios.urls.getsubscription, {
     session_id: getCookie(["session_id"]),
+  });
+}
+
+/*****
+ *  ### [ Method - nevAxios.updatesubscription ]
+ * 
+ *  #### Description
+ * 
+ *  - Update a subscription information
+ * 
+ *  #### Usage
+ * 
+ *  ```
+ *  const loginResponse = await nevAxios.login(...);
+ *  ...
+ *  const updateSubscriptionRes = await nevAxios.updatesubscription(
+ *    app_id, sub_type, bill, startdate, enddate
+ *  );
+ *  ```
+ * 
+ *  #### NOTICE
+ *
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
+ *  - session_id must be defined in request cookie  
+ *    (nev-axios automatically handles this with CookieJar)
+ * 
+ *  @param {JSON} formJSON - JSON-typed request form data
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
+ * 
+ */
+nevAxios.updatesubscription = async function (formJSON) {
+  return await nevAxios.post(nevAxios.urls.updatesubscription, {
+    session_id: getCookie(["session_id"]),
+    ...formJSON,
+  });
+}
+
+/*****
+ *  ### [ Method - nevAxios.deletesubscription ]
+ * 
+ *  #### Description
+ * 
+ *  - Delete a subscription information
+ * 
+ *  #### Usage
+ * 
+ *  ```
+ *  const loginResponse = await nevAxios.login(...);
+ *  ...
+ *  const deleteSubscriptionRes = await nevAxios.deletesubscription({
+ *    app_id
+ *  });
+ *  ```
+ *
+  *  #### NOTICE
+ *
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
+ *  - session_id must be defined in request cookie  
+ *    (nev-axios automatically handles this with CookieJar)
+ * 
+ *  @param {JSON} formJSON - JSON-typed request form data
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
+ * 
+ */
+nevAxios.deletesubscription = async function (formJSON) {
+  return await nevAxios.post(nevAxios.urls.deletesubscription, {
+    session_id: getCookie(["session_id"]),
+    ...formJSON,
   });
 }
 
