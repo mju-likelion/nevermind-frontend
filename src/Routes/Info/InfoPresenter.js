@@ -55,6 +55,10 @@ export default class InfoPresenter extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    this.props.handleuserinfo();
+  }
+
   render() {
     return (
       <Container>

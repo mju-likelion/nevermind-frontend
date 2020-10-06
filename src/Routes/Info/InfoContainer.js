@@ -11,7 +11,6 @@ export default class InfoContainer extends React.Component {
       email: null,
       username: null,
     };
-    this.handleregister = this.handleregister.bind(this);
     this.handleUnregister = this.handleUnregister.bind(this);
   }
 
@@ -19,13 +18,9 @@ export default class InfoContainer extends React.Component {
     $("#QuitNeverMind").modal("hide");
   }
 
-  async handleregister() {
+  async handleuserinfo() {
     const res = await nevAxios.getprofile();
     this.setState({ email: res.data.email, username: res.data.username });
-  }
-
-  componentDidMount() {
-    this.handleUnregister();
   }
 
   async handleUnregister() {
@@ -49,7 +44,7 @@ export default class InfoContainer extends React.Component {
       <InfoPresenter
         email={email}
         username={username}
-        handleregister={this.handleregister}
+        handleuserinfo={this.handleuserinfo}
         handleUnregister={this.handleUnregister}
         handleClose={this.handleClose}
       />
