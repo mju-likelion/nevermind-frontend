@@ -52,7 +52,11 @@ export default class InfoPresenter extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {};
+    this.state = { isLogin: true };
+  }
+
+  OnLogout() {
+    this.setState({ isLogin: false });
   }
 
   componentDidMount() {
@@ -123,14 +127,16 @@ export default class InfoPresenter extends React.Component {
                     >
                       아니오
                     </Button>
-                    <Button
-                      id="No"
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={this.props.handleUnregister}
-                    >
-                      예
-                    </Button>
+                    <Link to="Main" className="d-flex h-100" onClick={(e) => this.props.OnLogout()}>
+                      <Button
+                        id="No"
+                        type="button"
+                        className="btn btn-danger"
+                        // onClick={this.props.handleUnregister}
+                      >
+                        예
+                      </Button>
+                    </Link>
                   </div>
                 </ModalContainer>
               </div>
