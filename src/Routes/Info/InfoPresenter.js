@@ -55,7 +55,7 @@ export default class InfoPresenter extends React.Component {
     this.state = { isLogin: true };
   }
 
-  OnLogout() {
+  OnUnResgister() {
     this.setState({ isLogin: false });
   }
 
@@ -118,7 +118,7 @@ export default class InfoPresenter extends React.Component {
               </div>
               <div className="modal-body">
                 <ModalContainer>
-                  <div className="d-flex">
+                  <div className="d-flex align-items-center">
                     <Button
                       id="No"
                       type="button"
@@ -127,12 +127,16 @@ export default class InfoPresenter extends React.Component {
                     >
                       아니오
                     </Button>
-                    <Link to="Main" className="d-flex h-100" onClick={(e) => this.props.OnLogout()}>
+                    <Link to="Main" className="d-flex h-100">
+                      <div className="d-flex align-items-center"></div>
+
                       <Button
                         id="No"
                         type="button"
                         className="btn btn-danger"
-                        // onClick={this.props.handleUnregister}
+                        data-dismiss="modal"
+                        //onClick={(e) => this.props.onLogout()}
+                        onClick={this.props.handleUnregister}
                       >
                         예
                       </Button>
