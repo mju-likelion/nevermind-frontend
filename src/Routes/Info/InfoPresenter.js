@@ -3,7 +3,6 @@ import Helmet from "react-helmet";
 import styled from "styled-components";
 import Logo from "Components/Logo";
 import { Link } from "react-router-dom";
-import $ from "jquery";
 
 const Container = styled.div`
   margin: 0;
@@ -55,12 +54,6 @@ export default class InfoPresenter extends React.Component {
 
     this.state = {};
   }
-
-  handleClose() {
-    $("#QuitNeverMind").modal("hide");
-  }
-
-  async handleQuit() {}
 
   render() {
     return (
@@ -123,7 +116,7 @@ export default class InfoPresenter extends React.Component {
                       id="No"
                       type="button"
                       className="btn btn-light"
-                      onClick={this.handleClose}
+                      onClick={this.props.handleClose}
                     >
                       아니오
                     </Button>
@@ -131,7 +124,7 @@ export default class InfoPresenter extends React.Component {
                       id="No"
                       type="button"
                       className="btn btn-danger"
-                      onClick={this.handleQuit}
+                      onClick={this.props.handleUnregister}
                     >
                       예
                     </Button>
