@@ -173,7 +173,7 @@ class ServicePresenter extends Component {
 
   render() {
     const calcBill = this.props.calculateBill();
-    console.log(calcBill);
+
     return (
       <Container className="position-relative">
         <Helmet>
@@ -197,9 +197,15 @@ class ServicePresenter extends Component {
               <dt className="col-md-4 h5 text-center ">연간</dt>
             </dl>
             <dl className="row">
-              <dt className="col-md-4 h5 text-center">{calcBill["week_bill"]}원</dt>
-              <dt className="col-md-4 h5 text-center">{calcBill["month_bill"]}원</dt>
-              <dt className="col-md-4 h5 text-center">{calcBill["year_bill"]}원</dt>
+              <dt className="col-md-4 h5 text-center">
+                {calcBill["week_bill"]}원
+              </dt>
+              <dt className="col-md-4 h5 text-center">
+                {calcBill["month_bill"]}원
+              </dt>
+              <dt className="col-md-4 h5 text-center">
+                {calcBill["year_bill"]}원
+              </dt>
             </dl>
           </EstiExpend>
           <AlreadyPaid>
@@ -209,7 +215,12 @@ class ServicePresenter extends Component {
             </dl>
           </AlreadyPaid>
           {this.props.applist.map((item) => (
-            <ItemContainer data-toggle="modal" data-target="#Form" key={item.app_id}>
+            <ItemContainer
+              data-toggle="modal"
+              data-target="#Form"
+              key={item.app_id}
+              onClick={() => this.props.handleOnclick(item)}
+            >
               <div className="d-flex align-items-center flex-grow-1">
                 <AppImage bgImage={item.app_img_url} />
                 <AppInfo>
@@ -234,124 +245,146 @@ class ServicePresenter extends Component {
             aria-labelledby="addFormTitle"
             aria-hidden="true"
           >
-            {this.props.applist.map((item) => (
-              <div className="modal-dialog " role="document">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="addFormTitle">
-                      구독 추가
-                    </h5>
-                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
+            <div className="modal-dialog " role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="addFormTitle">
+                    구독 정보
+                  </h5>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <Form
+                  value={this.props.selectedItem}
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    const appImg = this.props.appImg;
+                    const appName = event.target.appname.value;
+                    const fee = event.target.fee.value;
+                    const type = event.target.type.value;
+                    const startDate = this.props.startDate;
+                    const endDate = this.props.endDate;
+                    this.props.handleSubmit(
+                      appImg,
+                      appName,
+                      fee,
+                      type,
+                      startDate,
+                      endDate
+                    );
+                    this.handleClose();
+                  }}
+                >
+                  <div className="modal-body">
+                    <div className="form-group d-flex flex-column align-items-center">
+                      <img
+                        src={this.props.selectedItem.app_img_url}
+                        width="100"
+                        height="100"
+                        name="appimg"
+                        aria-describedby="validatedInputGroupPrepend"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        data-html="true"
+                        required
+                        className="border border-info rounded-lg"
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="validationServer01">App Name</label>
+                      <input
+                        name="appname"
+                        value={this.props.selectedItem.app_name}
+                        onChange={this.handleAppNameChange}
+                        className="mt-2 form-control"
+                        aria-describedby="validatedInputGroupPrepend"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        data-html="true"
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="validationServer01">
+                        Subscription Fee&nbsp; (KRW)
+                      </label>
+                      <input
+                        type="text"
+                        value={this.props.selectedItem.bill}
+                        name="fee"
+                        id="fee"
+                        className="mt-2 form-control"
+                        aria-describedby="validatedInputGroupPrepend"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        data-html="true"
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label className="mr-sm-2 sr-only" for="type">
+                        Subscription Type
+                      </label>
+                      <select
+                        className="custom-select mr-sm-2"
+                        id="type"
+                        name="type"
+                        required
+                      >
+                        <option value="default" selected>
+                          {this.props.selectedItem.sub_type_label}
+                        </option>
+                        <option value="week">week</option>
+                        <option value="month">month</option>
+                        <option value="year">year</option>
+                        <option value="lifetime">life_time</option>
+                      </select>
+                    </div>
+                    <TextContainer>
+                      Start Date :&nbsp;
+                      <DatePicker
+                        dateFormat="yyyy-MM-dd"
+                        value={this.props.selectedItem.startdate}
+                        selected={this.props.startDate}
+                        onChange={this.props.handleStartDateChange}
+                      ></DatePicker>
+                    </TextContainer>
+
+                    <TextContainer>
+                      End&nbsp;&nbsp; Date :&nbsp;
+                      <DatePicker
+                        dateFormat="yyyy-MM-dd"
+                        value={this.props.selectedItem.enddate}
+                        selected={this.props.endDate}
+                        onChange={this.props.handleEndDateChange}
+                      ></DatePicker>
+                    </TextContainer>
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Delete
+                    </button>
+                    <button type="submit" className="btn btn-primary">
+                      Save
                     </button>
                   </div>
-
-                  <Form
-                    onSubmit={(event) => {
-                      event.preventDefault();
-                      const appImg = this.props.appImg;
-                      const appName = event.target.appname.value;
-                      const fee = event.target.fee.value;
-                      const type = event.target.type.value;
-                      const startDate = this.props.startDate;
-                      const endDate = this.props.endDate;
-                      this.props.handleSubmit(appImg, appName, fee, type, startDate, endDate);
-                      this.handleClose();
-                    }}
-                  >
-                    <div className="modal-body">
-                      <div className="form-group d-flex flex-column align-items-center">
-                        <img
-                          src={item.app_img_url}
-                          width="100"
-                          height="100"
-                          name="appimg"
-                          aria-describedby="validatedInputGroupPrepend"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          data-html="true"
-                          required
-                          className="border border-info rounded-lg"
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <label htmlFor="validationServer01">App Name</label>
-                        <input
-                          name="appname"
-                          value={item.app_name}
-                          onChange={this.handleAppNameChange}
-                          className="mt-2 form-control"
-                          aria-describedby="validatedInputGroupPrepend"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          data-html="true"
-                          required
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <label htmlFor="validationServer01">Subscription Fee&nbsp; (KRW)</label>
-                        <input
-                          type="text"
-                          value={item.bill}
-                          name="fee"
-                          id="fee"
-                          className="mt-2 form-control"
-                          aria-describedby="validatedInputGroupPrepend"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          data-html="true"
-                          required
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <label className="mr-sm-2 sr-only" for="type">
-                          Subscription Type
-                        </label>
-                        <select className="custom-select mr-sm-2" id="type" name="type" required>
-                          <option value="default" selected>
-                            {item.sub_type_label}
-                          </option>
-                          <option value="week">week</option>
-                          <option value="month">month</option>
-                          <option value="year">year</option>
-                          <option value="lifetime">life_time</option>
-                        </select>
-                      </div>
-                      <TextContainer>
-                        Start Date :&nbsp;
-                        <DatePicker
-                          dateFormat="yyyy-MM-dd"
-                          value={item.startdate}
-                          selected={this.props.startDate}
-                          onChange={this.props.handleStartDateChange}
-                        ></DatePicker>
-                      </TextContainer>
-
-                      <TextContainer>
-                        End&nbsp;&nbsp; Date :&nbsp;
-                        <DatePicker
-                          dateFormat="yyyy-MM-dd"
-                          value={item.enddate}
-                          selected={this.props.endDate}
-                          onChange={this.props.handleEndDateChange}
-                        ></DatePicker>
-                      </TextContainer>
-                    </div>
-                    <div className="modal-footer">
-                      <button type="button" className="btn btn-secondary" data-dismiss="modal">
-                        Delete
-                      </button>
-                      <button type="submit" className="btn btn-primary">
-                        Save
-                      </button>
-                    </div>
-                  </Form>
-                </div>
+                </Form>
               </div>
-            ))}
+            </div>
           </div>
         </ViewContainer>
       </Container>

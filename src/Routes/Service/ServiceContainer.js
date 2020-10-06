@@ -30,7 +30,6 @@ import nevAxios from "../../nev-axios";
 import ServicePresenter from "./ServicePresenter";
 import $ from "jquery";
 
-
 class ServiceContainer extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -40,10 +39,12 @@ class ServiceContainer extends React.Component {
       applist: [],
       renderedList: [],
       typeClicked: null,
+      selectedItem: {},
     };
 
     this.calculateBill = this.calculateBill.bind(this);
     this.handleSidebarClick = this.handleSidebarClick.bind(this);
+    this.handleOnclick = this.handleOnclick.bind(this);
   }
 
   calculateBill() {
@@ -60,6 +61,10 @@ class ServiceContainer extends React.Component {
       month_bill: calcBillByType("month_bill"),
       year_bill: calcBillByType("year_bill"),
     };
+  }
+
+  handleOnclick(e) {
+    this.setState({ selectedItem: e });
   }
 
   handleSidebarClick(e) {
@@ -101,9 +106,11 @@ class ServiceContainer extends React.Component {
     return (
       <ServicePresenter
         applist={this.state.renderedList}
+        handleOnclick={this.handleOnclick}
         handleSidebarClick={this.handleSidebarClick}
         typeClicked={this.state.typeClicked}
         calculateBill={this.calculateBill}
+        selectedItem={this.state.selectedItem}
       />
     );
   }
