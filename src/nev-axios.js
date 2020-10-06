@@ -3,7 +3,7 @@
  * 
  *  { nev-axios, Custom Axios for Nevermind Web Service }
  * 
- *  Version 3.5.0
+ *  Version 3.6.0
  * 
  **/
 /* ==================================================== */
@@ -73,6 +73,26 @@ nevAxios.urls = {
    *
    * */
   issession: "/user/issession",
+
+  /*****
+   *  ### [ Property - Get User Profile ]
+   * 
+   *  * Method: `POST`
+   *  * App: `user`
+   *  * Model: `User`, `Session`
+   * 
+   *  * Request Parameters
+   *    - `session_id` (String)
+   * 
+   *  * Response Data
+   *    - `is_getprofile` (Boolean)
+   *    - `error_msg` (null | String)
+   *    - `username` (String)
+   *    - `email` (String)
+   *    - `cellphone` (String)
+   * 
+   */
+  getprofile: "/user/getprofile",
 
   /*****
    *  ### [ Property - User Login ]
@@ -534,6 +554,37 @@ nevAxios.issession = async function () {
     session_id: getCookie(["session_id"]),
   });
 };
+
+/*****
+ *  ### [ Method - nevAxios.getprofile ]
+ *
+ *  #### Description
+ *  
+ *  - Nevermind User Profile
+ * 
+ *  #### Usage
+ * 
+ *  ```
+ *  const loginResponse = await nevAxios.login(...);
+ *  ...
+ *  const profileRes = await nevAxios.getprofile();
+ *  ```
+ * 
+ *  #### NOTICE
+ *
+ *  - The method must be called inside of the `async` function  
+ *    using `await` keyword
+ *  - session_id must be defined in request cookie  
+ *    (nev-axios automatically handles this with CookieJar)
+ * 
+ *  @returns {import("axios").AxiosResponse} - Axios HTTP Response Object
+ * 
+ */
+nevAxios.getprofile = async function () {
+  return await nevAxios.post(nevAxios.urls.getprofile, {
+    session_id: getCookie(["session_id"]),
+  });
+}
 
 /*****
  *  ### [ Method - nevAxios.login ]
