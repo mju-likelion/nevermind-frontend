@@ -46,7 +46,6 @@ const Navbar = ({ isLogin, onLogout }) => {
         <ImgLinkContainer>
           <ImgLink to="Main" imgSrc={home} />
           <ImgLink to="Info" imgSrc={user} />
-          <ImgLink to="Main" imgSrc={notice} />
           <ImgLink to="Service" imgSrc={service} />
           <Link to="Main" className="d-flex h-100" onClick={(e) => onLogout()}>
             <button type="button" className="btn">
