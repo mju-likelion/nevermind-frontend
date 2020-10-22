@@ -7,7 +7,6 @@ import service from "assets/service.svg";
 import user from "assets/user.svg";
 import logout from "assets/logout.png"; // 임시 로그아웃 이미지
 import { Link } from "react-router-dom";
-import nevAxios from "Src/nev-axios";
 
 const Container = styled.div`
   margin: 0;

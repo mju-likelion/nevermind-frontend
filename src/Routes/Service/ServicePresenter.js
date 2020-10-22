@@ -1,13 +1,10 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import AppList from "Components/AppList";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
-import Logo from "Components/Logo";
-import { Link } from "react-router-dom";
 import AddContainer from "Routes/Add";
-import $ from "jquery";
 import Sidebar from "../../Components/Sidebar";
 
 const TextContainer = styled.div`
